@@ -1,0 +1,173 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+ul {
+  margin-bottom: 0;
+}
+
+/*
+bootstrap overrides / additions
+*/
+label small {
+  font-weight: 300;
+  font-style: italic;
+  color: #aaa;
+}
+.checkbox label, 
+.radio label {
+  padding-left: 20px;
+}
+#logo {
+  padding: 5px;
+  height: 40px;
+}
+#logo img {
+  height: 40px;
+}
+footer {
+  padding: 20px 0;
+  background-color: #333;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+}
+footer p {
+  margin: 0;
+  line-height: 20px;
+}
+.bg-full {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.bg-full.bg-1 {
+  background-image: url("../images/general/cliche_stock_photo.jpg");
+}
+.login-pane {
+  margin-top: 100px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+}
+.survey-form {
+  margin: 0 auto;
+}
+
+@media only screen and (max-width : 520px) {
+
+  .display-block-sm {
+    display: block !important;
+    float: none !important;
+  }
+}
+
+.imageloc { 
+   position: relative; 
+   width: 100%; /* for IE 6 */
+}
+  
+  /* Centered text */
+.floatdiv {
+   position: absolute; 
+   top: 0; 
+   left: 0; 
+   width: 100%;
+}
+
+.imagecenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.div-left{
+    float:left;
+    padding-left:10px;
+}
+.div-right{
+    float:right;
+    padding-right:10px;
+}
+
+.introtext{
+    text-align: center; 
+    font-size: 4.5vh; 
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.body{
+  /* The image used */
+    /*background-image: url("../images/general/mainback2.jpg");*/
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.footer {
+  opacity: 1;  
+  background-color: rgba(0,0,0,0.6); 
+}
+
+.footer-text {
+  color: white;
+  font-size: 2.5vh;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    /*height: 250px;*/
+    overflow-y: auto;
+}

@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 26, 2018, 2:02:27 AM
+    Author     : paparece
+*/
+.rating {
+    overflow: hidden;
+    display: inline-block;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 1.5vw;
+    color: white;
+    text-shadow: 5px 5px 7px grey;
+    font-size: 2.5vh !important;
+}
+
+ul li:hover{
+    color: yellow;
+}
+
+ul li.active,ul li.secondary-active{
+    color: yellow;
+}
+
+input[type="radio"]{
+    display: none;
+}
