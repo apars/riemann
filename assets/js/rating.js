@@ -5,22 +5,22 @@
  */
 var clickself = 1;
 var checkedcount = 0;
-$('li').on('click', function(){
-    $('li').removeClass('active');
-    $('li').removeClass('secondary-active');
-    $(this).addClass('active');
-    $(this).prevAll().addClass('secondary-active');
-    
-    
-    if(clickself===1)
-    {
-      $('#carouselExampleIndicators').carousel('next');
-      //var l = document.getElementById('carnextid');
-      //l.click();
-    }
-    
-    clickself=1;
-});
+//$('li').on('click', function(){
+//    $('li').removeClass('active');
+//    $('li').removeClass('secondary-active');
+//    $(this).addClass('active');
+//    $(this).prevAll().addClass('secondary-active');
+//    
+//    
+//    if(clickself===1)
+//    {
+//      $('#carouselExampleIndicators').carousel('next');
+//      //var l = document.getElementById('carnextid');
+//      //l.click();
+//    }
+//    
+//    clickself=1;
+//});
 
 $('input').on('click', function(){
     //alert(this.id);
