@@ -103,7 +103,10 @@ function updateSurveyCount()
         //if(document.getElementById('mainsurveyform') != null)document.getElementById('mainsurveyform').submit(); return false;
         checkedcount = 0;
         //$(location).attr('href','../thanks/');
-        redirectOnClick(base_url+'/thanks');
+        document.getElementById('popsound').onended = function () {
+            redirectOnClick(base_url+'/thanks');
+        }
+        
     }
 }
 
