@@ -171,3 +171,9 @@ body, html {
     /*height: 250px;*/
     overflow-y: auto;
 }
+
+@font-face {
+  font-family: 'AmaticSC';
+  src: url('../fonts/amatic/AmaticSC-Regular.ttf');
+}
+

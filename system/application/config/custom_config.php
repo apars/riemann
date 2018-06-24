@@ -42,7 +42,8 @@ $config['exp_prefix']                       = 'data_export_';
 $config['exp_ext']                          = '.csv';
 $config['db_prefix']                        = 'survey_';
 $config['db_ext']                           = '.sql';
-
+$config['taste_cafe']                       = 'assets/images/general/tastecafe.gif';
+$config['sonnets']                          = 'assets/images/general/sonnets.gif';
 
 //Bootstrap
 $config['bootflat_css']                     = 'assets/css/bootflat.min.css';

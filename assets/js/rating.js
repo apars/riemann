@@ -101,7 +101,8 @@ function updateSurveyCount()
         //Submit after all questions are answered.
         //if(document.getElementById('mainsurveyform') != null)document.getElementById('mainsurveyform').submit(); return false;
         checkedcount = 0;
-        $(location).attr('href','../thanks/');
+        //$(location).attr('href','../thanks/');
+        redirectOnClick(base_url+'/thanks');
     }
 }
 
@@ -164,37 +165,3 @@ function getCheckedValue( groupName ) {
     return null;
 };  
 
-idleTimer = null;
-idleState = false;
-idleWait = 30000;
-
-(function ($) {
-
-    $(document).ready(function () {
-    
-        $('*').bind('mousemove keydown scroll', function () {
-        
-            clearTimeout(idleTimer);
-                    
-            if (idleState == true) { 
-                
-                // Reactivated event
-                //$("body").append("<p>Welcome Back.</p>");            
-            }
-            
-            idleState = false;
-            
-            idleTimer = setTimeout(function () { 
-                
-                // Idle Event
-                //$("body").append("<p>You've been idle for " + idleWait/1000 + " seconds.</p>");
-                if(document.getElementById('mainsurveyform') != null)document.getElementById('mainsurveyform').submit(); return false;
-                //redirectOnClick(base_url)
-
-                idleState = true; }, idleWait);
-        });
-        
-        $("body").trigger("mousemove");
-    
-    });
-}) (jQuery)

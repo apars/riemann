@@ -84,6 +84,48 @@ function date_time(id)
         return true;
 }
 
+idleTimer = null;
+idleState = false;
+idleWait = 30000;
+
 window.onload = function() {
     date_time('date_time');
 };
+
+
+
+(function ($) {
+
+    $(document).ready(function () {
+    
+        $('*').bind('mousemove keydown scroll', function () {
+        
+            clearTimeout(idleTimer);
+                    
+            if (idleState == true) { 
+                
+                // Reactivated event
+                //$("body").append("<p>Welcome Back.</p>");            
+            }
+            
+            idleState = false;
+            
+            idleTimer = setTimeout(function () { 
+                
+                // Idle Event
+                //$("body").append("<p>You've been idle for " + idleWait/1000 + " seconds.</p>");
+                //if(document.getElementById('mainsurveyform') != null)document.getElementById('mainsurveyform').submit(); return false;
+                var loc = window.location;
+                var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);
+                if (pathName!=base_url.substring(base_url.lastIndexOf('/')+1))
+                {
+                    redirectOnClick(base_url+'/thanks');
+                }
+
+                idleState = true; }, idleWait);
+        });
+        
+        $("body").trigger("mousemove");
+    
+    });
+}) (jQuery)

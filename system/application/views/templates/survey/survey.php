@@ -24,7 +24,7 @@
           <img class="d-block w-100" src="data:image/jpeg;base64,<?php echo base64_encode($question->image_back); ?>" alt="" style="<?php echo $this->config->item('carousel_fit'); ?>">
       <?php if($question->question_type == 0): ?>
           <div class="carousel-caption d-none d-md-block">                          
-            <h1 style="text-shadow: 2px 2px 4px #000000;"><?php echo $question->question_text; ?></h1>
+            <h1 style="text-shadow: 2px 2px 4px #000000;font-family: AmaticSC; font-size: 14vh;"><?php echo $question->question_text; ?></h1>
               <div class="form-group" id="options<?php echo $question->id; ?>">
                 <span class="rating" id="ratingentry">
                   <ul>
@@ -95,9 +95,19 @@
         <audio autoplay>
           <source src="data:audio/mpeg;base64,<?php echo base64_encode($thanks_audio); ?>" type="audio/mpeg">
           </audio>
-      <h2 class="introtext" style="text-align: center"><br>All Done! <br><br>
-         Thank you for completing the survey.<br><br>
-      </h2>
+        <div>
+    <h2 class="introtext" style="text-align: center; font-family: AmaticSC; font-size: 14vh;margin-top: auto;margin-bottom: auto;">SALAMAT! <br>
+        For helping us serve you better.<br>
+  </h2>
+        <div class="row col-8" style='margin-left: auto;margin-right: auto;'>
+            <div class="column" style="margin-top: auto;margin-bottom: auto;justify-content: center;">
+        <img class="d-block" src="<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="width:30vw;">
+        </div>
+            <div class="column" style="margin-top: auto;margin-bottom: auto;justify-content: center;">
+        <img class="d-block" src="<?php echo $this->config->item('sonnets'); ?>"    alt="" style="width:30vw;">
+        </div>
+        </div>
+    </div>
       <?php header("Refresh: 2; url=".base_url()); ?>
    <?php endif; ?>
     </div>
