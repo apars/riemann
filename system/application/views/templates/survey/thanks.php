@@ -10,7 +10,7 @@
             <div class="column" style="margin-top: auto;margin-bottom: auto;justify-content: center;width:40vw;">
         <img class="d-block" src="<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
         </div>
-            <div class="column" style="width:20vw;margin-top: auto;margin-bottom: auto;justify-content: center;">
+            <div class="column" style="width:18vw;margin-top: auto;margin-bottom: auto;justify-content: center;">
         <img class="d-block" src="<?php echo $this->config->item('sonnets'); ?>"    alt="" style="max-width: 100%;max-height: 100%;">
         </div>
         </div>

@@ -24,12 +24,15 @@
           <img class="d-block w-100" src="data:image/jpeg;base64,<?php echo base64_encode($question->image_back); ?>" alt="" style="<?php echo $this->config->item('carousel_fit'); ?>">
       <?php if($question->question_type == 0): ?>
           <div class="carousel-caption d-none d-md-block">                          
-            <h1 style="text-shadow: 2px 2px 4px #000000;font-family: AmaticSC; font-size: 14vh;"><?php echo $question->question_text; ?></h1>
+            <h1 style="text-shadow: 2px 2px 4px #000000;font-family: AmaticSC; font-size: 12vh;"><?php echo $question->question_text; ?></h1>
               <div class="form-group" id="options<?php echo $question->id; ?>">
                 <span class="rating" id="ratingentry">
                   <ul>
                     <?php foreach($question->options as $option): ?>
-                    <li><label for="rating_<?php echo $option->id ?>"><i class="<?php echo (($question->icon_text != null ) ? $question->icon_text : 'fas fa-star fa-5x'); ?>" aria-hidden="true"></i></label>
+                    <li><label for="rating_<?php echo $option->id ?>">
+                            <img class="d-block" src="data:image/gif;base64,<?php echo base64_encode($option->option_image); ?>" alt="" style="max-width: 13vw;max-height: 13vh;">
+                            <!--<i class="<?php echo (($question->icon_text != null ) ? $question->icon_text : 'fas fa-star fa-5x'); ?>" aria-hidden="true"></i>-->
+                        </label>
                         <input type="radio" name="ratings<?php echo $i+1 ?>" id="rating_<?php echo $option->id ?>" value="<?php echo $option->id ?>" 
                             <?php echo ((isset($_POST["ratings".$i+1]) && $_POST["ratings".$i+1] == $option->id) ? "checked" : "" ); ?>/>
                         <p style="color:white;text-shadow: 2px 2px 4px #000000;"><?php echo $option->option_text ?></p>
@@ -38,7 +41,11 @@
                   </ul>
                 </span>
               </div>
+          <div class="col-md-12" style="position: relative;margin-left: auto;margin-right: 0; width:20vw;">
+        <img class="d-block" src="../<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
+        </div>  
           </div>
+          
       <?php endif; ?>
       <?php if($question->question_type == 3): ?>
           <div class="carousel-caption d-none d-md-block">                          
@@ -63,8 +70,12 @@
                           Submit
               </button>
               </div>
+            <div class="col-md-12" style="position: relative;margin-left: auto;margin-right: 0; width:20vw;">
+        <img class="d-block" src="../<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
+        </div>
           </div>
       <?php endif; ?>
+          
         </div>
       <?php $i++ ?>
       <?php endforeach; ?>
@@ -88,7 +99,9 @@
             <div style="text-shadow: 2px 2px 4px #000000;">Next</div>
           </a>
      -->
+        
        </div>
+        
     </form>
     <div class="col-md-12">
   <?php elseif(isset($valid_survey) && $valid_survey && !(isset($survey_errors) && $survey_errors)): ?>

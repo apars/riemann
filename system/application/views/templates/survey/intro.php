@@ -3,15 +3,15 @@
       <div class="col-md-12">
         <!--<img class="d-block img-responsive imagecenter w-100" src="<?php echo base_url().$this->config->item('main_back'); ?>" alt="Main_Back">-->
         <?php if(isset($active_surveys) && $active_surveys != null): ?>
-          <div class="floatdiv" style="width: 95%;left: 2.5%; transform: translateY(5%)">
-              <div class="col-md-12" style="margin-left: auto;margin-right: auto;justify-content: center;width:70vw;">
+          <div class="col-md-12" style="position: absolute; transform: translate(0%, 10%); margin-top: auto;margin-bottom: auto;margin-left: auto;margin-right: auto;">
+              <div class="col-md-12" style="margin-left: auto;margin-right: auto; width:70vw;">
         <img class="d-block" src="<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
         </div>
                   <div class="col-md-12" style="width:20vw; position: absolute;right: 0px;">
         <img class="d-block" src="<?php echo $this->config->item('sonnets'); ?>"    alt="" style="max-width: 100%;max-height: 100%;">
         </div>
               <h2 class="introtext" style="font-family: AmaticSC; font-size: 9vh;"><?php echo $this->config->item('begin_text'); ?></h2>
-          <div style="width: 30%;margin: 0 auto;">
+          <div style="width: 20vw; height: 15vh;margin: 0 auto;">
             <?php foreach($active_surveys as $survey): ?>
 <!--              <a href="<?php echo base_url() . "questions/" . $survey->slug; ?>" class="list-group-item" style="text-align: center">
                 <?php echo $survey->title; ?>
