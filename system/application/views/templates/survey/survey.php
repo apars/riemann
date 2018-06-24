@@ -30,7 +30,7 @@
                   <ul>
                     <?php foreach($question->options as $option): ?>
                     <li><label for="rating_<?php echo $option->id ?>">
-                            <img class="d-block" src="data:image/gif;base64,<?php echo base64_encode($option->option_image); ?>" alt="" style="max-width: 13vw;max-height: 13vh;">
+                            <img class="d-block" src="data:image/gif;base64,<?php echo base64_encode($option->option_image); ?>" alt="" style="max-width: 12.5vw;max-height: 12.5vh;">
                             <!--<i class="<?php echo (($question->icon_text != null ) ? $question->icon_text : 'fas fa-star fa-5x'); ?>" aria-hidden="true"></i>-->
                         </label>
                         <input type="radio" name="ratings<?php echo $i+1 ?>" id="rating_<?php echo $option->id ?>" value="<?php echo $option->id ?>" 
