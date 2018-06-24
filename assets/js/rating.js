@@ -39,16 +39,22 @@ $('input').on('click', function(){
     checkedcount += 1;
     document.getElementById('popsound').play();
     //postx('../aquestion/' + pathName, thepair);
-    
+    var isfailed=0;
     $.post('../aquestion/' + pathName, thepair, function(data){
             // show the response
-            $('#response').html(data); 
-            $('#carouselExampleIndicators').carousel('next');
+            $('#response').html(data);    
         }).fail(function() {
+            isfailed=1;
             // just in case posting your form failed
             //alert( "Posting failed." );     
         });
         updateSurveyCount();
+        var radioscount =  document.getElementsByName('carindicate').length;
+        
+        if ((isfailed===0) && ((checkedcount)!= 0))
+        {
+           $('#carouselExampleIndicators').carousel('next');
+       }
         return false;
     }
     else

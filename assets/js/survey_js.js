@@ -13,6 +13,14 @@ function redirectOnClick(url) {
     $(location).attr('href',url);
 }
 
+function redirectOnBeginClick(url) {
+    //document.getElementById("demo").style.color = "red";
+    document.getElementById('popsoundbegin').play();
+    document.getElementById('popsoundbegin').onended = function () {
+    $(location).attr('href',url);
+    }
+}
+
 function redirect2importDB(url) {
     
     thedbfile = document.getElementsByName("dbfile");

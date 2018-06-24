@@ -19,13 +19,17 @@
               </a>-->
               
               <button id="demo" type="submit" class="btn btn-lg btn-success pull-center" 
-                      onclick="redirectOnClick('<?php echo base_url() . "questions/" . $survey->slug; ?>')" 
+                      onclick="redirectOnBeginClick('<?php echo base_url() . "questions/" . $survey->slug; ?>')" 
                       style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">
                           Begin
               </button>
               
               
             <?php endforeach; ?>
+              <audio control id="popsoundbegin">
+          <source src="<?php echo $this->config->item('pop_path'); ?>" type="audio/mpeg">
+          </audio>
+       </div>
           </div>
         <?php else: ?>
         <div class="alert alert-danger text-center" role="alert">
