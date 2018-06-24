@@ -33,6 +33,7 @@ $config['company_name']                     = 'FSDII';
 $config['posted_by']                        = 'Pelolito A. Aparece';
 $config['posted_email']                     = 'paparece@lexmark.com';
 $config['thanks_path']                      = 'assets/audios/ty.mp3';
+$config['pop_path']                         = 'assets/audios/soundpopbubbbletrimmed.mp3';
 $config['img_path']                         = 'assets/images/general/';
 $config['main_back']                        = 'assets/images/general/mainback2.jpg';
 $config['button_back']                      = 'assets/images/general/submit.jpg';

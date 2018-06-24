@@ -37,3 +37,11 @@ ul li.active,ul li.secondary-active{
 input[type="radio"]{
     display: none;
 }
+
+.rateimg {
+  transition: transform .5s;
+}
+
+.rateimg:hover {
+  transform: scale(1.5);
+}

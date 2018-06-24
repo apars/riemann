@@ -37,6 +37,7 @@ $('input').on('click', function(){
     var thepair = {};
     thepair[thekey] = thevalue;
     checkedcount += 1;
+    document.getElementById('popsound').play();
     //postx('../aquestion/' + pathName, thepair);
     
     $.post('../aquestion/' + pathName, thepair, function(data){
