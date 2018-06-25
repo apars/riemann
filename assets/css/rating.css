@@ -44,4 +44,5 @@ input[type="radio"]{
 
 .rateimg:hover {
   transform: scale(1.5);
+  filter: brightness(120%);
 }

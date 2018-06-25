@@ -109,9 +109,10 @@ function updateSurveyCount()
         //if(document.getElementById('mainsurveyform') != null)document.getElementById('mainsurveyform').submit(); return false;
         checkedcount = 0;
         //$(location).attr('href','../thanks/');
-        document.getElementById('popsound').onended = function () {
+        //paparece 06/25/2018 - Removed audio play end checking to reduce delay on final answer.
+        //document.getElementById('popsound').onended = function () {
             redirectOnClick(base_url+'/thanks');
-        }
+        //}
         
     }
 }
