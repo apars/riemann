@@ -35,7 +35,7 @@
                         </label>
                         <input type="radio" name="ratings<?php echo $i+1 ?>" id="rating_<?php echo $option->id ?>" value="<?php echo $option->id ?>" 
                             <?php echo ((isset($_POST["ratings".$i+1]) && $_POST["ratings".$i+1] == $option->id) ? "checked" : "" ); ?>/>
-                        <p style="color:white;text-shadow: 2px 2px 4px #000000;"><?php echo $option->option_text ?></p>
+                        <p style="font-size: x-large;color:white;text-shadow: 2px 2px 4px #000000;"><?php echo $option->option_text ?></p>
                     </li>
                     <?php endforeach; ?>
                   </ul>
@@ -49,7 +49,7 @@
       <?php endif; ?>
       <?php if($question->question_type == 3): ?>
           <div class="carousel-caption d-none d-md-block">                          
-            <h1 style="text-shadow: 2px 2px 4px #000000;"><?php echo $question->question_text; ?></h1>
+            <h1 style="text-shadow: 2px 2px 4px #000000;font-family: AmaticSC; font-size: 12vh;"><?php echo $question->question_text; ?></h1>
             <br>
               <div class="form-group" id="options<?php echo $question->id; ?>">
                 <span class="rating" id="ratingentry">
@@ -58,7 +58,7 @@
                     <label for="rating_<?php echo $option->id ?>">
                         <input type="checkbox" style="width:8vw; height:8vh;" name="ratings<?php echo $i+1 ?>" id="rating_<?php echo $option->id ?>" value="<?php echo $option->id ?>" 
                             <?php echo ((isset($_POST["ratings".$i+1]) && $_POST["ratings".$i+1] == $option->id) ? "checked" : "" ); ?>/>
-                        <p style="color:white;text-shadow: 2px 2px 4px #000000;"><?php echo $option->option_text ?></p>
+                        <p style="font-size: x-large;color:white;text-shadow: 2px 2px 4px #000000;"><?php echo $option->option_text ?></p>
                     </label>
                     <?php endforeach; ?>
                   </div>
