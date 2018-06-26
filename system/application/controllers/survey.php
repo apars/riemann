@@ -288,12 +288,35 @@ class Survey extends CI_Controller {
         {
             $data["export_result"] = "File successfully exported.";
         }
+    //sleep(3);
+    echo $data["export_result"];
     
+//    $data["active_surveys"] = "";
+//    $this->load->view('templates/survey/header', $data);
+//    $this->load->view('templates/survey/nav');
+//    $this->load->view('templates/survey/exported', $data);
+//    $this->load->view('templates/survey/footer'); 
+  }
+  
+  public function displayexport($exportresult="")
+  {
+      $this->loadConfiguration();
+      $configdata = $this->survey_model->getConfiguration();
+    if ($configdata != null)
+    {
+        $data["thanks_audio"] = $configdata->thanks_audio;
+        $data["main_back"] = $configdata->main_back;
+    }
+    else
+        {
+            $data["main_back"] = file_get_contents($this->config->item('main_back'));
+        }
+    
+    $data["export_result"] = $exportresult;
     $data["active_surveys"] = "";
     $this->load->view('templates/survey/header', $data);
     $this->load->view('templates/survey/nav');
     $this->load->view('templates/survey/exported', $data);
     $this->load->view('templates/survey/footer');
-    
   }
 }

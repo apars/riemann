@@ -3,7 +3,7 @@
       <div class="col-md-12">
         <!--<img class="d-block img-responsive imagecenter w-100" src="<?php echo base_url().$this->config->item('main_back'); ?>" alt="Main_Back">-->
         <?php if(isset($active_surveys) && $active_surveys != null): ?>
-          <div class="col-md-12" style="position: absolute; transform: translate(0%, 10%); margin-top: auto;margin-bottom: auto;margin-left: auto;margin-right: auto;">
+          <div class="col-md-12" id="beginintro" style="position: absolute; transform: translate(0%, 10%); margin-top: auto;margin-bottom: auto;margin-left: auto;margin-right: auto;">
               <div class="col-md-12" style="margin-left: auto;margin-right: auto; width:70vw;">
         <img class="d-block" src="<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
         </div>
@@ -29,8 +29,11 @@
               <audio control id="popsoundbegin">
           <source src="<?php echo $this->config->item('pop_path'); ?>" type="audio/mpeg">
           </audio>
+              
        </div>
           </div>
+          <br><br>
+          <div class="loader" id="beginloader" style="display: none;"></div>
         <?php else: ?>
         <div class="alert alert-danger text-center" role="alert">
             <strong>

@@ -60,8 +60,7 @@ $('input').on('click', function(){
     else
     {
         return true;
-    }
-        
+    }   
 })
 
 function submitCheckbox(thecheckbox)
@@ -113,7 +112,6 @@ function updateSurveyCount()
         //document.getElementById('popsound').onended = function () {
             redirectOnClick(base_url+'/thanks');
         //}
-        
     }
 }
 

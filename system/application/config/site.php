@@ -9,5 +9,6 @@ $config["logo_text"] = "SCFS";
 $config["default_title"] = "SCFS";
 $config["footer_text"] = "..."; //not used
 $config["export_url"] = "survey/export";
+$config["disp_export_url"] = "survey/displayexport";
 $config["loaddb_url"] = "survey/loaddb";
 

@@ -29,6 +29,7 @@ function redirect2importDB(url) {
     var thevalue = '';
     var thepair = {};
     for( i = 0; i < thedbfile.length; i++ ) {
+        
         if( thedbfile[i].checked ) {
             document.getElementById("theloaddbbuttons").style.display = "none";
             document.getElementById("theloader").style.display = "";
@@ -56,11 +57,41 @@ function redirect2importDB(url) {
             return false; 
         }
     }
-    alert('You must select a file.');
-    
-    
+    alert('You must select a file.');  
 }
 
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
+function redirect2exportData(url, url2) {
+        document.getElementById("beginintro").style.display = "none";
+        document.getElementById("beginloader").style.display = "";
+        $('#myModal').modal('hide');
+            
+        var datafromajax="";
+        
+        $.post(url, "", function(data){
+            // show the response
+            $('#response').html(data);
+            datafromajax = data; 
+            
+            //document.getElementById("beginintro").style.display = "";
+            //document.getElementById("beginloader").style.display = "none";
+            redirectOnClick(url2+'/'+datafromajax);
+            
+        }).fail(function() {
+            // just in case posting your form failed
+            //alert( "Posting failed." );
+            document.getElementById("beginintro").style.display = "";
+            document.getElementById("beginloader").style.display = "none";
+        });
+        return true; 
+}
 
 function date_time(id)
 {
@@ -99,8 +130,6 @@ idleWait = 30000;
 window.onload = function() {
     date_time('date_time');
 };
-
-
 
 (function ($) {
 

@@ -49,6 +49,7 @@ $config['sonnets']                          = 'assets/images/general/sonnets.gif
 //Bootstrap
 $config['bootflat_css']                     = 'assets/css/bootflat.min.css';
 $config['style_css']                        = 'assets/css/style.css';
+$config['loader_css']                       = 'assets/css/customloader.css';
 $config['bootstrap_css']                    = 'assets/frameworks/bootstrap-4.0.0/dist/css/bootstrap.css';
 $config['rating_css']                       = 'assets/css/rating.css';
 $config['fontawesome_css']                  = 'assets/frameworks/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.css';

@@ -17,6 +17,8 @@
                     <a href="#" class="fab fa-instagram"></a> 
                     <?php if(($active_surveys != "") && ($active_surveys != null)): ?>
                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">E</button>
+                    <!--redirect2exportData-->
+                    <!--redirectOnClick-->
                     <button type="button" class="btn btn-info btn-sm btn-danger" onclick="redirectOnClick('<?php echo base_url().$this->config->item('loaddb_url').'/'; ?>')" >L</button>
                     <?php endif; ?>
                     </p>
@@ -40,7 +42,8 @@
                   </div>
                   <div class="modal-footer">
                       <?php foreach($active_surveys as $survey): ?>
-                      <button type="button" class="btn btn-default" onclick="redirectOnClick('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>')" >OK</button>
+                      <button type="button" class="btn btn-default" onclick="redirect2exportData('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>',
+                                  '<?php echo base_url().$this->config->item('disp_export_url'); ?>')" data-dismiss="modal">OK</button>
                       <?php endforeach; ?>
                   </div>
                 </div>
