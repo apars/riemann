@@ -40,6 +40,9 @@ function checkPinCode(url){
     if (pincode == '1128147'){
         redirectOnClick(url);
     }
+    else{
+        document.getElementById("password").value = '';
+    }
 }
 
 function redirectOnBeginClick(url) {
