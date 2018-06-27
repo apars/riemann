@@ -23,7 +23,7 @@ var checkedcount = 0;
 //});
 
 $('input').on('click', function(){
-    if (this.type != 'checkbox' && (this.name != 'dbfile') && (this.id != 'password'))
+    if (this.type != 'checkbox' && (this.name != 'dbfile') && (this.id != 'password') && (this.id != 'text-basic'))
     {
         var loc = window.location;
         var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);
@@ -104,7 +104,7 @@ function updateSurveyCount()
         //$(location).attr('href','../thanks/');
         //paparece 06/25/2018 - Removed audio play end checking to reduce delay on final answer.
         //document.getElementById('popsound').onended = function () {
-            redirectOnClick(base_url+'/thanks');
+            redirectOnClick(base_url+'reward');
         //}
     }
 }

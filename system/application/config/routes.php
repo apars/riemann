@@ -44,6 +44,9 @@ $route['404_override'] = '';
 $route['questions/(:any)'] = "survey/questions/$1";
 $route['aquestion/(:any)'] = "survey/aquestion/$1";
 $route['thanks']           = "survey/thanks/";
+$route['reward']           = "survey/reward/";
+$route['registercell']     = "survey/registercell/";
+$route['reloadlist']     = "survey/reloadlist/";
 $route['importdb']         = "survey/importdb/";
 
 

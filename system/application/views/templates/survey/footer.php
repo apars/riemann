@@ -43,7 +43,7 @@
                         </div>
                         <div class="modal-footer">
                             <?php foreach($active_surveys as $survey): ?>
-                                <button type="button" class="btn btn-default" onclick="checkPinCode('<?php echo base_url().$this->config->item('loaddb_url').'/'; ?>')" data-dismiss="modal">OK</button>
+                                <button type="button" id="pinconfirm" class="btn btn-default" onclick="checkPinCode('<?php echo base_url().$this->config->item('loaddb_url').'/'; ?>')" data-dismiss="modal">OK</button>
                             <?php endforeach; ?>
                         </div>
                     </div>

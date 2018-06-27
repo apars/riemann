@@ -41,13 +41,13 @@
             <div id="theloaddbbuttons">
                 <!--800x480 = 3vw 1280x800 = 5vw -->
                 <div><br><br></div>
-                <button type="button" class="btn btn-info btn-sm btn-lg btn-danger" data-toggle="modal" data-target="#loadUSB" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">Load Database...</button>
+                <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#loadUSB" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">Load Database...</button>
                 <div><br><br></div>
                 <?php if(($active_surveys_ex != "") && ($active_surveys_ex != null)): ?>
-                    <button type="button" class="btn btn-info btn-sm btn-lg btn-success" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">Export Data...</button>
+                    <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">Export Data...</button>
                 <?php endif; ?>
                 <div><br><br></div>    
-                <button type="button" class="btn btn-info btn-sm btn btn-lg" onclick="redirectOnClick('<?php echo base_url(); ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">Return</button>
+                <button type="button" class="btn btn-lg btn-info" onclick="redirectOnClick('<?php echo base_url(); ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">Return</button>
                 <!-- Load USB Modal -->
                 <div id="loadUSB" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -61,7 +61,7 @@
                                 <p>Please insert USB stick and hit OK button.</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#loadDBFile" data-dismiss="modal">OK</button>
+                                <button type="button" id="usbinsert" class="btn btn-default" data-toggle="modal" onclick="refreshfilelist()" data-dismiss="modal">OK</button>
                                 <!--<button type="button" class="btn btn-default" onclick="redirect2importDB('<?php echo base_url().'importdb'; ?>')" data-dismiss="modal">OK</button>-->
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body" style="height: 250px;">
-                                <p>Please select Database File and hit OK button.</p>
+                                <p>Please select Database File and click [Load Database] button.</p>
                                 <?php    
                                     if (!file_exists($this->config->item('usb_path'))) {
                                         echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';

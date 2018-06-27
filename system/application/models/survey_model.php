@@ -277,6 +277,17 @@ $query = $this->db->query('SELECT '
     return null;
   } // end function - validate submission
 
+  function saveCell($surveyPrefix, $cellnumber)
+  {
+    $sessrespid = $this->session->userdata('response_id');     
+    $data = array(
+        'contact' => $cellnumber
+    );
+
+    $this->db->where('id', $sessrespid);
+    $this->db->update($surveyPrefix . "_responses", $data); 
+    return true;
+  }
   /*
   submit the data to the database
   param - surveyPrefix of table - example 's1'
@@ -305,9 +316,16 @@ $query = $this->db->query('SELECT '
     }
 
     // create a response & retrieve the id
-    $responseId = 0;
-    $this->db->insert($surveyPrefix . "_responses", array("user_id" => $userId));
-    $responseId = $this->db->insert_id();
+    $sessrespid = $this->session->userdata('response_id');
+    if ($sessrespid == 0){
+        $responseId = 0;
+        $this->db->insert($surveyPrefix . "_responses", array("user_id" => $userId));
+        $responseId = $this->db->insert_id();
+        $this->session->set_userdata('response_id', $responseId);
+    }
+    else{
+        $responseId = $sessrespid;
+    }
 
     // prepare insert responses
     $insert_data = array();

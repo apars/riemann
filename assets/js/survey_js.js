@@ -8,6 +8,32 @@ function redirectOnClick(url) {
     $(location).attr('href',url);
 }
 
+function refreshfilelist(){ 
+    var mymodal = $('#loadDBFile');
+    var url = base_url+'reloadlist';
+    mymodal.find('.modal-body').load(url);
+    mymodal.modal('show');
+    
+//    $('.modal-body').load(base_url+'reloadlist',function(){
+//        $('#loadDBFile').modal({show:true});
+//    });
+}
+
+function registerCellNumber(url){
+    thekey = 'cellnumber';
+    thevalue = document.getElementById("text-basic").value;
+    thepair = {};
+    thepair[thekey] = thevalue;
+    $.post(url, thepair, function(data){
+        // show the response
+        $('#response').html(data);
+        redirectOnClick(base_url+'thanks');
+    }).fail(function() {
+        // just in case posting your form failed
+        
+    });
+}
+
 function checkPinCode(url){
     var pincode = document.getElementById("password").value;
     //alert(pincode);
@@ -19,7 +45,7 @@ function checkPinCode(url){
 function redirectOnBeginClick(url) {
     document.getElementById('popsoundbegin').play();
     document.getElementById('popsoundbegin').onended = function () {
-        $(location).attr('href',url);
+        redirectOnClick(url);
     }
 }
 
@@ -42,7 +68,7 @@ function redirect2importDB(url) {
                 $('#response').html(data);
                 document.getElementById("theloaddbbuttons").style.display = "";
                 document.getElementById("theloader").style.display = "none";
-                location.reload();
+                location.reload(url);
             }).fail(function() {
                 // just in case posting your form failed
                 document.getElementById("theloaddbbuttons").style.display = "";
@@ -139,7 +165,7 @@ window.onload = function() {
                 var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);
                 if (pathName!=base_url.substring(base_url.lastIndexOf('/')+1))
                 {
-                    redirectOnClick(base_url+'/thanks');
+                    redirectOnClick(base_url+'thanks');
                 }
                 idleState = true; }, idleWait);
         });        

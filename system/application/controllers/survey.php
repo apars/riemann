@@ -7,6 +7,7 @@ class Survey extends CI_Controller {
     parent::__construct();
     $this->load->helper('url');
     $this->load->model("survey_model");
+    
   }
 
   public function loadConfiguration()
@@ -44,8 +45,11 @@ class Survey extends CI_Controller {
   public function index()
   {
     try{
+        $this->session->set_userdata(array('response_id' => 0));
+        $this->session->set_userdata(array('survey_slug' => ''));
         //$this->load->database();
         $data["active_surveys"] = $this->survey_model->getActiveSurveys();
+        $data["active_surveys_ex"] = $data["active_surveys"];
         $this->loadConfiguration();
         $configdata = $this->survey_model->getConfiguration();
         
@@ -110,17 +114,18 @@ class Survey extends CI_Controller {
                     $mysqladminbin = realpath($this->config->item("bw_mysqladmin_path"));
                 }
             }
-              
+            //Backup current database in local app folder.
             $sublocation = $this->config->item("db_prefix").date('m-d-Y_hia').$this->config->item("db_ext");
             $dbexpfile = $this->config->item("back_path").$sublocation;
-            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." > ".$dbexpfile."\n";
+            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." --opt --routines --triggers --databases BANCO > ".$dbexpfile."\n";
             exec($shellcommand);
-              
+            
+            //Backup current database in USB flash drive.
             $dbexpfile = $this->config->item("usb_path").$sublocation;
             if (!file_exists($dbexpfile)) {
                 $dbexpfile = $this->config->item("back_usb_path").$sublocation;
             }
-            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." > ".$dbexpfile."\n";
+            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." --opt --routines --triggers --databases BANCO > ".$dbexpfile."\n";
             exec($shellcommand);
 
             if(file_exists($dbasedir)){
@@ -140,6 +145,7 @@ class Survey extends CI_Controller {
   
   public function thanks()
   {
+    $this->session->set_userdata('response_id', 0);
     $this->loadConfiguration();
     $configdata = $this->survey_model->getConfiguration();
     if ($configdata != null){
@@ -154,6 +160,43 @@ class Survey extends CI_Controller {
     $this->load->view('templates/survey/nav');
     $this->load->view('templates/survey/thanks', $data);
     $this->load->view('templates/survey/footer');
+  }
+  
+  public function reward()
+  {
+    $this->loadConfiguration();
+    $configdata = $this->survey_model->getConfiguration();
+    if ($configdata != null){
+        $data["thanks_audio"] = $configdata->thanks_audio;
+        $data["main_back"] = $configdata->main_back;
+        $data["active_surveys"] = "";
+    }
+    else{
+        $data["main_back"] = file_get_contents($this->config->item('main_back'));
+    }    
+    $this->load->view('templates/survey/header', $data);
+    $this->load->view('templates/survey/nav');
+    $this->load->view('templates/survey/reward', $data);
+    $this->load->view('templates/survey/footer');
+  }
+  
+  public function registercell()
+  {
+    $this->loadConfiguration();
+    $surveyPrefix = "";
+    $survey=$this->session->userdata('survey_slug');
+    $surveyData = $this->survey_model->getSurveyPrefix($survey);
+    if($surveyData != null) {
+        // populate survery information
+        $surveyPrefix = $surveyData->prefix;
+    }
+    
+    if(isset($_POST["cellnumber"])){
+        $cellnumber = $_POST["cellnumber"];
+        
+        $this->survey_model->saveCell($surveyPrefix, $cellnumber);
+        echo $surveyPrefix.' '.$cellnumber;
+    }
   }
   
   public function aquestion($survey = "")
@@ -196,6 +239,7 @@ class Survey extends CI_Controller {
   public function questions($survey = "")
   {
     $this->loadConfiguration();
+    $this->session->set_userdata('survey_slug', $survey);
     $surveyPrefix = "";
     $surveyData = $this->survey_model->getSurveyPrefix($survey);
     $data["valid_survey"] = true;
@@ -310,4 +354,23 @@ class Survey extends CI_Controller {
     $this->load->view('templates/survey/exported', $data);
     $this->load->view('templates/survey/footer');
   }
+  
+  public function reloadlist(){
+    echo '<p>Please select Database File and click [Load Database] button.</p>';
+
+    if (!file_exists($this->config->item('usb_path'))) {
+        echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
+        $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('db_ext'));
+    } 
+    else {
+        $flist = glob($this->config->item('usb_path').'*'.$this->config->item('db_ext'));
+    }
+    
+    echo '<div class="radio" style="display: block">';
+    foreach($flist as $fileitem){
+        echo '<label><input type="radio" style="display: inline" name="dbfile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
+    }
+    echo '</div>';
+  }
+  
 }

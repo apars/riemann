@@ -17,6 +17,7 @@ $.fn.numpad.defaults.onKeypadCreate = function(){$(this).find('.done').addClass(
 // Instantiate NumPad once the page is ready to be shown
 (function($){
 	$('password').numpad();
+        $('text-basic').numpad();
 })
 
 $(document).ready(function(){
