@@ -23,24 +23,20 @@ var checkedcount = 0;
 //});
 
 $('input').on('click', function(){
-    //alert(this.id);
-    //alert(this.name);
-    //alert(this.value);
-    if (this.type != 'checkbox' && (this.name != 'dbfile'))
+    if (this.type != 'checkbox' && (this.name != 'dbfile') && (this.id != 'password'))
     {
-    var loc = window.location;
-    var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);
-    //alert(pathName);
+        var loc = window.location;
+        var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);
+        var thekey = this.name;
+        var thevalue = this.value;
+        var thepair = {};
+        var isfailed=0;
+        
+        thepair[thekey] = thevalue;
+        checkedcount += 1;
+        document.getElementById('popsound').play();
     
-    var thekey = this.name;
-    var thevalue = this.value;
-    var thepair = {};
-    thepair[thekey] = thevalue;
-    checkedcount += 1;
-    document.getElementById('popsound').play();
-    //postx('../aquestion/' + pathName, thepair);
-    var isfailed=0;
-    $.post('../aquestion/' + pathName, thepair, function(data){
+        $.post('../aquestion/' + pathName, thepair, function(data){
             // show the response
             $('#response').html(data);    
         }).fail(function() {
@@ -48,17 +44,16 @@ $('input').on('click', function(){
             // just in case posting your form failed
             //alert( "Posting failed." );     
         });
+        
         updateSurveyCount();
         var radioscount =  document.getElementsByName('carindicate').length;
         
-        if ((isfailed===0) && ((checkedcount)!= 0))
-        {
+        if ((isfailed===0) && ((checkedcount)!= 0)){
            $('#carouselExampleIndicators').carousel('next');
-       }
+        }
         return false;
     }
-    else
-    {
+    else{
         return true;
     }   
 })
@@ -95,7 +90,6 @@ function submitCheckbox(thecheckbox)
 function updateSurveyCount()
 {
     var radioscount =  document.getElementsByName('carindicate').length;
-    //var checkedcount = getCheckedCount(radioscount);
     var surveycount = "";
       
     if(document.getElementById("answeredsurvey")!=null)
@@ -116,56 +110,54 @@ function updateSurveyCount()
 }
 
 $('a[data-slide="prev"]').click(function() {
-  $('#myCarousel').carousel('prev');
+    $('#myCarousel').carousel('prev');
 });
 
 $('a[data-slide="next"]').click(function() {
-  $('#myCarousel').carousel('next');
+    $('#myCarousel').carousel('next');
 });
 
 $(document).ready(function(){
-  $("#carouselExampleIndicators").on('slid.bs.carousel', function () {
-    currentIndex = $('div.active').index()+1;
-    //$('.num').html(''+currentIndex+'/'+totalItems+'');
-    //alert(String(currentIndex));
-    if (currentIndex != 'null')
-    {
-      var classNamePrefix = 'ratings';
-      updateSurveyCount();
-      checkedValue = getCheckedValue(classNamePrefix.concat(String(currentIndex)));
-      if (checkedValue != null)
-      {
-        var idPrefix = 'rating_';
-        var idRadioButton = idPrefix.concat(String(checkedValue));
-        //alert(idRadioButton);
-        var l = document.getElementById(idRadioButton);
-        clickself = '0';
-        l.click();
-        
-        //alert(idRadioButton);
-      }
-    }
-  });
+    $("#carouselExampleIndicators").on('slid.bs.carousel', function () {
+        currentIndex = $('div.active').index()+1;
+        //$('.num').html(''+currentIndex+'/'+totalItems+'');
+        //alert(String(currentIndex));
+        if (currentIndex != 'null'){
+            var classNamePrefix = 'ratings';
+            
+            updateSurveyCount();
+            checkedValue = getCheckedValue(classNamePrefix.concat(String(currentIndex)));
+            if (checkedValue != null){
+                var idPrefix = 'rating_';
+                var idRadioButton = idPrefix.concat(String(checkedValue));
+                var l = document.getElementById(idRadioButton);
+                
+                clickself = '0';
+                l.click();
+            }
+        }
+    });
 });
 
 function getCheckedCount( numslides ) {
     var classNamePrefix = 'ratings';
     var checkedcnt = 0;
-    for (currSlide = 1; currSlide <= numslides; currSlide++)
-    {
-    var radios = document.getElementsByName( classNamePrefix.concat(String(currSlide)) );
     
-    for( i = 0; i < radios.length; i++ ) {
-        if( radios[i].checked ) {
-            checkedcnt += 1;
+    for (currSlide = 1; currSlide <= numslides; currSlide++){
+        var radios = document.getElementsByName( classNamePrefix.concat(String(currSlide)) );
+    
+        for( i = 0; i < radios.length; i++ ) {
+            if( radios[i].checked ) {
+                checkedcnt += 1;
+            }
         }
-    }
     }
     return checkedcnt;
 };
 
 function getCheckedValue( groupName ) {
     var radios = document.getElementsByName( groupName );
+    
     for( i = 0; i < radios.length; i++ ) {
         if( radios[i].checked ) {
             return radios[i].value;

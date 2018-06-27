@@ -4,9 +4,9 @@ class Survey extends CI_Controller {
 
   public function __construct()
   {
-      parent::__construct();
-      $this->load->helper('url');
-      $this->load->model("survey_model");
+    parent::__construct();
+    $this->load->helper('url');
+    $this->load->model("survey_model");
   }
 
   public function loadConfiguration()
@@ -36,6 +36,8 @@ class Survey extends CI_Controller {
         $this->config->set_item('thanks_path', $configdata->thanks_audio);
         $this->config->set_item('main_back', $configdata->main_back);
         $this->config->set_item('fav_icon', $configdata->fav_icon);
+        $this->config->set_item('logo_text', $configdata->logo_text);
+        $this->config->set_item('default_title', $configdata->default_title);
     }
   }
   
@@ -68,84 +70,86 @@ class Survey extends CI_Controller {
   
   public function loaddb()
   {
-      $this->loadConfiguration();
-      $data["active_surveys"] = null;
-      $configdata = $this->survey_model->getConfiguration();
-      if ($configdata != null)
-      {
+    $this->loadConfiguration();
+    $data["active_surveys"] = null;
+    $data["active_surveys_ex"] = $this->survey_model->getActiveSurveys();
+    $configdata = $this->survey_model->getConfiguration();
+    if ($configdata != null){
         $data["thanks_audio"] = $configdata->thanks_audio;
         $data["main_back"] = $configdata->main_back;
-      }
-      else
-        {
-            $data["main_back"] = file_get_contents($this->config->item('main_back'));
-        }
-        
-      $this->load->view('templates/survey/header', $data);
-      $this->load->view('templates/survey/nav');
-      $this->load->view('templates/survey/intro', $data);
-      $this->load->view('templates/survey/footer');
+    }
+    else{
+        $data["main_back"] = file_get_contents($this->config->item('main_back'));
+    }     
+    $this->load->view('templates/survey/header', $data);
+    $this->load->view('templates/survey/nav');
+    $this->load->view('templates/survey/intro', $data);
+    $this->load->view('templates/survey/footer');
   }
   
   public function importdb()
   {
-      try{
-          $this->loadConfiguration();
-          if(isset($_POST["dbfile"]))
-          {
+    try{
+        $this->loadConfiguration();
+        if(isset($_POST["dbfile"])){
             $dbasedir = $_POST["dbfile"];
-          }
-          else
-          {
+        }
+        else{
             $dbasedir = $this->config->item("usb_path").'survey.sql';
-          }
+        }
           
-          if(isset($_POST["dbfile"]))
-          {
-              $mysqlbin = $this->config->item("mysql_path");
-              $mysqldumpbin = $this->config->item("mysqldump_path");
-              $mysqladminbin = $this->config->item("mysqladmin_path");
+        if(isset($_POST["dbfile"])){
+            $mysqlbin = $this->config->item("mysql_path");
+            $mysqldumpbin = $this->config->item("mysqldump_path");
+            $mysqladminbin = $this->config->item("mysqladmin_path");
+                
+            if (!file_exists($mysqlbin)){
+                if (DIRECTORY_SEPARATOR == '\\') {
+                    $mysqlbin = realpath($this->config->item("bw_mysql_path"));
+                    $mysqldumpbin = realpath($this->config->item("bw_mysqldump_path"));
+                    $mysqladminbin = realpath($this->config->item("bw_mysqladmin_path"));
+                }
+            }
+              
+            $sublocation = $this->config->item("db_prefix").date('m-d-Y_hia').$this->config->item("db_ext");
+            $dbexpfile = $this->config->item("back_path").$sublocation;
+            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." > ".$dbexpfile."\n";
+            exec($shellcommand);
+              
+            $dbexpfile = $this->config->item("usb_path").$sublocation;
+            if (!file_exists($dbexpfile)) {
+                $dbexpfile = $this->config->item("back_usb_path").$sublocation;
+            }
+            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." > ".$dbexpfile."\n";
+            exec($shellcommand);
 
-              $sublocation = $this->config->item("db_prefix").date('m-d-Y_hia').$this->config->item("db_ext");
-              $dbexpfile = $this->config->item("back_path").$sublocation;
-              $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." > ".$dbexpfile."\n";
-              exec($shellcommand);
-
-              $dbexpfile = $this->config->item("usb_path").$sublocation;
-              $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." > ".$dbexpfile."\n";
-              exec($shellcommand);
-
-              if(file_exists($dbasedir))
-              {
+            if(file_exists($dbasedir)){
                 //Drop database only when new db file is available.
                 $shellcommand= $mysqladminbin." -u ".$this->db->username." -p".$this->db->password." -f drop ".$this->db->database."\n";
                 exec($shellcommand);
                 //Import database.
                 $shellcommand= $mysqlbin." -u ".$this->db->username." -p".$this->db->password." < ".$dbasedir."\n";
                 exec($shellcommand);
-              }
-              redirect($this.base_url());
-          }
-      } catch (Exception $ex) {
+            }
+            //redirect($this.base_url());
+        }
+    } catch (Exception $ex) {
 
-      }
+    }
   }
   
   public function thanks()
   {
     $this->loadConfiguration();
     $configdata = $this->survey_model->getConfiguration();
-    if ($configdata != null)
-    {
+    if ($configdata != null){
         $data["thanks_audio"] = $configdata->thanks_audio;
         $data["main_back"] = $configdata->main_back;
         $data["active_surveys"] = "";
     }
-    else
-        {
-            $data["main_back"] = file_get_contents($this->config->item('main_back'));
-        }
-    
+    else{
+        $data["main_back"] = file_get_contents($this->config->item('main_back'));
+    }    
     $this->load->view('templates/survey/header', $data);
     $this->load->view('templates/survey/nav');
     $this->load->view('templates/survey/thanks', $data);
@@ -163,26 +167,25 @@ class Survey extends CI_Controller {
 
     // check if the provided slug was valid
     if($surveyData != null) {
-
-      // populate survery information
-      $surveyPrefix = $surveyData->prefix;
-      $data["survey_title"] = $surveyData->title;
-      $data["survey_subtitle"] = $surveyData->subtitle;
+        // populate survery information
+        $surveyPrefix = $surveyData->prefix;
+        $data["survey_title"] = $surveyData->title;
+        $data["survey_subtitle"] = $surveyData->subtitle;
     }
     else {
-      $data["valid_survey"] = false; // display error
+        $data["valid_survey"] = false; // display error
     }
 
     // check if the survey was submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST' && $data["valid_survey"]) {
-      $result = $this->survey_model->validateSubmission($surveyPrefix);
-      if(array_key_exists("errors", $result)) {
-        $data["errors"] = $result["errors"];
-        $data["survey_errors"] = true;
-      }
-      else {
-        $data["show_questions"] = false;
-      }
+        $result = $this->survey_model->validateSubmission($surveyPrefix);
+        if(array_key_exists("errors", $result)) {
+            $data["errors"] = $result["errors"];
+            $data["survey_errors"] = true;
+        }
+        else {
+            $data["show_questions"] = false;
+        }
     }
   }
   
@@ -204,42 +207,37 @@ class Survey extends CI_Controller {
         $data["thanks_audio"] = $configdata->thanks_audio;
         $data["main_back"] = $configdata->main_back;
     }
-    else
-        {
-            $data["main_back"] = file_get_contents($this->config->item('main_back'));
-        }
+    else{
+        $data["main_back"] = file_get_contents($this->config->item('main_back'));
+    }
     
     // check if the provided slug was valid
     if($surveyData != null) {
-
-      // populate survery information
-      $surveyPrefix = $surveyData->prefix;
-      $data["survey_title"] = $surveyData->title;
-      $data["survey_subtitle"] = $surveyData->subtitle;
+        // populate survery information
+        $surveyPrefix = $surveyData->prefix;
+        $data["survey_title"] = $surveyData->title;
+        $data["survey_subtitle"] = $surveyData->subtitle;
     }
     else {
-      $data["valid_survey"] = false; // display error
+        $data["valid_survey"] = false; // display error
     }
 
     // check if the survey was submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST' && $data["valid_survey"]) {
-      $result = $this->survey_model->validateSubmission($surveyPrefix);
-      if(array_key_exists("errors", $result)) {
-        $data["errors"] = $result["errors"];
-        $data["survey_errors"] = true;
-      }
-      else {
-        $data["show_questions"] = false;
-      }
+        $result = $this->survey_model->validateSubmission($surveyPrefix);
+        if(array_key_exists("errors", $result)) {
+            $data["errors"] = $result["errors"];
+            $data["survey_errors"] = true;
+        }
+        else {
+            $data["show_questions"] = false;
+        }
     }
-
     // check if the user specified a valid survey
     if(!empty($surveyPrefix)) {
-
-      $data["questions"] = $this->survey_model->getSurveyData($surveyPrefix);
-      ($data["questions"] === null) ? $data["valid_survey"] = false: "";
+        $data["questions"] = $this->survey_model->getSurveyData($surveyPrefix);
+        ($data["questions"] === null) ? $data["valid_survey"] = false: "";
     }
-
     $data["active_surveys"] = "";
     $this->load->view('templates/survey/header', $data);
     $this->load->view('templates/survey/nav');
@@ -262,32 +260,28 @@ class Survey extends CI_Controller {
         $data["thanks_audio"] = $configdata->thanks_audio;
         $data["main_back"] = $configdata->main_back;
     }
-    else
-        {
-            $data["main_back"] = file_get_contents($this->config->item('main_back'));
-        }
+    else{
+        $data["main_back"] = file_get_contents($this->config->item('main_back'));
+    }
 
     // check if the provided slug was valid
     if($surveyData != null) {
-      // populate survery information
-      $surveyPrefix = $surveyData->prefix;
-      $data["survey_title"] = $surveyData->title;
-      $data["survey_subtitle"] = $surveyData->subtitle;
+        // populate survery information
+        $surveyPrefix = $surveyData->prefix;
+        $data["survey_title"] = $surveyData->title;
+        $data["survey_subtitle"] = $surveyData->subtitle;
     }
     $result = $this->survey_model->getSurveyDataForExport($surveyPrefix);
     $this->load->dbutil();
     $this->load->helper('file');
-    //var_dump($result);
     $outfile = $this->config->item("usb_path").$this->config->item("exp_prefix").date('m-d-Y_hia').$this->config->item("exp_ext");
     $csvdata = $this->dbutil->csv_from_result($result);
-        if ( ! write_file($outfile, $csvdata))
-        {
-            $data["export_result"] = "Export failed.";
-        }
-        else
-        {
-            $data["export_result"] = "File successfully exported.";
-        }
+    if ( ! write_file($outfile, $csvdata)){
+        $data["export_result"] = "Export failed.";
+    }
+    else{
+        $data["export_result"] = "File successfully exported.";
+    }
     //sleep(3);
     echo $data["export_result"];
     
@@ -300,18 +294,15 @@ class Survey extends CI_Controller {
   
   public function displayexport($exportresult="")
   {
-      $this->loadConfiguration();
-      $configdata = $this->survey_model->getConfiguration();
-    if ($configdata != null)
-    {
+    $this->loadConfiguration();
+    $configdata = $this->survey_model->getConfiguration();
+    if ($configdata != null){
         $data["thanks_audio"] = $configdata->thanks_audio;
         $data["main_back"] = $configdata->main_back;
     }
-    else
-        {
-            $data["main_back"] = file_get_contents($this->config->item('main_back'));
-        }
-    
+    else{
+        $data["main_back"] = file_get_contents($this->config->item('main_back'));
+    }
     $data["export_result"] = $exportresult;
     $data["active_surveys"] = "";
     $this->load->view('templates/survey/header', $data);
