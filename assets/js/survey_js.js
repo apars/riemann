@@ -106,7 +106,7 @@ function redirect2exportData(url, url2) {
             
         //document.getElementById("beginintro").style.display = "";
         //document.getElementById("beginloader").style.display = "none";
-        redirectOnClick(url2+'/'+datafromajax);
+        redirectOnClick(url2+'?exportresult='+encodeURI(datafromajax));
             
     }).fail(function() {
         // just in case posting your form failed

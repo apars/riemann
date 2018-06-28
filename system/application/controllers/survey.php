@@ -99,7 +99,8 @@ class Survey extends CI_Controller {
             $dbasedir = $_POST["dbfile"];
         }
         else{
-            $dbasedir = $this->config->item("usb_path").'survey.sql';
+            $theusbpath = $this->whereusb();
+            $dbasedir = $theusbpath.'survey.sql';
         }
           
         if(isset($_POST["dbfile"])){
@@ -121,7 +122,8 @@ class Survey extends CI_Controller {
             exec($shellcommand);
             
             //Backup current database in USB flash drive.
-            $dbexpfile = $this->config->item("usb_path").$sublocation;
+            $theusbpath = $this->whereusb();
+            $dbexpfile = $theusbpath.'/'.$sublocation;
             if (!file_exists($dbexpfile)) {
                 $dbexpfile = $this->config->item("back_usb_path").$sublocation;
             }
@@ -318,13 +320,18 @@ class Survey extends CI_Controller {
     $result = $this->survey_model->getSurveyDataForExport($surveyPrefix);
     $this->load->dbutil();
     $this->load->helper('file');
-    $outfile = $this->config->item("usb_path").$this->config->item("exp_prefix").date('m-d-Y_hia').$this->config->item("exp_ext");
+    $theusbpath = $this->whereusb();
+    if (!file_exists($theusbpath)) {
+        $theusbpath = $this->config->item('back_usb_path');
+    } 
+    $thefile = $this->config->item("exp_prefix").date('m-d-Y_hia').$this->config->item("exp_ext");
+    $outfile = $theusbpath.$thefile;
     $csvdata = $this->dbutil->csv_from_result($result);
     if ( ! write_file($outfile, $csvdata)){
         $data["export_result"] = "Export failed.";
     }
     else{
-        $data["export_result"] = "File successfully exported.";
+        $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
     }
     //sleep(3);
     echo $data["export_result"];
@@ -338,6 +345,7 @@ class Survey extends CI_Controller {
   
   public function displayexport($exportresult="")
   {
+    $exportresult = $_GET['exportresult'];
     $this->loadConfiguration();
     $configdata = $this->survey_model->getConfiguration();
     if ($configdata != null){
@@ -355,15 +363,35 @@ class Survey extends CI_Controller {
     $this->load->view('templates/survey/footer');
   }
   
+  public function whereusb(){
+    $usb_path = $this->config->item('usb_path');
+    $good_usb_path = "";
+    if (file_exists($usb_path)){
+        $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
+        foreach($directories as $directory){
+            if(touch($directory.'/test.txt') == true){
+                if(unlink($directory.'/test.txt') == true){
+                    $good_usb_path = $directory;
+                    return $good_usb_path;
+                    break;
+                }
+            }
+        }
+    }
+    return '_dummy_';
+  }
+  
   public function reloadlist(){
-    echo '<p>Please select Database File and click [Load Database] button.</p>';
-
-    if (!file_exists($this->config->item('usb_path'))) {
+    
+    $theusbpath = $this->whereusb();
+    echo '<p>Please select Database File and click [Load Database] button.<br> USB Path detected: '.$theusbpath.'.</p>';
+    
+    if (!file_exists($theusbpath)) {
         echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
         $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('db_ext'));
     } 
     else {
-        $flist = glob($this->config->item('usb_path').'*'.$this->config->item('db_ext'));
+        $flist = glob($theusbpath.'/*'.$this->config->item('db_ext'));
     }
     
     echo '<div class="radio" style="display: block">';
