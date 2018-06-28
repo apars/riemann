@@ -23,6 +23,7 @@ var checkedcount = 0;
 //});
 
 $('input').on('click', function(){
+    //Accept only radio input types.
     if (this.type != 'checkbox' && (this.name != 'dbfile') && (this.id != 'password') && (this.id != 'text-basic'))
     {
         var loc = window.location;
@@ -35,7 +36,7 @@ $('input').on('click', function(){
         thepair[thekey] = thevalue;
         checkedcount += 1;
         document.getElementById('popsound').play();
-    
+
         $.post('../aquestion/' + pathName, thepair, function(data){
             // show the response
             $('#response').html(data);    

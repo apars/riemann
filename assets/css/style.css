@@ -171,3 +171,40 @@ body, html {
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+
+
+.starbounce {
+  animation: bounce .5s alternate infinite ease-in;
+}
+
+/*@media screen and (min-width:701px) {
+    @keyframes bounce {
+        0% {
+            transform: translateX(50%);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+  
+  .starbounce {
+    color: red;
+    display: inline-block; needed to trigger update 
+  }
+}*/
+
+@media screen and (min-width:701px) {
+    @keyframes bounce {
+        0% {
+            transform: translateY(-10%);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+  
+  .starbounce {
+    color: green;
+    display: inline-block; /* needed to trigger update */
+  }
+}
