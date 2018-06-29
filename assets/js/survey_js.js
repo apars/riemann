@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+
+
 function redirectOnClick(url) {
     $(location).attr('href',url);
 }
@@ -143,15 +145,38 @@ function date_time(id)
     return true;
 }
 
+
+
+
 idleTimer = null;
 idleState = false;
 idleWait = 30000;
 
 window.onload = function() {
     date_time('date_time');
+    
+    $.ajax({
+            type: "POST",
+            url: base_url+"survey/getfooterhidden",
+            data: {},
+            success:function(response){
+                //your code goes here
+                if (response == "false"){
+                   displayval = document.getElementById("thefooter").style.display = "";
+                   footerhidden = false;
+                }
+                else{
+                    displayval = document.getElementById("thefooter").style.display = "none";
+                    footerhidden = true;
+                }
+            }
+        })
+    
 };
 
 (function ($) {
+    var footerhidden = true;
+    
     $(document).ready(function () {
         $('*').bind('mousemove keydown scroll', function () {
             clearTimeout(idleTimer);                    
@@ -174,4 +199,25 @@ window.onload = function() {
         });        
         $("body").trigger("mousemove");    
     });
+    
+    $('#sonnetimg').click(function(){
+        var displayval = document.getElementById("thefooter").style.display;
+        if (displayval == "none"){
+           displayval = document.getElementById("thefooter").style.display = "";
+           footerhidden = false;
+        }
+        else{
+            displayval = document.getElementById("thefooter").style.display = "none";
+            footerhidden = true;
+        }
+        $.ajax({
+            type: "POST",
+            url: base_url+"survey/setfooterhidden",
+            data: { footerhidden: footerhidden },
+            success:function(response){
+                //your code goes here
+            }
+        })
+});
+
 }) (jQuery)

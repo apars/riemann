@@ -5,22 +5,24 @@
  */
 var clickself = 1;
 var checkedcount = 0;
-//$('li').on('click', function(){
-//    $('li').removeClass('active');
-//    $('li').removeClass('secondary-active');
-//    $(this).addClass('active');
-//    $(this).prevAll().addClass('secondary-active');
-//    
-//    
-//    if(clickself===1)
-//    {
-//      $('#carouselExampleIndicators').carousel('next');
-//      //var l = document.getElementById('carnextid');
-//      //l.click();
-//    }
-//    
-//    clickself=1;
-//});
+$('li').on('click', function(){
+    $('li').removeClass('active');
+    $('li').removeClass('secondary-active');
+    $(this).addClass('active');
+    $(this).prevAll().addClass('secondary-active');
+    
+    
+    if(clickself===1)
+    {
+        document.getElementById('popsound').onended = function () {
+            $('#carouselExampleIndicators').carousel('next');
+        }
+      //var l = document.getElementById('carnextid');
+      //l.click();
+    }
+    
+    clickself=1;
+});
 
 $('input').on('click', function(){
     //Accept only radio input types.
@@ -50,7 +52,9 @@ $('input').on('click', function(){
         var radioscount =  document.getElementsByName('carindicate').length;
         
         if ((isfailed===0) && ((checkedcount)!= 0)){
-           $('#carouselExampleIndicators').carousel('next');
+            document.getElementById('popsound').onended = function () {
+                $('#carouselExampleIndicators').carousel('next');
+            }
         }
         return false;
     }
@@ -104,9 +108,9 @@ function updateSurveyCount()
         checkedcount = 0;
         //$(location).attr('href','../thanks/');
         //paparece 06/25/2018 - Removed audio play end checking to reduce delay on final answer.
-        //document.getElementById('popsound').onended = function () {
+        document.getElementById('popsound').onended = function () {
             redirectOnClick(base_url+'reward');
-        //}
+        }
     }
 }
 

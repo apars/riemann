@@ -1,5 +1,5 @@
         <footer style="background:transparent !important;">
-            <div class="container" >
+            <div class="container" id="thefooter" style="display: none;">
                 <p class="text-muted">
                 <div class="div-left" style="display: inline-block;"><p class="footer-text">&copy; 2018 <?php echo $this->config->item('company_name'); ?> All rights reserved. 
                 <!--<?php if($active_surveys != ""): ?>

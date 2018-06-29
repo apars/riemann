@@ -29,7 +29,7 @@
                     
                 </div>
                     <div class="col-md-12" style="<?php echo $this->config->item('sonnet_intro_pos'); ?>">
-                        <img class="d-block" src="<?php echo $this->config->item('sonnets'); ?>"    alt="" style="max-width: 100%;max-height: 100%;">
+                        <img class="d-block" id="sonnetimg" src="<?php echo $this->config->item('sonnets'); ?>"    alt="" style="max-width: 100%;max-height: 100%;">
                     </div>
 
                 <div class="loader" id="beginloader" style="display: none;"></div>

@@ -48,6 +48,7 @@ class Survey extends CI_Controller {
     try{
         $this->session->set_userdata(array('response_id' => 0));
         $this->session->set_userdata(array('survey_slug' => ''));
+        $this->session->set_userdata(array('footerhidden' => true));
         //$this->load->database();
         $data["active_surveys"] = $this->survey_model->getActiveSurveys();
         $data["active_surveys_ex"] = $data["active_surveys"];
@@ -322,17 +323,22 @@ class Survey extends CI_Controller {
     $this->load->dbutil();
     $this->load->helper('file');
     $theusbpath = $this->whereusb();
-    if (!file_exists($theusbpath)) {
-        $theusbpath = $this->config->item('back_usb_path');
-    } 
-    $thefile = $this->config->item("exp_prefix").date('m-d-Y_hisa').$this->config->item("exp_ext");
-    $outfile = $theusbpath.$thefile;
-    $csvdata = $this->dbutil->csv_from_result($result);
-    if ( ! write_file($outfile, $csvdata)){
-        $data["export_result"] = "Export failed.";
+    if ($theusbpath!=''){
+        if (!file_exists($theusbpath)) {
+            $theusbpath = $this->config->item('back_usb_path');
+        } 
+        $thefile = $this->config->item("exp_prefix").date('m-d-Y_hisa').$this->config->item("exp_ext");
+        $outfile = $theusbpath.$thefile;
+        $csvdata = $this->dbutil->csv_from_result($result);
+        if ( ! write_file($outfile, $csvdata)){
+            $data["export_result"] = "Export failed.";
+        }
+        else{
+            $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
+        }
     }
     else{
-        $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
+        $data["export_result"] = "Export failed . USB stick not detected.";
     }
     //sleep(3);
     echo $data["export_result"];
@@ -370,36 +376,52 @@ class Survey extends CI_Controller {
     if (file_exists($usb_path)){
         $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
         foreach($directories as $directory){
-            if(touch($directory.'/test.txt') == true){
-                if(unlink($directory.'/test.txt') == true){
-                    $good_usb_path = $directory;
-                    return $good_usb_path;
-                    break;
+            if(is_writable($directory) == true){
+                if(touch($directory.'/test.txt') == true){
+                    if(unlink($directory.'/test.txt') == true){
+                        $good_usb_path = $directory;
+                        return $good_usb_path;
+                    }
                 }
             }
         }
     }
-    return '_dummy_';
+    return '';
   }
   
   public function reloadlist(){
     
     $theusbpath = $this->whereusb();
-    echo '<p>Please select Database File and click [Load Database] button.<br> USB Path detected: '.$theusbpath.'.</p>';
-    
-    if (!file_exists($theusbpath)) {
-        echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
-        $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('db_ext'));
-    } 
-    else {
-        $flist = glob($theusbpath.'/*'.$this->config->item('db_ext'));
+    if($theusbpath != ''){
+        echo '<p>Please select Database File and click [Load Database] button.<br> USB Path detected: '.$theusbpath.'.</p>';
+
+        if (!file_exists($theusbpath)) {
+            echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
+            $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('db_ext'));
+        } 
+        else {
+            $flist = glob($theusbpath.'/*'.$this->config->item('db_ext'));
+        }
+
+        echo '<div class="radio" style="display: block">';
+        foreach($flist as $fileitem){
+            echo '<label><input type="radio" style="display: inline" name="dbfile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
+        }
+        echo '</div>';
     }
-    
-    echo '<div class="radio" style="display: block">';
-    foreach($flist as $fileitem){
-        echo '<label><input type="radio" style="display: inline" name="dbfile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
+    else{
+        echo '';
     }
-    echo '</div>';
+  }
+  
+  public function setfooterhidden(){
+    if(isset($_POST["footerhidden"])){
+        $this->session->set_userdata(array('footerhidden' => $_POST["footerhidden"]));
+    }
+  }
+  
+  public function getfooterhidden(){
+    echo $this->session->userdata('footerhidden');
   }
   
 }
