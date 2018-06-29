@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <!--<img class="d-block img-responsive imagecenter w-100" src="<?php echo base_url().$this->config->item('main_back'); ?>" alt="Main_Back">-->
             <?php if(isset($active_surveys) && $active_surveys != null): ?>
-                <div class="col-md-12 vmarginauto hmarginauto" id="beginintro" style="position: absolute; top: 3vh; ">
+                <div class="col-md-12 vmarginauto hmarginauto" id="beginintro" style="position: absolute; top: 3vh; left: 0px;">
                     <div class="col-md-12 hmarginauto" style="width: 85%">
                         <img class="d-block" src="<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
                     </div>
