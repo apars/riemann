@@ -1,7 +1,7 @@
         <footer style="background:transparent !important;">
             <div class="container" >
                 <p class="text-muted">
-                <div class="div-left" style="display: inline-block;"><p class="footer-text">Copyright (C) 2018 <?php echo $this->config->item('company_name'); ?> All rights reserved.
+                <div class="div-left" style="display: inline-block;"><p class="footer-text">&copy; 2018 <?php echo $this->config->item('company_name'); ?> All rights reserved. 
                 <!--<?php if($active_surveys != ""): ?>
                   <?php foreach($active_surveys as $survey): ?>
                     <?php echo getFooterContent($survey->slug); ?>
@@ -15,12 +15,15 @@
                     <a href="#" class="fab fa-twitter"></a>
                     <a href="#" class="fab fa-google"></a>
                     <a href="#" class="fab fa-instagram"></a> 
+                    <span style="font-size: 2vh">[DBV <?php echo $this->config->item('dbver'); ?>]</span>
                     <?php if(($active_surveys != "") && ($active_surveys != null)): ?>
                     <!--<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">E</button>-->
                     <button type="button" class="btn btn-info btn-sm btn-danger" data-toggle="modal" data-target="#inputpin" data-dismiss="modal">M</button>
                     <!--<button type="button" class="btn btn-info btn-sm btn-danger" onclick="redirectOnClick('<?php echo base_url().$this->config->item('loaddb_url').'/'; ?>')" >M</button>-->
                     <?php endif; ?>
+                    
                     </p>
+                    
                     
             <!--<strong>Posted by: <?php echo $this->config->item('posted_by'); ?> Contact information: <a href="mailto:<?php echo $this->config->item('posted_email'); ?>"><?php echo $this->config->item('posted_email'); ?></a>.</strong>-->
                 </div>

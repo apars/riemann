@@ -12,20 +12,20 @@ $config['usb_path']                         = 'assets/downloads/';
 $config['back_usb_path']                    = 'assets/downloads/';
 /*Set path of mysql and mysqldump.*/
 if (DIRECTORY_SEPARATOR == '\\') {
-    $config['mysql_path']                       = 'D:\xampp\mysql\bin\mysql.exe';
-    $config['mysqldump_path']                   = 'D:\xampp\mysql\bin\mysqldump.exe';
-    $config['mysqladmin_path']                  = 'D:\xampp\mysql\bin\mysqladmin.exe';
+    $config['mysql_path']                   = 'D:\xampp\mysql\bin\mysql.exe';
+    $config['mysqldump_path']               = 'D:\xampp\mysql\bin\mysqldump.exe';
+    $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
 }
 else
 {
-    $config['mysql_path']                       = '/usr/bin/mysql';
-    $config['mysqldump_path']                   = '/usr/bin/mysqldump';
-    $config['mysqladmin_path']                  = '/usr/bin/mysqladmin';
+    $config['mysql_path']                   = '/usr/bin/mysql';
+    $config['mysqldump_path']               = '/usr/bin/mysqldump';
+    $config['mysqladmin_path']              = '/usr/bin/mysqladmin';
 }
 
-$config['bw_mysql_path']                       = 'assets/database/winmysql/mysql.exe';
-$config['bw_mysqldump_path']                   = 'assets/database/winmysql/mysqldump.exe';
-$config['bw_mysqladmin_path']                  = 'assets/database/winmysql/mysqladmin.exe';
+$config['bw_mysql_path']                    = 'assets/database/winmysql/mysql.exe';
+$config['bw_mysqldump_path']                = 'assets/database/winmysql/mysqldump.exe';
+$config['bw_mysqladmin_path']               = 'assets/database/winmysql/mysqladmin.exe';
 /*Set carousel image relative dimension.*/
 /*1280x800=88vh 800x480=78vh 1366x768=85vh*/
 $config["carousel_fit"]                     = "height:85vh";
@@ -33,6 +33,9 @@ $config["carousel_fit"]                     = "height:85vh";
 /*<!--800x480 = 3vw 1280x800 = 5vw -->*/
 $config["begin_button_fit"]                 = "5vw";
 $config["begin_text"]                       = "";
+$config['dbver']                            = 'x';
+$config['taste_cafe_pos']                   = 'width: 35vw; position: absolute; top: 78vh; right: 4vw;';
+$config['sonnet_intro_pos']                 = 'width: 25vw; height: 25vh; position: absolute; top: 70vh; right: 0px ;';
 
 $config['company_name']                     = 'Impruv IT Solutions';
 $config['posted_by']                        = 'Pelolito A. Aparece';

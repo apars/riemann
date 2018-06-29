@@ -14,7 +14,7 @@ if ( ! function_exists('getNavBrand'))
                   </a>";
         }
         elseif(!empty($logo_text)) {
-          return "<a class='navbar-brand' style='color: black;' href=\"javascript:{}\" onclick=\"var loc = window.location;var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);if (pathName!=base_url.substring(base_url.lastIndexOf('/')+1)){redirectOnClick(base_url+'/thanks');}return false;\"". ">"
+          return "<a class='navbar-brand footer-text' style='color: black;' href=\"javascript:{}\" onclick=\"var loc = window.location;var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);if (pathName!=base_url.substring(base_url.lastIndexOf('/')+1)){redirectOnClick(base_url+'/thanks');}return false;\"". ">"
                    . $logo_text . 
                   "</a>";
               
@@ -26,7 +26,7 @@ if ( ! function_exists('getNavBrand'))
  //                 "</a>";
         }
         else {
-          return "<a class='navbar-brand' href=" . base_url() . $url . "></a>";
+          return "<a class='navbar-brand footer-text' href=" . base_url() . $url . "></a>";
         }
     }   
 }

@@ -1,3 +1,4 @@
+<div class="container-fluid imageloc">
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
     <?php if(isset($valid_survey) && $valid_survey && isset($show_questions) && $show_questions): ?>
         <ol class="carousel-indicators">
@@ -23,8 +24,8 @@
             <?php endif; ?>
             <img class="d-block w-100" src="data:image/jpeg;base64,<?php echo base64_encode($question->image_back); ?>" alt="" style="<?php echo $this->config->item('carousel_fit'); ?>">
             <?php if($question->question_type == 0): ?>
-                <div class="carousel-caption d-none d-md-block">                          
-                    <h1 style="text-shadow: 2px 2px 4px #000000;font-family: AmaticSC; font-size: 12vh;"><?php echo $question->question_text; ?></h1>
+            <div class="carousel-caption d-md-blockn" style="left: 0;width: 100%;">                          
+                    <h1 class="questiontext"><?php echo $question->question_text; ?></h1>
                     <div class="form-group" id="options<?php echo $question->id; ?>">
                         <span class="rating" id="ratingentry">
                             <ul>
@@ -35,20 +36,20 @@
                                         </label>
                                         <input type="radio" name="ratings<?php echo $i+1 ?>" id="rating_<?php echo $option->id ?>" value="<?php echo $option->id ?>" 
                                         <?php echo ((isset($_POST["ratings".$i+1]) && $_POST["ratings".$i+1] == $option->id) ? "checked" : "" ); ?>/>
-                                        <p style="font-size: x-large;color:white;text-shadow: 2px 2px 4px #000000;"><?php echo $option->option_text ?></p>
-                                    </li>
+                                        <p class="optionx"><?php echo $option->option_text ?></p>
+                                    </li> 
                                 <?php endforeach; ?>
                             </ul>
                         </span>
                     </div>
-                    <div class="col-md-12" style="position: relative;margin-left: auto;margin-right: 0; width:20vw;">
+<!--                    <div class="col-md-12" style="position: relative;margin-left: auto;margin-right: 0; width:20vw;">
                         <img class="d-block" src="../<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
-                    </div>  
+                    </div>  -->
                 </div>
             <?php endif; ?>
             <?php if($question->question_type == 3): ?>
                 <div class="carousel-caption d-none d-md-block">                          
-                    <h1 style="text-shadow: 2px 2px 4px #000000;font-family: AmaticSC; font-size: 12vh;"><?php echo $question->question_text; ?></h1>
+                    <h1 class="questiontext"><?php echo $question->question_text; ?></h1>
                     <br>
                     <div class="form-group" id="options<?php echo $question->id; ?>">
                         <span class="rating" id="ratingentry">
@@ -57,7 +58,7 @@
                                 <label for="rating_<?php echo $option->id ?>">
                                 <input type="checkbox" style="width:8vw; height:8vh;" name="ratings<?php echo $i+1 ?>" id="rating_<?php echo $option->id ?>" value="<?php echo $option->id ?>" 
                                 <?php echo ((isset($_POST["ratings".$i+1]) && $_POST["ratings".$i+1] == $option->id) ? "checked" : "" ); ?>/>
-                                <p style="font-size: x-large;color:white;text-shadow: 2px 2px 4px #000000;"><?php echo $option->option_text ?></p>
+                                <p class="optionstext"><?php echo $option->option_text ?></p>
                                 </label>
                             <?php endforeach; ?>
                             </div>
@@ -65,13 +66,11 @@
                         <br><br><br>
                         <button id="checkboxsubmit<?php echo $option->id ?>" type="button" class="btn btn-lg btn-success pull-center" 
                             onclick="submitCheckbox('ratings<?php echo $i+1 ?>')" 
-                            style="height:100%;width:50%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 25px;">
+                            style="height:100%;width:50%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                             Submit
                         </button>
                     </div>
-                    <div class="col-md-12" style="position: relative;margin-left: auto;margin-right: 0; width:20vw;">
-                        <img class="d-block" src="../<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
-                    </div>
+                    
                 </div>
             <?php endif; ?>
                 </div>
@@ -81,7 +80,7 @@
           <div class="carousel-item">
             <img class="d-block w-100" src="<?php echo base_url().$this->config->item('button_back'); ?>" alt="Submit Button" style="<?php echo $this->config->item('carousel_fit'); ?>">
             <div class="carousel-caption d-none d-md-block" style="height:50%;width:50%;left:25%;">
-              <button id="demo" type="submit" class="btn btn-lg btn-success pull-center" style="height:100%;width:100%;font-size:5vw;border-radius: 25px;">Submit Response</button>
+              <button id="demo" type="submit" class="btn btn-lg btn-success pull-center" style="height:100%;width:100%;font-size:5vw;border-radius: 3vh;">Submit Response</button>
             </div>              
           </div>-->
                 </div>          
@@ -101,6 +100,9 @@
                 <source src="../<?php echo $this->config->item('pop_path'); ?>" type="audio/mpeg">
             </audio>
         </div> 
+        <div class="col-md-12" style="<?php echo $this->config->item('taste_cafe_pos'); ?>">
+            <img class="d-block" src="../<?php echo $this->config->item('taste_cafe'); ?>" alt="" style="max-width: 100%;max-height: 100%;">
+        </div>
     </form>
     <div class="col-md-12">
     <?php elseif(isset($valid_survey) && $valid_survey && !(isset($survey_errors) && $survey_errors)): ?>
@@ -123,5 +125,6 @@
         <?php header("Refresh: 2; url=".base_url()); ?>
     <?php endif; ?>
     </div>
+</div>
 </div>
 

@@ -39,6 +39,7 @@ class Survey extends CI_Controller {
         $this->config->set_item('fav_icon', $configdata->fav_icon);
         $this->config->set_item('logo_text', $configdata->logo_text);
         $this->config->set_item('default_title', $configdata->default_title);
+        $this->config->set_item('dbver', $configdata->dbver);
     }
   }
   
@@ -116,7 +117,7 @@ class Survey extends CI_Controller {
                 }
             }
             //Backup current database in local app folder.
-            $sublocation = $this->config->item("db_prefix").date('m-d-Y_hia').$this->config->item("db_ext");
+            $sublocation = $this->config->item("db_prefix").date('m-d-Y_hisa').$this->config->item("db_ext");
             $dbexpfile = $this->config->item("back_path").$sublocation;
             $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." --opt --routines --triggers --databases BANCO > ".$dbexpfile."\n";
             exec($shellcommand);
@@ -324,7 +325,7 @@ class Survey extends CI_Controller {
     if (!file_exists($theusbpath)) {
         $theusbpath = $this->config->item('back_usb_path');
     } 
-    $thefile = $this->config->item("exp_prefix").date('m-d-Y_hia').$this->config->item("exp_ext");
+    $thefile = $this->config->item("exp_prefix").date('m-d-Y_hisa').$this->config->item("exp_ext");
     $outfile = $theusbpath.$thefile;
     $csvdata = $this->dbutil->csv_from_result($result);
     if ( ! write_file($outfile, $csvdata)){
