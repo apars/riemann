@@ -15,12 +15,14 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['mysql_path']                   = 'D:\xampp\mysql\bin\mysql.exe';
     $config['mysqldump_path']               = 'D:\xampp\mysql\bin\mysqldump.exe';
     $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
+    $config['code_path']                    = 'D:\xampp\htdocs\riemann';
 }
 else
 {
     $config['mysql_path']                   = '/usr/bin/mysql';
     $config['mysqldump_path']               = '/usr/bin/mysqldump';
     $config['mysqladmin_path']              = '/usr/bin/mysqladmin';
+    $config['code_path']                    = '/var/www/html';
 }
 
 $config['bw_mysql_path']                    = 'assets/database/winmysql/mysql.exe';
@@ -49,6 +51,7 @@ $config['fav_icon']                         = 'assets/images/general/fav_icon.pn
 $config['back_path']                        = 'assets/downloads/backup/';
 $config['exp_prefix']                       = 'data_export_';
 $config['exp_ext']                          = '.csv';
+$config['zip_ext']                          = '.zip';
 $config['db_prefix']                        = 'survey_';
 $config['db_ext']                           = '.sql';
 $config['taste_cafe']                       = 'assets/images/general/tastecafe.gif';

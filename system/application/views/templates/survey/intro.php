@@ -44,13 +44,16 @@
                 <!--800x480 = 3vw 1280x800 = 5vw -->
                 <div><br><br></div>
                 <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#loadUSB" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Load Database...</button>
-                <div><br><br></div>
+                <div><br></div>
+                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSBforCode" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Load Code...</button>
+                <div><br></div>
                 <?php if(($active_surveys_ex != "") && ($active_surveys_ex != null)): ?>
                     <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Export Data...</button>
                 <?php endif; ?>
-                <div><br><br></div>    
+                <div><br></div>    
                 <button type="button" class="btn btn-lg btn-info" onclick="redirectOnClick('<?php echo base_url(); ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Return</button>
-                <!-- Load USB Modal -->
+                
+                <!-- Load USB for Database -->
                 <div id="loadUSB" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <!-- Modal content-->
@@ -68,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>              
                 <!-- Load Database File Modal -->
                 <div id="loadDBFile" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -105,7 +108,64 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
+                
+                <!-- Load USB for Code -->
+                <div id="loadUSBforCode" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Insert USB</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Please insert USB stick and hit OK button.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="usbinsert" class="btn btn-default" data-toggle="modal" onclick="refreshzipfilelist()" data-dismiss="modal">OK</button>
+                                <!--<button type="button" class="btn btn-default" onclick="redirect2importDB('<?php echo base_url().'importdb'; ?>')" data-dismiss="modal">OK</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <!-- Load Code Modal -->
+                <div id="loadCodeFile" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Load Code</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body" style="height: 33vh;">
+                                <p>Please select Code File and click [Load Code] button.</p>
+                                <?php    
+                                    if (!file_exists($this->config->item('usb_path'))) {
+                                        echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
+                                        $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('zip_ext'));
+                                    } 
+                                    else {
+                                        $flist = glob($this->config->item('usb_path').'*'.$this->config->item('zip_ext'));
+                                    }
+                                ?>
+                                <div class="radio" style="display: block">
+                                    <?php foreach($flist as $fileitem): ?>
+                                        <label><input type="radio" style="display: inline" name="codefile" value="<?php echo $fileitem ?>"          
+                                                      /> <?php echo basename($fileitem) ?>
+                                        </label><br>
+                                    <?php endforeach; ?>
+                                    <!--<label><input type="radio" style="display: inline" name="dbfile" value="female"> Female</label><br>
+                                    <label><input type="radio" style="display: inline" name="dbfile" value="other"> Other</label>-->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onclick="redirect2loadcode('<?php echo base_url().'loadcode'; ?>')">Load Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Export Data Modal -->
                 <div id="exportData" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <!-- Modal content-->

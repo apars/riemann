@@ -21,6 +21,17 @@ function refreshfilelist(){
 //    });
 }
 
+function refreshzipfilelist(){ 
+    var mymodal = $('#loadCodeFile');
+    var url = base_url+'reloadziplist';
+    mymodal.find('.modal-body').load(url);
+    mymodal.modal('show');
+    
+//    $('.modal-body').load(base_url+'reloadlist',function(){
+//        $('#loadDBFile').modal({show:true});
+//    });
+}
+
 function registerCellNumber(url){
     thekey = 'cellnumber';
     thevalue = document.getElementById("text-basic").value;
@@ -80,6 +91,38 @@ function redirect2importDB(url) {
                 document.getElementById("theloader").style.display = "none";
             });
             $('#loadDBFile').modal('hide');
+            return false; 
+        }
+    }
+    alert('You must select a file.');  
+}
+
+function redirect2loadcode(url) {
+    var thedbfile = document.getElementsByName("dbfile");
+    var thekey = '';
+    var thevalue = '';
+    var thepair = {};
+    for( i = 0; i < thedbfile.length; i++ ) {
+        if( thedbfile[i].checked ) {
+            document.getElementById("theloaddbbuttons").style.display = "none";
+            document.getElementById("theloader").style.display = "";
+            
+            thekey = thedbfile[i].name;
+            thevalue = thedbfile[i].value;
+            thepair = {};
+            thepair[thekey] = thevalue;
+            $.post(url, thepair, function(data){
+                // show the response
+                $('#response').html(data);
+                document.getElementById("theloaddbbuttons").style.display = "";
+                document.getElementById("theloader").style.display = "none";
+                location.reload(url);
+            }).fail(function() {
+                // just in case posting your form failed
+                document.getElementById("theloaddbbuttons").style.display = "";
+                document.getElementById("theloader").style.display = "none";
+            });
+            $('#loadCodeFile').modal('hide');
             return false; 
         }
     }

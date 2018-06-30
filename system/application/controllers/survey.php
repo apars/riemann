@@ -410,7 +410,7 @@ class Survey extends CI_Controller {
         echo '</div>';
     }
     else{
-        echo '';
+        echo '<p>USB stick not detected.</p>';
     }
   }
   
@@ -422,6 +422,87 @@ class Survey extends CI_Controller {
   
   public function getfooterhidden(){
     echo $this->session->userdata('footerhidden');
+  }
+  
+  public function reloadZiplist(){
+    
+    $theusbpath = $this->whereusb();
+    if($theusbpath != ''){
+        echo '<p>Please select Code File and click [Load Code] button.<br> USB Path detected: '.$theusbpath.'.</p>';
+
+        if (!file_exists($theusbpath)) {
+            echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
+            $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('zip_ext'));
+        } 
+        else {
+            $flist = glob($theusbpath.'/*'.$this->config->item('zip_ext'));
+        }
+
+        echo '<div class="radio" style="display: block">';
+        foreach($flist as $fileitem){
+            echo '<label><input type="radio" style="display: inline" name="codefile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
+        }
+        echo '</div>';
+    }
+    else{
+        echo '<p>USB stick not detected.</p>';
+    }
+  }
+  
+  public function loadcode()
+  {
+    try{
+        $this->loadConfiguration();
+        if(isset($_POST["codefile"])){
+            $dbasedir = $_POST["codefile"];
+        }
+        else{
+            $theusbpath = $this->whereusb();
+            $dbasedir = $theusbpath.'default.zip';
+        }
+          
+        if(isset($_POST["codefile"])){
+            //Unzip file to code_path with key changing folder name appended with timestamp.
+            //Change /home/pi/start.sh to point to new code.
+//            $mysqlbin = $this->config->item("mysql_path");
+//            $mysqldumpbin = $this->config->item("mysqldump_path");
+//            $mysqladminbin = $this->config->item("mysqladmin_path");
+//                
+//            if (!file_exists($mysqlbin)){
+//                if (DIRECTORY_SEPARATOR == '\\') {
+//                    $mysqlbin = realpath($this->config->item("bw_mysql_path"));
+//                    $mysqldumpbin = realpath($this->config->item("bw_mysqldump_path"));
+//                    $mysqladminbin = realpath($this->config->item("bw_mysqladmin_path"));
+//                }
+//            }
+//            //Backup current database in local app folder.
+//            $sublocation = $this->config->item("db_prefix").date('m-d-Y_hisa').$this->config->item("db_ext");
+//            $dbexpfile = $this->config->item("back_path").$sublocation;
+//            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." --opt --routines --triggers --databases BANCO > ".$dbexpfile."\n";
+//            exec($shellcommand);
+//            
+//            //Backup current database in USB flash drive.
+//            $theusbpath = $this->whereusb();
+//            $dbexpfile = $theusbpath.'/'.$sublocation;
+//            if (!file_exists($dbexpfile)) {
+//                $dbexpfile = $this->config->item("back_usb_path").$sublocation;
+//            }
+//            $shellcommand= $mysqldumpbin." -u ".$this->db->username." -p".$this->db->password." ".$this->db->database." --opt --routines --triggers --databases BANCO > ".$dbexpfile."\n";
+//            exec($shellcommand);
+//
+//            if(file_exists($dbasedir)){
+//                //Drop database only when new db file is available.
+//                $shellcommand= $mysqladminbin." -u ".$this->db->username." -p".$this->db->password." -f drop ".$this->db->database."\n";
+//                exec($shellcommand);
+//                //Import database.
+//                $shellcommand= $mysqlbin." -u ".$this->db->username." -p".$this->db->password." < ".$dbasedir."\n";
+//                exec($shellcommand);
+//            }
+            //redirect($this.base_url());
+        }
+    } catch (Exception $ex) {
+
+    }
   }
   
 }
