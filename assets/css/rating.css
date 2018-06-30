@@ -101,11 +101,11 @@ input[type="radio"]{
 }
 
 .cellentrytext {
-    text-shadow: 2px 2px 4px #000000;
-    font-family: roboto; 
+/*    text-shadow: 2px 2px 4px #000000;
+    font-family: roboto;
+    color: white;*/
     text-align: center; 
-    color: white;
-    font-size: 3vh;
+    font-size: 5vh;
 }
 
 .sonnetfrontpos {

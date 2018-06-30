@@ -15,14 +15,14 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['mysql_path']                   = 'D:\xampp\mysql\bin\mysql.exe';
     $config['mysqldump_path']               = 'D:\xampp\mysql\bin\mysqldump.exe';
     $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
-    $config['code_path']                    = 'D:\xampp\htdocs\riemann';
+    $config['code_path']                    = 'D:\xampp\htdocs\\';
 }
 else
 {
     $config['mysql_path']                   = '/usr/bin/mysql';
     $config['mysqldump_path']               = '/usr/bin/mysqldump';
     $config['mysqladmin_path']              = '/usr/bin/mysqladmin';
-    $config['code_path']                    = '/var/www/html';
+    $config['code_path']                    = '/var/www/html/';
 }
 
 $config['bw_mysql_path']                    = 'assets/database/winmysql/mysql.exe';

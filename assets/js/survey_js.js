@@ -10,7 +10,7 @@ function redirectOnClick(url) {
     $(location).attr('href',url);
 }
 
-function refreshfilelist(){ 
+function refreshfilelist(){
     var mymodal = $('#loadDBFile');
     var url = base_url+'reloadlist';
     mymodal.find('.modal-body').load(url);
@@ -51,7 +51,7 @@ function checkPinCode(url){
     var pincode = document.getElementById("password").value;
     //alert(pincode);
     if (pincode == '1128147'){
-        redirectOnClick(url);
+        redirectOnClick(url);        
     }
     else{
         document.getElementById("password").value = '';
@@ -85,6 +85,7 @@ function redirect2importDB(url) {
                 document.getElementById("theloaddbbuttons").style.display = "";
                 document.getElementById("theloader").style.display = "none";
                 location.reload(url);
+                
             }).fail(function() {
                 // just in case posting your form failed
                 document.getElementById("theloaddbbuttons").style.display = "";
@@ -188,9 +189,6 @@ function date_time(id)
     return true;
 }
 
-
-
-
 idleTimer = null;
 idleState = false;
 idleWait = 30000;
@@ -199,7 +197,7 @@ window.onload = function() {
     date_time('date_time');
     
     $.ajax({
-            type: "POST",
+            type: "GET",
             url: base_url+"survey/getfooterhidden",
             data: {},
             success:function(response){
@@ -261,6 +259,5 @@ window.onload = function() {
                 //your code goes here
             }
         })
-});
-
+    });
 }) (jQuery)

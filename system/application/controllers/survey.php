@@ -87,6 +87,7 @@ class Survey extends CI_Controller {
     else{
         $data["main_back"] = file_get_contents($this->config->item('main_back'));
     }     
+    $this->session->set_userdata(array('footerhidden' => false));
     $this->load->view('templates/survey/header', $data);
     $this->load->view('templates/survey/nav');
     $this->load->view('templates/survey/intro', $data);
@@ -140,6 +141,7 @@ class Survey extends CI_Controller {
                 $shellcommand= $mysqlbin." -u ".$this->db->username." -p".$this->db->password." < ".$dbasedir."\n";
                 exec($shellcommand);
             }
+            echo 'Database loaded successfully.';
             //redirect($this.base_url());
         }
     } catch (Exception $ex) {
@@ -370,30 +372,35 @@ class Survey extends CI_Controller {
     $this->load->view('templates/survey/footer');
   }
   
-  public function whereusb(){
+  public function whereusb($withfallback = false){
     $usb_path = $this->config->item('usb_path');
     $good_usb_path = "";
-    if (file_exists($usb_path)){
-        $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
-        foreach($directories as $directory){
-            if(is_writable($directory) == true){
-                if(touch($directory.'/test.txt') == true){
-                    if(unlink($directory.'/test.txt') == true){
-                        $good_usb_path = $directory;
-                        return $good_usb_path;
+    if(!$withfallback){
+        if (file_exists($usb_path)){
+            $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
+            foreach($directories as $directory){
+                if(is_writable($directory) == true){
+                    if(touch($directory.'/test.txt') == true){
+                        if(unlink($directory.'/test.txt') == true){
+                            $good_usb_path = $directory;
+                            return $good_usb_path;
+                        }
                     }
                 }
             }
         }
     }
+    else{
+        return $this->config->item('back_usb_path');
+    }
     return '';
   }
   
   public function reloadlist(){
-    
+    $this->loadConfiguration();
     $theusbpath = $this->whereusb();
     if($theusbpath != ''){
-        echo '<p>Please select Database File and click [Load Database] button.<br> USB Path detected: '.$theusbpath.'.</p>';
+        echo '<p>Please select Database File and click [Load Database] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
         if (!file_exists($theusbpath)) {
             echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
@@ -421,14 +428,15 @@ class Survey extends CI_Controller {
   }
   
   public function getfooterhidden(){
-    echo $this->session->userdata('footerhidden');
+    $footerhiddenval = $this->session->userdata('footerhidden');
+    echo ($footerhiddenval) ? 'true' : 'false';
   }
   
   public function reloadZiplist(){
-    
+    $this->loadConfiguration();
     $theusbpath = $this->whereusb();
     if($theusbpath != ''){
-        echo '<p>Please select Code File and click [Load Code] button.<br> USB Path detected: '.$theusbpath.'.</p>';
+        echo '<p>Please select Code File and click [Load Code] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
         if (!file_exists($theusbpath)) {
             echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
@@ -460,7 +468,7 @@ class Survey extends CI_Controller {
             $theusbpath = $this->whereusb();
             $dbasedir = $theusbpath.'default.zip';
         }
-          
+         
         if(isset($_POST["codefile"])){
             //Unzip file to code_path with key changing folder name appended with timestamp.
             //Change /home/pi/start.sh to point to new code.
@@ -498,6 +506,7 @@ class Survey extends CI_Controller {
 //                $shellcommand= $mysqlbin." -u ".$this->db->username." -p".$this->db->password." < ".$dbasedir."\n";
 //                exec($shellcommand);
 //            }
+//            echo 'Database loaded successfully.';
             //redirect($this.base_url());
         }
     } catch (Exception $ex) {

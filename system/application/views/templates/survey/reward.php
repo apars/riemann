@@ -5,8 +5,8 @@
     </audio>-->
     <div>
         <h2 class="rewardtext vmarginauto">Register your cellphone number for a chance to win <u>AMAZING PRIZES</u>!</h2>
-        <div class="col-md-8 form-group hmarginauto">
-            <label class="cellentrytext vmarginauto" for="text-basic" ><br>Click text box below to input cellphone number.<br></label>
+        <div class="col-md-8 form-group hmarginauto cellentrytext">
+            <label class="vmarginauto" for="text-basic" ><br>Click box below...<br></label>
             <input type="number" class="form-control cellentrytext" id="text-basic" style="max-height: 100%;max-width: 100%" placeholder="Enter cellphone number...">
 	</div>
         <div class="col-md-3 hmarginauto">
