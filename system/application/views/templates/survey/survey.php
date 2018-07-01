@@ -35,7 +35,10 @@
                                         <i class="<?php echo (($question->icon_text != null ) ? $question->icon_text : 'fas fa-star fa-5x'); ?>" aria-hidden="true"></i>
                                         </label>
                                         <input type="radio" name="ratings<?php echo $i+1 ?>" id="rating_<?php echo $option->id ?>" value="<?php echo $option->id ?>" 
-                                        <?php echo ((isset($_POST["ratings".$i+1]) && $_POST["ratings".$i+1] == $option->id) ? "checked" : "" ); ?>/>
+                                        <?php 
+                                            $ivalue = (string) ($i+1);
+                                            echo ((isset($_POST["ratings".$ivalue]) && $_POST["ratings".$ivalue] == $option->id) ? "checked" : "" ); 
+                                        ?>/>
                                         <!--<p class="optionx"><?php echo $option->option_text ?></p>-->
                                     </li> 
                                 <?php endforeach; ?>

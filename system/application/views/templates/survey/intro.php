@@ -32,7 +32,7 @@
                         <img class="d-block" id="sonnetimg" src="<?php echo $this->config->item('sonnets'); ?>"    alt="" style="max-width: 100%;max-height: 100%;">
                     </div>
 
-                <div class="loader" id="beginloader" style="display: none;"></div>
+            <div class="loader" id="beginloader" style="display: none;"></div>
             <?php else: ?>
             <div class="alert alert-danger text-center" role="alert">
                 <strong>
@@ -42,17 +42,42 @@
             </div>
             <div id="theloaddbbuttons">
                 <!--800x480 = 3vw 1280x800 = 5vw -->
-                <div><br><br></div>
-                <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#loadUSB" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Load Database...</button>
-                <div><br></div>
-                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSBforCode" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Load Code...</button>
-                <div><br></div>
+                <div class="row">
+                <div class="col-md-2"><br>
+                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSB" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                    <div class="fas fa-database"></div>
+                    <div class="settingstext">Load DB</div></button>
+                </div>
+                <div class="col-md-2"><br>
+                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSBforCode" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                    <div class="fab fa-php"></div>
+                    <div class="settingstext">Load Code</div></button>
+                </div>
+                <div class="col-md-2"><br>
+                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSBforCode" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                    <div class="fab fa-php"></div>
+                    <div class="settingstext">Select Code</div></button>
+                </div>
+                <div class="col-md-2"><br>
                 <?php if(($active_surveys_ex != "") && ($active_surveys_ex != null)): ?>
-                    <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Export Data...</button>
+                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-file-excel"></div>
+                        <div class="settingstext">Export</div></button>
                 <?php endif; ?>
-                <div><br></div>    
-                <button type="button" class="btn btn-lg btn-info" onclick="redirectOnClick('<?php echo base_url(); ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">Return</button>
+                </div>
                 
+                <div class="col-md-2"><br>
+                <button type="button" class="btn btn-lg btn-default" onclick="rebootsystem('<?php echo base_url().'importdb'; ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                    <div class="fas fa-power-off"></div>
+                    <div class="settingstext">Reboot</div></button>
+                </div>
+                
+                <div class="col-md-2"><br>
+                <button type="button" class="btn btn-lg btn-default" onclick="redirectOnClick('<?php echo base_url(); ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                    <div class="fas fa-sign-out-alt"></div>
+                    <div class="settingstext">Return</div></button>
+                </div>
+                    </div>
                 <!-- Load USB for Database -->
                 <div id="loadUSB" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -187,6 +212,7 @@
                     </div>
                 </div>
             </div>
+            <div class="introtext" id="theloadertext" style="text-align: center; display: none;"><p>Please wait...<br></p></div>
             <div class="loader" id="theloader" style="display: none"></div>
             <?php endif; ?>
         </div>

@@ -115,3 +115,9 @@ input[type="radio"]{
     right: 0px !important;
 }
 
+.settingstext {
+    font-family: roboto; 
+    text-align: center; 
+    color: gray;
+    font-size: 2vh;
+}

@@ -72,6 +72,8 @@ function redirect2importDB(url) {
     var thepair = {};
     for( i = 0; i < thedbfile.length; i++ ) {
         if( thedbfile[i].checked ) {
+            document.getElementById("theloadertext").style.display = "";
+            document.getElementById("theloadertext").innerHTML = "Loading Database. Please wait...<br><br>";
             document.getElementById("theloaddbbuttons").style.display = "none";
             document.getElementById("theloader").style.display = "";
             
@@ -84,12 +86,14 @@ function redirect2importDB(url) {
                 $('#response').html(data);
                 document.getElementById("theloaddbbuttons").style.display = "";
                 document.getElementById("theloader").style.display = "none";
+                document.getElementById("theloadertext").style.display = "none";
                 location.reload(url);
                 
             }).fail(function() {
                 // just in case posting your form failed
                 document.getElementById("theloaddbbuttons").style.display = "";
                 document.getElementById("theloader").style.display = "none";
+                document.getElementById("theloadertext").style.display = "none";
             });
             $('#loadDBFile').modal('hide');
             return false; 
@@ -99,17 +103,19 @@ function redirect2importDB(url) {
 }
 
 function redirect2loadcode(url) {
-    var thedbfile = document.getElementsByName("dbfile");
+    var thecodefile = document.getElementsByName("codefile");
     var thekey = '';
     var thevalue = '';
     var thepair = {};
-    for( i = 0; i < thedbfile.length; i++ ) {
-        if( thedbfile[i].checked ) {
+    for( i = 0; i < thecodefile.length; i++ ) {
+        if( thecodefile[i].checked ) {
+            document.getElementById("theloadertext").style.display = "";
+            document.getElementById("theloadertext").innerHTML = "Loading Code. Please wait...<br><br>";
             document.getElementById("theloaddbbuttons").style.display = "none";
             document.getElementById("theloader").style.display = "";
             
-            thekey = thedbfile[i].name;
-            thevalue = thedbfile[i].value;
+            thekey = thecodefile[i].name;
+            thevalue = thecodefile[i].value;
             thepair = {};
             thepair[thekey] = thevalue;
             $.post(url, thepair, function(data){
@@ -117,11 +123,16 @@ function redirect2loadcode(url) {
                 $('#response').html(data);
                 document.getElementById("theloaddbbuttons").style.display = "";
                 document.getElementById("theloader").style.display = "none";
+                document.getElementById("theloader").style.display = "none";
+                document.getElementById("theloadertext").style.display = "none";
                 location.reload(url);
+                alert(data);
             }).fail(function() {
                 // just in case posting your form failed
                 document.getElementById("theloaddbbuttons").style.display = "";
                 document.getElementById("theloader").style.display = "none";
+                document.getElementById("theloader").style.display = "none";
+                document.getElementById("theloadertext").style.display = "none";
             });
             $('#loadCodeFile').modal('hide');
             return false; 
@@ -139,6 +150,8 @@ function wait(ms){
 }
 
 function redirect2exportData(url, url2) {
+    document.getElementById("theloadertext").style.display = "";
+    document.getElementById("theloadertext").innerHTML = "Exporting Data. Please wait...<br><br>";
     document.getElementById("theloaddbbuttons").style.display = "none";
     document.getElementById("theloader").style.display = "";
     $('#myModal').modal('hide');
@@ -160,6 +173,29 @@ function redirect2exportData(url, url2) {
         document.getElementById("theloader").style.display = "none";
     });
     return true; 
+}
+
+function rebootsystem(){
+    if(confirm('Are you sure?', 'Reboot the system.')==true){
+        document.getElementById("theloadertext").style.display = "";
+        document.getElementById("theloadertext").innerHTML = "Rebooting System. Please wait...<br><br>";
+        document.getElementById("theloaddbbuttons").style.display = "none";
+        document.getElementById("theloader").style.display = "";
+        $.ajax({
+            type: "GET",
+            url: base_url+"survey/rebootsystem",
+            data: {},
+            success:function(response){
+                //your code goes here
+                if(response=='false'){
+                    document.getElementById("theloaddbbuttons").style.display = "";
+                    document.getElementById("theloader").style.display = "none";
+                    alert('Cannot reboot the system...');
+                    window.location.reload();                   
+                }
+            }
+        });
+    }
 }
 
 function date_time(id)

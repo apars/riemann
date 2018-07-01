@@ -15,7 +15,7 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['mysql_path']                   = 'D:\xampp\mysql\bin\mysql.exe';
     $config['mysqldump_path']               = 'D:\xampp\mysql\bin\mysqldump.exe';
     $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
-    $config['code_path']                    = 'D:\xampp\htdocs\\';
+    $config['code_path']                    = 'D:\keys\\';
 }
 else
 {

@@ -398,7 +398,7 @@ class Survey extends CI_Controller {
   
   public function reloadlist(){
     $this->loadConfiguration();
-    $theusbpath = $this->whereusb();
+    $theusbpath = $this->whereusb(true);
     if($theusbpath != ''){
         echo '<p>Please select Database File and click [Load Database] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
@@ -435,6 +435,7 @@ class Survey extends CI_Controller {
   public function reloadZiplist(){
     $this->loadConfiguration();
     $theusbpath = $this->whereusb();
+    echo($theusbpath);
     if($theusbpath != ''){
         echo '<p>Please select Code File and click [Load Code] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
@@ -443,7 +444,7 @@ class Survey extends CI_Controller {
             $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('zip_ext'));
         } 
         else {
-            $flist = glob($theusbpath.'/*'.$this->config->item('zip_ext'));
+            $flist = glob($theusbpath.'*'.$this->config->item('zip_ext'));
         }
 
         echo '<div class="radio" style="display: block">';
@@ -470,6 +471,32 @@ class Survey extends CI_Controller {
         }
          
         if(isset($_POST["codefile"])){
+            $zip = new ZipArchive;
+            $res = $zip->open($_POST["codefile"]);
+            if ($res === TRUE) {
+                if ($zip->setPassword("P@ssw0rd"))
+                {
+                    $dateappend = date('mdYhisa');
+                    $destfolder = $this->config->item('code_path').'riemann'.$dateappend;
+                    mkdir($destfolder);
+                    if($zip->extractTo($destfolder)){
+//                        if(unlink('/home/pi/start.sh') == true){
+//                            $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/riemann'.$dateappend;
+//                            $file_handle = fopen($file_path, 'w'); 
+//                            fwrite($file_handle, $data_to_write);
+//                            fclose($file_handle);
+//                            echo 'woot!';
+//                        }
+                        echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
+                    }
+                    else{
+                        echo 'Code loading failed!';
+                    }
+                }
+                $zip->close();
+            } else {
+              echo 'doh!';
+            }
             //Unzip file to code_path with key changing folder name appended with timestamp.
             //Change /home/pi/start.sh to point to new code.
 //            $mysqlbin = $this->config->item("mysql_path");
@@ -513,5 +540,18 @@ class Survey extends CI_Controller {
 
     }
   }
-  
+
+  public function rebootsystem()
+  {
+      try{
+        exec ('/usr/bin/sudo /etc/init.d/portmap restart');
+        shell_exec("/sbin/reboot");
+        exec("/sbin/reboot");
+        system("/sbin/reboot");
+        echo 'true';
+      }
+      catch (Exception $ex){
+        echo 'false';
+      }
+  }
 }
