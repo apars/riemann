@@ -89,7 +89,7 @@ function startScreenSaver(options) {
 
           setTimeout(function() {
             var imagenum = Math.floor((Math.random() * 10) + 1);
-            saverBadge.style.background = 'url(../../assets/images/screensave/page'+imagenum+'.gif) center';
+            saverBadge.style.background = 'url('+base_url+'/assets/images/screensave/page'+imagenum+'.gif) center';
             saverBadge.offsetWidth = saverBadge.offsetWidth;
 
             saverBadge.classList.add('visible');
