@@ -10,28 +10,6 @@ function redirectOnClick(url) {
     $(location).attr('href',url);
 }
 
-function refreshfilelist(){
-    var mymodal = $('#loadDBFile');
-    var url = base_url+'reloadlist';
-    mymodal.find('.modal-body').load(url);
-    mymodal.modal('show');
-    
-//    $('.modal-body').load(base_url+'reloadlist',function(){
-//        $('#loadDBFile').modal({show:true});
-//    });
-}
-
-function refreshzipfilelist(){ 
-    var mymodal = $('#loadCodeFile');
-    var url = base_url+'reloadziplist';
-    mymodal.find('.modal-body').load(url);
-    mymodal.modal('show');
-    
-//    $('.modal-body').load(base_url+'reloadlist',function(){
-//        $('#loadDBFile').modal({show:true});
-//    });
-}
-
 function registerCellNumber(url){
     thekey = 'cellnumber';
     thevalue = document.getElementById("text-basic").value;
@@ -47,17 +25,6 @@ function registerCellNumber(url){
     });
 }
 
-function checkPinCode(url){
-    var pincode = document.getElementById("password").value;
-    //alert(pincode);
-    if (pincode == '1128147'){
-        redirectOnClick(url);        
-    }
-    else{
-        document.getElementById("password").value = '';
-    }
-}
-
 function redirectOnBeginClick(url) {
     document.getElementById('popsoundbegin').play();
     document.getElementById('popsoundbegin').onended = function () {
@@ -65,136 +32,11 @@ function redirectOnBeginClick(url) {
     }
 }
 
-function redirect2importDB(url) {
-    var thedbfile = document.getElementsByName("dbfile");
-    var thekey = '';
-    var thevalue = '';
-    var thepair = {};
-    for( i = 0; i < thedbfile.length; i++ ) {
-        if( thedbfile[i].checked ) {
-            document.getElementById("theloadertext").style.display = "";
-            document.getElementById("theloadertext").innerHTML = "Loading Database. Please wait...<br><br>";
-            document.getElementById("theloaddbbuttons").style.display = "none";
-            document.getElementById("theloader").style.display = "";
-            
-            thekey = thedbfile[i].name;
-            thevalue = thedbfile[i].value;
-            thepair = {};
-            thepair[thekey] = thevalue;
-            $.post(url, thepair, function(data){
-                // show the response
-                $('#response').html(data);
-                document.getElementById("theloaddbbuttons").style.display = "";
-                document.getElementById("theloader").style.display = "none";
-                document.getElementById("theloadertext").style.display = "none";
-                location.reload(url);
-                
-            }).fail(function() {
-                // just in case posting your form failed
-                document.getElementById("theloaddbbuttons").style.display = "";
-                document.getElementById("theloader").style.display = "none";
-                document.getElementById("theloadertext").style.display = "none";
-            });
-            $('#loadDBFile').modal('hide');
-            return false; 
-        }
-    }
-    alert('You must select a file.');  
-}
-
-function redirect2loadcode(url) {
-    var thecodefile = document.getElementsByName("codefile");
-    var thekey = '';
-    var thevalue = '';
-    var thepair = {};
-    for( i = 0; i < thecodefile.length; i++ ) {
-        if( thecodefile[i].checked ) {
-            document.getElementById("theloadertext").style.display = "";
-            document.getElementById("theloadertext").innerHTML = "Loading Code. Please wait...<br><br>";
-            document.getElementById("theloaddbbuttons").style.display = "none";
-            document.getElementById("theloader").style.display = "";
-            
-            thekey = thecodefile[i].name;
-            thevalue = thecodefile[i].value;
-            thepair = {};
-            thepair[thekey] = thevalue;
-            $.post(url, thepair, function(data){
-                // show the response
-                $('#response').html(data);
-                document.getElementById("theloaddbbuttons").style.display = "";
-                document.getElementById("theloader").style.display = "none";
-                document.getElementById("theloader").style.display = "none";
-                document.getElementById("theloadertext").style.display = "none";
-                location.reload(url);
-                alert(data);
-            }).fail(function() {
-                // just in case posting your form failed
-                document.getElementById("theloaddbbuttons").style.display = "";
-                document.getElementById("theloader").style.display = "none";
-                document.getElementById("theloader").style.display = "none";
-                document.getElementById("theloadertext").style.display = "none";
-            });
-            $('#loadCodeFile').modal('hide');
-            return false; 
-        }
-    }
-    alert('You must select a file.');  
-}
-
 function wait(ms){
     var start = new Date().getTime();
     var end = start;
     while(end < start + ms) {
         end = new Date().getTime();
-    }
-}
-
-function redirect2exportData(url, url2) {
-    document.getElementById("theloadertext").style.display = "";
-    document.getElementById("theloadertext").innerHTML = "Exporting Data. Please wait...<br><br>";
-    document.getElementById("theloaddbbuttons").style.display = "none";
-    document.getElementById("theloader").style.display = "";
-    $('#myModal').modal('hide');
-            
-    var datafromajax="";
-        
-    $.post(url, "", function(data){
-        // show the response
-        $('#response').html(data);
-        datafromajax = data; 
-            
-        //document.getElementById("beginintro").style.display = "";
-        //document.getElementById("beginloader").style.display = "none";
-        redirectOnClick(url2+'?exportresult='+encodeURI(datafromajax));
-            
-    }).fail(function() {
-        // just in case posting your form failed
-        document.getElementById("theloaddbbuttons").style.display = "";
-        document.getElementById("theloader").style.display = "none";
-    });
-    return true; 
-}
-
-function rebootsystem(){
-    if(confirm('Are you sure?', 'Reboot the system.')==true){
-        document.getElementById("theloadertext").style.display = "";
-        document.getElementById("theloadertext").innerHTML = "Rebooting System. Please wait...<br><br>";
-        document.getElementById("theloaddbbuttons").style.display = "none";
-        document.getElementById("theloader").style.display = "";
-        $.ajax({
-            type: "GET",
-            url: base_url+"survey/rebootsystem",
-            data: {},
-            success:function(response){
-                //your code goes here
-                if(response=='false'){
-                    document.getElementById("theloaddbbuttons").style.display = "";
-                    document.getElementById("theloader").style.display = "none";
-                    alert('Cannot reboot the system...');
-                    window.location.reload();                   
-                }
-            }
-        });
     }
 }
 
@@ -248,7 +90,6 @@ window.onload = function() {
                 }
             }
         })
-    
 };
 
 (function ($) {
@@ -275,6 +116,7 @@ window.onload = function() {
                 idleState = true; }, idleWait);
         });        
         $("body").trigger("mousemove");    
+        
     });
     
     $('#sonnetimg').click(function(){

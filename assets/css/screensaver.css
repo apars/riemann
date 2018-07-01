@@ -1,0 +1,92 @@
+body.screensaver #saver-badge {
+        opacity: 0;
+        display: block;
+        position: absolute;
+        filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12,Color='#444')";
+        filter: url(#drop-shadow);
+        -webkit-filter: drop-shadow(12px 12px 20px rgba(0,0,0,0.5));
+        filter: drop-shadow(12px 12px 20px rgba(0,0,0,0.5));
+        background: url(../images/screensave/page6.gif) center;
+        background-size: contain;
+        z-index: 1001;
+}
+
+ body.screensaver #saver-badge.visible {
+  -webkit-animation: fadeBadge 6s; 
+  -moz-animation:    fadeBadge 6s; 
+  -o-animation:      fadeBadge 6s; 
+  animation:         fadeBadge 6s; 
+  opacity: 1;
+}
+
+body.screensaver .screensaver-overlay {
+  background: #000;
+  opacity: .5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+#saver-badge {
+  display: none;
+}
+
+@-webkit-keyframes fadeBadge {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fadeBadge {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes fadeBadge {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeBadge {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -43,41 +43,54 @@
             <div id="theloaddbbuttons">
                 <!--800x480 = 3vw 1280x800 = 5vw -->
                 <div class="row">
-                <div class="col-md-2"><br>
-                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSB" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
-                    <div class="fas fa-database"></div>
-                    <div class="settingstext">Load DB</div></button>
-                </div>
-                <div class="col-md-2"><br>
-                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSBforCode" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
-                    <div class="fab fa-php"></div>
-                    <div class="settingstext">Load Code</div></button>
-                </div>
-                <div class="col-md-2"><br>
-                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSBforCode" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
-                    <div class="fab fa-php"></div>
-                    <div class="settingstext">Select Code</div></button>
-                </div>
-                <div class="col-md-2"><br>
-                <?php if(($active_surveys_ex != "") && ($active_surveys_ex != null)): ?>
-                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
-                        <div class="fas fa-file-excel"></div>
-                        <div class="settingstext">Export</div></button>
-                <?php endif; ?>
-                </div>
-                
-                <div class="col-md-2"><br>
-                <button type="button" class="btn btn-lg btn-default" onclick="rebootsystem('<?php echo base_url().'importdb'; ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
-                    <div class="fas fa-power-off"></div>
-                    <div class="settingstext">Reboot</div></button>
-                </div>
-                
-                <div class="col-md-2"><br>
-                <button type="button" class="btn btn-lg btn-default" onclick="redirectOnClick('<?php echo base_url(); ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
-                    <div class="fas fa-sign-out-alt"></div>
-                    <div class="settingstext">Return</div></button>
-                </div>
+                    <div class="col-md-2"><br>
+                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSB" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-database"></div>
+                        <div class="settingstext">Load DB</div></button>
                     </div>
+                    <div class="col-md-2"><br>
+                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#loadUSBforCode" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-file-archive"></div>
+                        <div class="settingstext">Stage Code</div></button>
+                    </div>
+                    <div class="col-md-2"><br>
+                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" onclick="refreshcodefolderlist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fab fa-php"></div>
+                        <div class="settingstext">Select Code</div></button>
+                    </div>
+                    <div class="col-md-2"><br>
+                    <?php if(($active_surveys_ex != "") && ($active_surveys_ex != null)): ?>
+                        <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                            <div class="fas fa-file-excel"></div>
+                            <div class="settingstext">Export</div></button>
+                    <?php endif; ?>
+                    </div>
+
+                    <div class="col-md-2"><br>
+                    <button type="button" class="btn btn-lg btn-default" onclick="rebootsystem('<?php echo base_url().'importdb'; ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-power-off"></div>
+                        <div class="settingstext">Reboot</div></button>
+                    </div>
+
+                    <div class="col-md-2"><br>
+                    <button type="button" class="btn btn-lg btn-default" onclick="redirectOnClick('<?php echo base_url(); ?>')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-sign-out-alt"></div>
+                        <div class="settingstext">Return</div></button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-2"><br>
+                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" onclick="refreshcodefolderlist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-volume-up"></div>
+                        <div class="settingstext">Volume Adjust</div></button>
+                    </div>
+                    <div class="col-md-2"><br>
+                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" onclick="refreshcodefolderlist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-sun"></div>
+                        <div class="settingstext">Brightness</div></button>
+                    </div>
+                </div>
                 <!-- Load USB for Database -->
                 <div id="loadUSB" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -159,11 +172,11 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Load Code</h4>
+                                <h4 class="modal-title">Stage Code</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body" style="height: 33vh;">
-                                <p>Please select Code File and click [Load Code] button.</p>
+                                <p>Please select Code File and click [Stage Code] button.</p>
                                 <?php    
                                     if (!file_exists($this->config->item('usb_path'))) {
                                         echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
@@ -184,7 +197,31 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" onclick="redirect2loadcode('<?php echo base_url().'loadcode'; ?>')">Load Code</button>
+                                <button type="button" class="btn btn-default" onclick="redirect2stagecode('<?php echo base_url().'loadcode'; ?>')">Stage Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Load Code List -->
+                <div id="loadCodeList" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Load Code</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body" style="height: 33vh;">
+                                <div class="radio" style="display: block">
+                                        <label><input type="radio" style="display: inline" name="codefolder" value="checkpost"/>
+                                        </label><br>
+                                    <!--<label><input type="radio" style="display: inline" name="dbfile" value="female"> Female</label><br>
+                                    <label><input type="radio" style="display: inline" name="dbfile" value="other"> Other</label>-->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onclick="redirect2loadcode('<?php echo base_url().'selectthecode'; ?>')">Load Code</button>
                             </div>
                         </div>
                     </div>
@@ -204,8 +241,7 @@
                             </div>
                             <div class="modal-footer">
                                 <?php foreach($active_surveys_ex as $survey): ?>
-                                    <button type="button" class="btn btn-default" onclick="redirect2exportData('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>',
-                                    '<?php echo base_url().$this->config->item('disp_export_url'); ?>')" data-dismiss="modal">OK</button>
+                                    <button type="button" class="btn btn-default" onclick="redirect2exportData('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>')" data-dismiss="modal">OK</button>
                                 <?php endforeach; ?>
                             </div>
                         </div>

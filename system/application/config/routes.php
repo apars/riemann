@@ -46,10 +46,12 @@ $route['aquestion/(:any)'] = "survey/aquestion/$1";
 $route['thanks']           = "survey/thanks/";
 $route['reward']           = "survey/reward/";
 $route['registercell']     = "survey/registercell/";
-$route['reloadlist']       = "survey/reloadlist/";
-$route['reloadziplist']    = "survey/reloadziplist/";
-$route['importdb']         = "survey/importdb/";
-$route['loadcode']         = "survey/loadcode/";
+$route['reloadlist']       = "maint/reloadlist/";
+$route['reloadziplist']    = "maint/reloadziplist/";
+$route['reloadcodelist']   = "maint/reloadcodelist/";
+$route['importdb']         = "maint/importdb/";
+$route['loadcode']         = "maint/loadcode/";
+$route['selectthecode']    = "maint/selectthecode/";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

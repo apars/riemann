@@ -16,6 +16,7 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['mysqldump_path']               = 'D:\xampp\mysql\bin\mysqldump.exe';
     $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
     $config['code_path']                    = 'D:\keys\\';
+    $config['start_path']                   = 'D:\keys\\start.sh';
 }
 else
 {
@@ -23,6 +24,7 @@ else
     $config['mysqldump_path']               = '/usr/bin/mysqldump';
     $config['mysqladmin_path']              = '/usr/bin/mysqladmin';
     $config['code_path']                    = '/var/www/html/';
+    $config['start_path']                   = '/home/pi/start.sh';
 }
 
 $config['bw_mysql_path']                    = 'assets/database/winmysql/mysql.exe';
@@ -65,6 +67,7 @@ $config['loader_css']                       = 'assets/css/customloader.css';
 $config['bootstrap_css']                    = 'assets/frameworks/bootstrap-4.0.0/dist/css/bootstrap.css';
 $config['bootstrap_min_css']                = 'assets/frameworks/bootstrap-4.0.0/dist/css/bootstrap.min.css';
 $config['rating_css']                       = 'assets/css/rating.css';
+$config['screensaver_css']                  = 'assets/css/screensaver.css';
 $config['fontawesome_css']                  = 'assets/frameworks/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.css';
 $config['bootstrap_theme_css']              = 'assets/frameworks/bootstrap-3.3.4-dist/css/bootstrap-theme.min.css';
 //$config['bootstrap_theme_css']              = 'assets/frameworks/bootstrap-4.0.0/dist/css/bootstrap-theme.min.css';
@@ -77,6 +80,8 @@ $config['bootstrap_footer_css']             = 'assets/frameworks/bootstrap-4.0.0
 $config['bootstrap_js']                     = 'assets/frameworks/bootstrap-4.0.0/dist/js/bootstrap.min.js';
 $config['jQuery_js']                        = 'assets/js/jquery/jquery-3.3.1.min.js';
 $config['survey_js']                        = 'assets/js/survey_js.js';
+$config['maint_js']                         = 'assets/js/maint_js.js';
 $config['rating_js']                        = 'assets/js/rating.js';
 $config['numpad_js']                        = 'assets/js/numpad.js';
 $config['jqnumpad_js']                      = 'assets/js/jquery.numpad.js';
+$config['screensaver_js']                   = 'assets/js/screensaver.js';

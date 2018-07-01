@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('numpad_css'); ?>"/>
     <link rel="icon" href="data:image/png;base64,<?php echo base64_encode($this->config->item('fav_icon')); ?>"/>
     <link rel="Stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('loader_css'); ?>"  />
+    <link rel="Stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('screensaver_css'); ?>"  />
     <script type="text/javascript"> var base_url = "<?php echo base_url(); ?>";</script>
   </head>
   <body class="body" style="background-image: url(data:image/jpeg;base64,<?php echo base64_encode($main_back); ?>)">

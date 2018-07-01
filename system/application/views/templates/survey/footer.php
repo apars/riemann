@@ -79,8 +79,11 @@
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('jQuery_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('bootstrap_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('jqnumpad_js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().$this->config->item('screensaver_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('rating_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('survey_js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().$this->config->item('maint_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('numpad_js'); ?>"></script>
+        
     </body>
 </html>
