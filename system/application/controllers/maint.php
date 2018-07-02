@@ -246,7 +246,6 @@ class Maint extends CI_Controller {
   public function reloadZiplist(){
     $this->loadConfiguration();
     $theusbpath = $this->whereusb();
-    echo($theusbpath);
     if($theusbpath != ''){
         echo '<p>Please select Code File and click [Stage Code] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
@@ -255,7 +254,7 @@ class Maint extends CI_Controller {
             $flist = glob($this->config->item('back_usb_path').'*'.$this->config->item('zip_ext'));
         } 
         else {
-            $flist = glob($theusbpath.'*'.$this->config->item('zip_ext'));
+            $flist = glob($theusbpath.'/*'.$this->config->item('zip_ext'));
         }
 
         echo '<div class="radio" style="display: block">';
@@ -282,32 +281,37 @@ class Maint extends CI_Controller {
         }
          
         if(isset($_POST["codefile"])){
-            $zip = new ZipArchive;
-            $res = $zip->open($_POST["codefile"]);
-            if ($res === TRUE) {
-                if ($zip->setPassword("P@ssw0rd"))
-                {
-                    $dateappend = date('mdYhisa');
-                    $destfolder = $this->config->item('code_path').'riemann'.$dateappend;
-                    mkdir($destfolder);
-                    if($zip->extractTo($destfolder)){
-//                        if(unlink('/home/pi/start.sh') == true){
-//                            $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/riemann'.$dateappend;
-//                            $file_handle = fopen($file_path, 'w'); 
-//                            fwrite($file_handle, $data_to_write);
-//                            fclose($file_handle);
-//                            echo 'woot!';
-//                        }
-                        echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
-                    }
-                    else{
-                        echo 'Code loading failed!';
-                    }
-                }
-                $zip->close();
-            } else {
-              echo 'doh!';
-            }
+            $dateappend = date('mdYhisa');
+            $destfolder = $this->config->item('code_path').'riemann'.$dateappend;
+            mkdir($destfolder, 0777);
+            exec('tar -C '.$destfolder.' -xvf '.$_POST["codefile"]);
+
+//            $zip = new ZipArchive;
+//            $res = $zip->open($_POST["codefile"]);
+//            if ($res === TRUE) {
+//                if ($zip->setPassword("P@ssw0rd"))
+//                {
+//                    $dateappend = date('mdYhisa');
+//                    $destfolder = $this->config->item('code_path').'riemann'.$dateappend;
+//                    mkdir($destfolder);
+//                    if($zip->extractTo($destfolder)){
+////                        if(unlink('/home/pi/start.sh') == true){
+////                            $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/riemann'.$dateappend;
+////                            $file_handle = fopen($file_path, 'w'); 
+////                            fwrite($file_handle, $data_to_write);
+////                            fclose($file_handle);
+////                            echo 'woot!';
+////                        }
+//                        echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
+//                    }
+//                    else{
+//                        echo 'Code loading failed!';
+//                    }
+//                }
+//                $zip->close();
+//            } else {
+//              echo 'doh!';
+//            }
         }
     } catch (Exception $ex) {
 
@@ -358,7 +362,7 @@ class Maint extends CI_Controller {
   public function rebootsystem()
   {
       try{
-        exec ('/usr/bin/sudo /etc/init.d/portmap restart');
+        //exec ('/usr/bin/sudo /etc/init.d/portmap restart');
         shell_exec("/usr/bin/sudo /sbin/reboot");
         exec("/usr/bin/sudo /sbin/reboot");
         system("/usr/bin/sudo /sbin/reboot");
