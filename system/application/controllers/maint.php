@@ -359,9 +359,9 @@ class Maint extends CI_Controller {
   {
       try{
         exec ('/usr/bin/sudo /etc/init.d/portmap restart');
-        shell_exec("/sbin/reboot");
-        exec("/sbin/reboot");
-        system("/sbin/reboot");
+        shell_exec("/usr/bin/sudo /sbin/reboot");
+        exec("/usr/bin/sudo /sbin/reboot");
+        system("/usr/bin/sudo /sbin/reboot");
         echo 'true';
       }
       catch (Exception $ex){
