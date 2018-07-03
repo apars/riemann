@@ -1,10 +1,11 @@
 var screenSaver = {};
+var imagenum = 0;
 
 $(document).ready(function () {
     startScreenSaver({
-        timeout: 60000,
-        width: 30,
-        height: 30,
+        timeout:5000,
+        width: 1336,
+        height: 800,
         //exitTimeout: 1000,
     }); 
 });
@@ -44,7 +45,7 @@ function startScreenSaver(options) {
 
     createBadge.style.width = screenSaver.options.width + 'rem';
 
-     createBadge.style.height = screenSaver.options.height + 'rem';
+    createBadge.style.height = screenSaver.options.height + 'rem';
 
   }
 
@@ -78,7 +79,7 @@ function startScreenSaver(options) {
 
       //* get dimensions in em
       var windowHeight = window.outerHeight / parseFloat(window.getComputedStyle(document.getElementsByTagName("body")[0], null).getPropertyValue('font-size'));
-
+      
       var windowWidth = window.outerWidth / parseFloat(window.getComputedStyle(document.getElementsByTagName("body")[0], null).getPropertyValue('font-size'));
 
       screenSaver.setInterval = setInterval(function() {
@@ -88,8 +89,22 @@ function startScreenSaver(options) {
           saverBadge.classList.remove('visible');
 
           setTimeout(function() {
-            var imagenum = Math.floor((Math.random() * 10) + 1);
-            saverBadge.style.background = 'url('+base_url+'/assets/images/screensave/page'+imagenum+'.gif) center';
+            //Load background based on random number 1-10.
+            //alert(window.outerHeight);
+            //alert(window.outerWidth);
+            if ((imagenum + 1) > 10){
+                imagenum = 1;
+            }
+            else{
+                imagenum = imagenum + 1;
+            }
+            var randnumber = 0; // Math.floor((Math.random() * 10) + 1);
+            saverBadge.style.backgroundImage = "url("+base_url+"assets/images/screensave/page"+imagenum+".gif?id="+randnumber+")";
+            saverBadge.style.backgroundRepeat = "no-repeat";
+            saverBadge.style.backgroundAttachment = "fixed";
+            saverBadge.style.backgroundPosition = "center center";
+            saverBadge.style.backgroundSize = "100% auto";
+            saverBadge.style.overflowX = "hidden";
             saverBadge.offsetWidth = saverBadge.offsetWidth;
 
             saverBadge.classList.add('visible');
@@ -111,7 +126,9 @@ function startScreenSaver(options) {
             saverLeftValue = saverLeftValue + 15;
 
           }
-
+//          Set Top and Left position to upper left side.
+          saverTopValue = 0;
+          saverLeftValue = 0;
           saverBadge.style.top = saverTopValue + 'rem';
 
           saverBadge.style.left = saverLeftValue + 'rem';

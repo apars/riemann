@@ -222,22 +222,21 @@ class Maint extends CI_Controller {
   public function whereusb($withfallback = false){
     $usb_path = $this->config->item('usb_path');
     $good_usb_path = "";
-    if(!$withfallback){
-        if (file_exists($usb_path)){
-            $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
-            foreach($directories as $directory){
-                if(is_writable($directory) == true){
-                    if(touch($directory.'/test.txt') == true){
-                        if(unlink($directory.'/test.txt') == true){
-                            $good_usb_path = $directory;
-                            return $good_usb_path;
-                        }
+    
+    if (file_exists($usb_path)){
+        $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
+        foreach($directories as $directory){
+            if(is_writable($directory) == true){
+                if(touch($directory.'/test.txt') == true){
+                    if(unlink($directory.'/test.txt') == true){
+                        $good_usb_path = $directory;
+                        return $good_usb_path;
                     }
                 }
             }
         }
     }
-    else{
+    if (($good_usb_path === "") && $withfallback){
         return $this->config->item('back_usb_path');
     }
     return '';
@@ -245,7 +244,7 @@ class Maint extends CI_Controller {
 
   public function reloadZiplist(){
     $this->loadConfiguration();
-    $theusbpath = $this->whereusb();
+    $theusbpath = $this->whereusb(true);
     if($theusbpath != ''){
         echo '<p>Please select Code File and click [Stage Code] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
@@ -277,41 +276,51 @@ class Maint extends CI_Controller {
         }
         else{
             $theusbpath = $this->whereusb();
-            $dbasedir = $theusbpath.'default.zip';
+            $dbasedir = $theusbpath.'default.tar';
         }
          
         if(isset($_POST["codefile"])){
             $dateappend = date('mdYhisa');
-            $destfolder = $this->config->item('code_path').'riemann'.$dateappend;
+            $path_parts = pathinfo($_POST["codefile"]);
+            $destfolder = $this->config->item('code_path').$path_parts['filename'].$dateappend;
             mkdir($destfolder, 0777);
-            exec('tar -C '.$destfolder.' -xvf '.$_POST["codefile"]);
-
-//            $zip = new ZipArchive;
-//            $res = $zip->open($_POST["codefile"]);
-//            if ($res === TRUE) {
-//                if ($zip->setPassword("P@ssw0rd"))
-//                {
-//                    $dateappend = date('mdYhisa');
-//                    $destfolder = $this->config->item('code_path').'riemann'.$dateappend;
-//                    mkdir($destfolder);
-//                    if($zip->extractTo($destfolder)){
-////                        if(unlink('/home/pi/start.sh') == true){
-////                            $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/riemann'.$dateappend;
-////                            $file_handle = fopen($file_path, 'w'); 
-////                            fwrite($file_handle, $data_to_write);
-////                            fclose($file_handle);
-////                            echo 'woot!';
-////                        }
-//                        echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
-//                    }
-//                    else{
-//                        echo 'Code loading failed!';
-//                    }
-//                }
-//                $zip->close();
-//            } else {
-//              echo 'doh!';
-//            }
+            if (DIRECTORY_SEPARATOR == '/') {
+                //exec('tar -C '.$destfolder.' -xvf '.$_POST["codefile"]);
+                $phar = new PharData($_POST["codefile"]);
+                if($phar->extractTo($destfolder)){
+                    echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
+                }
+                else{
+                        echo 'Code loading failed!';
+                }
+            }
+            else{
+                //$zip = new ZipArchive;
+                $phar = new PharData($_POST["codefile"]);
+                //$res = $zip->open($_POST["codefile"]);
+                //if ($res === TRUE) {
+                    //if ($zip->setPassword("P@ssw0rd"))
+                    //{
+                    if($phar->extractTo($destfolder)){
+                    //if($zip->extractTo($destfolder)){
+//                        if(unlink('/home/pi/start.sh') == true){
+//                            $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/riemann'.$dateappend;
+//                            $file_handle = fopen($file_path, 'w'); 
+//                            fwrite($file_handle, $data_to_write);
+//                            fclose($file_handle);
+//                            echo 'woot!';
+//                        }
+                        echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
+                    }
+                    else{
+                        echo 'Code loading failed!';
+                    }
+                    //}
+                    //$zip->close();
+                //} else {
+                //  echo 'doh!';
+                //}
+            }
         }
     } catch (Exception $ex) {
 
