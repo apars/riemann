@@ -3,9 +3,9 @@ var imagenum = 0;
 
 $(document).ready(function () {
     startScreenSaver({
-        timeout:60000,
-        width: 1336,
-        height: 800,
+        timeout:3000,
+        width: 120,
+        height: 70,
         //exitTimeout: 1000,
     }); 
 });
@@ -81,13 +81,13 @@ function startScreenSaver(options) {
       var windowHeight = window.outerHeight / parseFloat(window.getComputedStyle(document.getElementsByTagName("body")[0], null).getPropertyValue('font-size'));
       
       var windowWidth = window.outerWidth / parseFloat(window.getComputedStyle(document.getElementsByTagName("body")[0], null).getPropertyValue('font-size'));
-
+      
       screenSaver.setInterval = setInterval(function() {
-
+          
         if (screenSaver.inProgress === true) {
 
           saverBadge.classList.remove('visible');
-
+          
           setTimeout(function() {
             //Load background based on random number 1-10.
             //alert(window.outerHeight);

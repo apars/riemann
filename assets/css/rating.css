@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : paparece
 */
 .rating {
-    overflow: hidden; 
+    overflow: hidden;
     /*hidden;*/
     display: inline-block;
 }
