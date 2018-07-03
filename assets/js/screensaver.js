@@ -3,7 +3,7 @@ var imagenum = 0;
 
 $(document).ready(function () {
     startScreenSaver({
-        timeout:3000,
+        timeout:60000,
         width: 120,
         height: 70,
         //exitTimeout: 1000,
