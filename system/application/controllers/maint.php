@@ -64,7 +64,7 @@ class Maint extends CI_Controller {
   
     public function reloadlist(){
     $this->loadConfiguration();
-    $theusbpath = $this->whereusb();
+    $theusbpath = $this->whereusb(true);
     if($theusbpath != ''){
         echo '<p>Please select Database File and click [Load Database] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
@@ -244,7 +244,7 @@ class Maint extends CI_Controller {
 
   public function reloadZiplist(){
     $this->loadConfiguration();
-    $theusbpath = $this->whereusb(true);
+    $theusbpath = $this->whereusb();
     if($theusbpath != ''){
         echo '<p>Please select Code File and click [Stage Code] button.<br> USB Path detected, '.$theusbpath.'.</p>';
 
