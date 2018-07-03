@@ -39,7 +39,7 @@ $config["begin_button_fit"]                 = "5vw";
 $config["begin_text"]                       = "";
 $config['dbver']                            = 'x';
 $config['taste_cafe_pos']                   = 'width: 35vw; position: absolute; top: 78vh; right: 4vw;';
-$config['sonnet_intro_pos']                 = 'width: 25vw; height: 25vh; position: absolute; top: 70vh; right: 0px ;';
+$config['sonnet_intro_pos']                 = 'width: 25vw; height: 25vh; position: absolute; top: 67vh; right: 0px ;';
 
 $config['company_name']                     = 'Impruv IT Solutions';
 $config['posted_by']                        = 'Pelolito A. Aparece';

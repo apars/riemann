@@ -285,14 +285,14 @@ class Maint extends CI_Controller {
             $destfolder = $this->config->item('code_path').$path_parts['filename'].$dateappend;
             mkdir($destfolder, 0777);
             if (DIRECTORY_SEPARATOR == '/') {
-                //exec('tar -C '.$destfolder.' -xvf '.$_POST["codefile"]);
-                $phar = new PharData($_POST["codefile"]);
-                if($phar->extractTo($destfolder)){
-                    echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
-                }
-                else{
-                        echo 'Code loading failed!';
-                }
+                exec('tar -C '.$destfolder.' -xvf '.$_POST["codefile"]);
+                //$phar = new PharData($_POST["codefile"]);
+                //if($phar->extractTo($destfolder)){
+                echo $_POST["codefile"].' successfully extracted to '.$destfolder.'.';
+                //}
+                //else{
+                //        echo 'Code loading failed!';
+                //}
             }
             else{
                 //$zip = new ZipArchive;
