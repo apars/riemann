@@ -384,6 +384,7 @@ class Maint extends CI_Controller {
   
   public function mutesound($mute = 0){
       try{
+        //0 - Mute; 1 - UnMute;
         $imute = (string) ($mute);
         if ($this->config->item('vol_ctrl') != ''){
             exec("sudo amixer cset numid=2 ".$imute);
@@ -398,25 +399,44 @@ class Maint extends CI_Controller {
   public function getsoundlevel(){
       try{
         if ($this->config->item('vol_ctrl') != ''){  
-            echo exec("sudo ".$this->config->item('vol_ctrl')); 
+            return exec("sudo ".$this->config->item('vol_ctrl')); 
         }
+        return '';
       }
       catch (Exception $ex){
-        echo '';
+        return '';
       }
   }
   
   public function adjustsound($vol = 0){
       try{
-        $ivol = (string) ($vol);
-        if ($this->config->item('vol_ctrl')!= ''){
-            exec("sudo ".$this->config->item('vol_ctrl')." ".$ivol);
+        if(isset($_POST["vol"])){
+            $ivol = (string) ($_POST["vol"]);
+            if ($this->config->item('vol_ctrl')!= ''){
+                exec("sudo ".$this->config->item('vol_ctrl')." ".$ivol);
+            }
+            echo 'true';
         }
-        echo 'true';
       }
       catch (Exception $ex){
         echo 'false';
       }
+  }
+  
+  public function reloadvolume(){
+    $this->loadConfiguration();
+    $thesoundlevel = $this->getsoundlevel();
+    if ($thesoundlevel === '') {
+        $thesoundlevel = "50";
+    }
+    echo '<audio control id="popsoundonvol">';
+    echo '    <source src="<?php echo $this->config->item(\'pop_path\'); ?>" type="audio/mpeg">';
+    echo '</audio>';
+    echo '<div><br></div>';
+    echo '<div>';
+    echo '    <input type="range" id="volid" min="0" max="100" value="'.$thesoundlevel.'" data-rangeslider>';
+    echo '    <output></output>';
+    echo '</div>';
   }
   
 }

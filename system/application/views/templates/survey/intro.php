@@ -81,7 +81,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-2"><br>
-                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#adjustVolume" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                    <button type="button" class="btn btn-lg btn-default" onclick="refreshvolume()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                         <div class="fas fa-volume-up"></div>
                         <div class="settingstext">Volume Adjust</div></button>
                     </div>
@@ -258,9 +258,12 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
+                                <audio control id="popsoundonvol">
+                                    <source src="<?php echo '../'.$this->config->item('pop_path'); ?>" type="audio/mpeg">
+                                </audio>
                                 <div><br></div>
                                 <div>
-                                    <input type="range" min="0" max="100" data-rangeslider>
+                                    <input type="range" id="volid" min="0" max="100" data-rangeslider>
                                     <output></output>
                                 </div>
                             </div>

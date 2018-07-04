@@ -38,6 +38,17 @@ function refreshcodefolderlist(){
 //    });
 }
 
+function refreshvolume(){ 
+    var mymodal = $('#adjustVolume');
+    var url = base_url+'reloadvolume';
+    mymodal.find('.modal-body').load(url);
+    mymodal.modal('show');
+    
+//    $('.modal-body').load(base_url+'reloadlist',function(){
+//        $('#loadDBFile').modal({show:true});
+//    });
+}
+
 function inputPinCode()
 {
     document.getElementById("password").click();
@@ -263,6 +274,29 @@ function rebootsystem(){
     }
 }
 
+function setvolume(vol) {
+    var thekey = '';
+    var thevalue = '';
+    var thepair = {};
+
+            
+    thekey = "vol";
+    thevalue = vol;
+    thepair = {};
+    thepair[thekey] = thevalue;
+
+    $.ajax({
+    type: "POST",
+    url: base_url+'adjustsound',
+    data: thepair,
+    success:function(response){
+        //alert(response);
+    }
+    });
+    return false; 
+}
+
+
     $(function() {
         var $document = $(document);
         var selector = '[data-rangeslider]';
@@ -274,6 +308,14 @@ function rebootsystem(){
             var value = element.value;
             var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
             output[textContent] = value;
+
+            var aud = document.getElementById('popsoundonvol');
+            if(!aud.paused){
+                aud.play();
+            }
+            
+            setvolume(value);
+            
         }
         $document.on('input', 'input[type="range"], ' + selector, function(e) {
             valueOutput(e.target);
@@ -332,6 +374,7 @@ function rebootsystem(){
             onSlide: function(position, value) {
                 console.log('onSlide');
                 console.log('position: ' + position, 'value: ' + value);
+                
             },
             // Callback function
             onSlideEnd: function(position, value) {

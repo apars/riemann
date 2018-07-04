@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "survey";
 $route['admin'] = "admin/login";
-$route['404_override'] = '';
+$route['404_override']     = '';
 $route['questions/(:any)'] = "survey/questions/$1";
 $route['aquestion/(:any)'] = "survey/aquestion/$1";
 $route['thanks']           = "survey/thanks/";
@@ -52,6 +52,9 @@ $route['reloadcodelist']   = "maint/reloadcodelist/";
 $route['importdb']         = "maint/importdb/";
 $route['loadcode']         = "maint/loadcode/";
 $route['selectthecode']    = "maint/selectthecode/";
+$route['reloadvolume']     = "maint/reloadvolume/";
+$route['adjustsound']      = "maint/adjustsound/";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
