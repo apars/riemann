@@ -81,15 +81,15 @@
                 <br>
                 <div class="row">
                     <div class="col-md-2"><br>
-                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" onclick="refreshcodefolderlist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                    <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#adjustVolume" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                         <div class="fas fa-volume-up"></div>
                         <div class="settingstext">Volume Adjust</div></button>
                     </div>
-                    <div class="col-md-2"><br>
+<!--                    <div class="col-md-2"><br>
                     <button type="button" class="btn btn-lg btn-default" data-toggle="modal" onclick="refreshcodefolderlist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                         <div class="fas fa-sun"></div>
                         <div class="settingstext">Brightness</div></button>
-                    </div>
+                    </div>-->
                 </div>
                 <!-- Load USB for Database -->
                 <div id="loadUSB" class="modal fade" role="dialog">
@@ -243,6 +243,30 @@
                                 <?php foreach($active_surveys_ex as $survey): ?>
                                     <button type="button" class="btn btn-default" onclick="redirect2exportData('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>')" data-dismiss="modal">OK</button>
                                 <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Adjust Volume -->
+                <div id="adjustVolume" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Volume Control</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div><br></div>
+                                <div>
+                                    <input type="range" min="0" max="100" data-rangeslider>
+                                    <output></output>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <!--<button type="button" id="usbinsert" class="btn btn-default" data-toggle="modal" onclick="refreshzipfilelist()" data-dismiss="modal">OK</button>-->
+                                <!--<button type="button" class="btn btn-default" onclick="redirect2importDB('<?php echo base_url().'importdb'; ?>')" data-dismiss="modal">OK</button>-->
                             </div>
                         </div>
                     </div>

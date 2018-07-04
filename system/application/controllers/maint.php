@@ -381,4 +381,42 @@ class Maint extends CI_Controller {
         echo 'false';
       }
   }
+  
+  public function mutesound($mute = 0){
+      try{
+        $imute = (string) ($mute);
+        if ($this->config->item('vol_ctrl') != ''){
+            exec("sudo amixer cset numid=2 ".$imute);
+        }
+        echo 'true';
+      }
+      catch (Exception $ex){
+        echo 'false';
+      }
+  }
+  
+  public function getsoundlevel(){
+      try{
+        if ($this->config->item('vol_ctrl') != ''){  
+            echo exec("sudo ".$this->config->item('vol_ctrl')); 
+        }
+      }
+      catch (Exception $ex){
+        echo '';
+      }
+  }
+  
+  public function adjustsound($vol = 0){
+      try{
+        $ivol = (string) ($vol);
+        if ($this->config->item('vol_ctrl')!= ''){
+            exec("sudo ".$this->config->item('vol_ctrl')." ".$ivol);
+        }
+        echo 'true';
+      }
+      catch (Exception $ex){
+        echo 'false';
+      }
+  }
+  
 }

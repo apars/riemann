@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('bootflat_css'); ?>"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('style_css'); ?>"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('numpad_css'); ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('slider_css'); ?>"/>
     <link rel="icon" href="data:image/png;base64,<?php echo base64_encode($this->config->item('fav_icon')); ?>"/>
     <link rel="Stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('loader_css'); ?>"  />
     <link rel="Stylesheet" type="text/css" href="<?php echo base_url().$this->config->item('screensaver_css'); ?>"  />

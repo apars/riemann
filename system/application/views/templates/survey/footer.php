@@ -10,6 +10,11 @@
                 </p></div>
                 <!-- Trigger the modal with a button -->
                 
+                <div class="form-group" style="display: none;">
+                    <label for="password">Pin code</label>
+                    <input type="password" class="form-control" id="password" placeholder="Pin code">
+                </div>
+                
                 <div class="div-right" style="display: inline-block;"><p class="footer-text">Follow Us
                     <a href="#" class="fab fa-facebook"></a>
                     <a href="#" class="fab fa-twitter"></a>
@@ -18,7 +23,9 @@
                     <span style="font-size: 2vh">[DBV <?php echo $this->config->item('dbver'); ?>]</span>
                     <?php if(($active_surveys != "") && ($active_surveys != null)): ?>
                     <!--<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">E</button>-->
-                    <button type="button" class="btn btn-info btn-sm btn-danger" data-toggle="modal" data-target="#inputpin" data-dismiss="modal">M</button>
+                    <!--<button type="button" class="btn btn-info btn-sm btn-danger" data-toggle="modal" data-target="#inputpin" data-dismiss="modal">M</button>-->
+                    <button type="button" id="pinconfirm" class="btn btn-info btn-sm btn-danger" onclick="inputPinCode()" data-dismiss="modal">M</button>
+                    
                     <!--<button type="button" class="btn btn-info btn-sm btn-danger" onclick="redirectOnClick('<?php echo base_url().$this->config->item('loaddb_url').'/'; ?>')" >M</button>-->
                     <?php endif; ?>
                     
@@ -29,10 +36,10 @@
                 </div>
             </div>
             
-            <!-- Input Pin -->
+<!--             Input Pin 
             <div id="inputpin" class="modal fade" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Modal content-->
+                     Modal content
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Input Pin Code:</h4>
@@ -51,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
@@ -81,6 +88,7 @@
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('jqnumpad_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('screensaver_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('rating_js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().$this->config->item('slider_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('survey_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('maint_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('numpad_js'); ?>"></script>

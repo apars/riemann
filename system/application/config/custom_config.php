@@ -17,6 +17,8 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
     $config['code_path']                    = 'D:\keys\\';
     $config['start_path']                   = 'D:\keys\\start.sh';
+    //Shell Scripts
+    $config['vol_ctrl']                     = '';   
 }
 else
 {
@@ -25,6 +27,8 @@ else
     $config['mysqladmin_path']              = '/usr/bin/mysqladmin';
     $config['code_path']                    = '/var/www/html/';
     $config['start_path']                   = '/home/pi/start.sh';
+    //Shell Scripts
+    $config['vol_ctrl']                     = 'assets/audios/vol.sh';
 }
 
 $config['bw_mysql_path']                    = 'assets/database/winmysql/mysql.exe';
@@ -62,6 +66,7 @@ $config['sonnets']                          = 'assets/images/general/sonnets.gif
 //Bootstrap
 $config['bootflat_css']                     = 'assets/css/bootflat.min.css';
 $config['style_css']                        = 'assets/css/style.css';
+$config['slider_css']                       = 'assets/css/rangeslider.css';
 $config['numpad_css']                       = 'assets/css/jquery.numpad.css';
 $config['loader_css']                       = 'assets/css/customloader.css';
 $config['bootstrap_css']                    = 'assets/frameworks/bootstrap-4.0.0/dist/css/bootstrap.css';
@@ -82,6 +87,7 @@ $config['jQuery_js']                        = 'assets/js/jquery/jquery-3.3.1.min
 $config['survey_js']                        = 'assets/js/survey_js.js';
 $config['maint_js']                         = 'assets/js/maint_js.js';
 $config['rating_js']                        = 'assets/js/rating.js';
+$config['slider_js']                        = 'assets/js/rangeslider.js';
 $config['numpad_js']                        = 'assets/js/numpad.js';
 $config['jqnumpad_js']                      = 'assets/js/jquery.numpad.js';
 $config['screensaver_js']                   = 'assets/js/screensaver.js';
