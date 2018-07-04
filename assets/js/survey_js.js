@@ -111,7 +111,10 @@ window.onload = function() {
                 var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);
                 if (pathName!=base_url.substring(base_url.lastIndexOf('/')+1))
                 {
-                    redirectOnClick(base_url+'thanks');
+                    var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);
+                    if (pathName != 'loaddb'){
+                        redirectOnClick(base_url+'thanks');
+                    }
                 }
                 idleState = true; }, idleWait);
         });        

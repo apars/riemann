@@ -28,7 +28,7 @@ else
     $config['code_path']                    = '/var/www/html/';
     $config['start_path']                   = '/home/pi/start.sh';
     //Shell Scripts
-    $config['vol_ctrl']                     = 'assets/audios/vol.sh';
+    $config['vol_ctrl']                     = 'home/pi/vol.sh';
 }
 
 $config['bw_mysql_path']                    = 'assets/database/winmysql/mysql.exe';

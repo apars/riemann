@@ -399,7 +399,7 @@ class Maint extends CI_Controller {
   public function getsoundlevel(){
       try{
         if ($this->config->item('vol_ctrl') != ''){  
-            return exec("sudo ".$this->config->item('vol_ctrl')); 
+            return exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')); 
         }
         return '';
       }
@@ -413,20 +413,20 @@ class Maint extends CI_Controller {
         if(isset($_POST["vol"])){
             $ivol = (string) ($_POST["vol"]);
             if ($this->config->item('vol_ctrl')!= ''){
-                exec("sudo ".$this->config->item('vol_ctrl')." ".$ivol);
+                exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')." ".$ivol);
             }
-            echo 'true';
+            //echo 'true';
         }
       }
       catch (Exception $ex){
-        echo 'false';
+        //echo 'false';
       }
   }
   
   public function reloadvolume(){
     $this->loadConfiguration();
     $thesoundlevel = $this->getsoundlevel();
-    if ($thesoundlevel === '') {
+    if ($thesoundlevel === "") {
         $thesoundlevel = "50";
     }
     echo '<audio control id="popsoundonvol">';
