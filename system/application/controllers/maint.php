@@ -435,7 +435,7 @@ class Maint extends CI_Controller {
         $thesoundlevel = "50";
     }
     echo '<audio control id="popsoundonvol">';
-    echo '    <source src="<?php echo \'../../\'.$this->config->item(\'pop_path\'); ?>" type="audio/mpeg">';
+    echo '    <source src="../'.$this->config->item('pop_path').'" type="audio/mpeg">';
     echo '</audio>';
     echo '<div><br></div>';
     echo '<div id="voldiv">';
