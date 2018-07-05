@@ -259,7 +259,7 @@
                             </div>
                             <div class="modal-body">
                                 <audio control id="popsoundonvol">
-                                    <source src="<?php echo '../'.$this->config->item('pop_path'); ?>" type="audio/mpeg">
+                                    <source src="<?php echo $this->config->item('pop_path'); ?>" type="audio/mpeg">
                                 </audio>
                                 <div><br></div>
                                 <div>

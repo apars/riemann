@@ -399,7 +399,7 @@ class Maint extends CI_Controller {
   public function getsoundlevel(){
       try{
         if ($this->config->item('vol_ctrl') != ''){  
-            return exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')); 
+            echo exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')); 
         }
         return '';
       }
@@ -413,7 +413,7 @@ class Maint extends CI_Controller {
         if(isset($_POST["vol"])){
             $ivol = (string) ($_POST["vol"]);
             if ($this->config->item('vol_ctrl')!= ''){
-                exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')." ".$ivol);
+                echo exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')." ".$ivol);
             }
             //echo 'true';
         }
@@ -430,7 +430,7 @@ class Maint extends CI_Controller {
         $thesoundlevel = "50";
     }
     echo '<audio control id="popsoundonvol">';
-    echo '    <source src="<?php echo $this->config->item(\'pop_path\'); ?>" type="audio/mpeg">';
+    echo '    <source src="<?php echo \'../../\'.$this->config->item(\'pop_path\'); ?>" type="audio/mpeg">';
     echo '</audio>';
     echo '<div><br></div>';
     echo '<div>';
