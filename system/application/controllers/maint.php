@@ -226,6 +226,7 @@ class Maint extends CI_Controller {
     if (file_exists($usb_path)){
         $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
         foreach($directories as $directory){
+            exec('/usr/bin/sudo /bin/chmod 777 '.$directory);
             if(is_writable($directory) == true){
                 if(touch($directory.'/test.txt') == true){
                     if(unlink($directory.'/test.txt') == true){
