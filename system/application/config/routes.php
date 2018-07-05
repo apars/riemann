@@ -54,6 +54,8 @@ $route['loadcode']         = "maint/loadcode/";
 $route['selectthecode']    = "maint/selectthecode/";
 $route['reloadvolume']     = "maint/reloadvolume/";
 $route['adjustsound']      = "maint/adjustsound/";
+$route['getsoundlevel']    = "maint/getsoundlevel/";
+
 
 
 /* End of file routes.php */

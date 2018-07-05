@@ -402,6 +402,9 @@ class Maint extends CI_Controller {
         if ($this->config->item('vol_ctrl') != ''){  
             $retval = exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')); 
         }
+        if ($retval === "") {
+            $retval = "50";
+        }
         return $retval;
       }
       catch (Exception $ex){
@@ -434,9 +437,10 @@ class Maint extends CI_Controller {
     echo '    <source src="<?php echo \'../../\'.$this->config->item(\'pop_path\'); ?>" type="audio/mpeg">';
     echo '</audio>';
     echo '<div><br></div>';
-    echo '<div>';
-    echo '    <input type="range" id="volid" min="0" max="100" value="'.$thesoundlevel.'" data-rangeslider>';
-    echo '    <output></output>';
+    echo '<div id="voldiv">';
+    echo '    <input type="range" id="volid" style="width:100%;" min="0" max="100" value="'.$thesoundlevel.'" data-rangeslider>';
+    echo '    <output>'.$thesoundlevel.'</output>';
+    echo '<input type="number" style="display: none;" value="'.$thesoundlevel.'">';
     echo '</div>';
   }
   

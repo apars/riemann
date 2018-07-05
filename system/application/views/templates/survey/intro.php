@@ -80,7 +80,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md-2"><br>
+                    <div class="col-md-2" id ="refvolbut"><br>
                     <button type="button" class="btn btn-lg btn-default" onclick="refreshvolume()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                         <div class="fas fa-volume-up"></div>
                         <div class="settingstext">Volume Adjust</div></button>

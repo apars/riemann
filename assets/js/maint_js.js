@@ -32,7 +32,7 @@ function refreshcodefolderlist(){
     var url = base_url+'reloadcodelist';
     mymodal.find('.modal-body').load(url);
     mymodal.modal('show');
-    
+  
 //    $('.modal-body').load(base_url+'reloadlist',function(){
 //        $('#loadDBFile').modal({show:true});
 //    });
@@ -41,8 +41,17 @@ function refreshcodefolderlist(){
 function refreshvolume(){ 
     var mymodal = $('#adjustVolume');
     var url = base_url+'reloadvolume';
-    mymodal.find('.modal-body').load(url);
-    mymodal.modal('show');
+    
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: {},
+        success:function(response){
+            mymodal.find('.modal-body').load(url);
+            mymodal.modal('show');
+        }
+    });
+    
     
 //    $('.modal-body').load(base_url+'reloadlist',function(){
 //        $('#loadDBFile').modal({show:true});
@@ -332,10 +341,15 @@ function setvolume(vol) {
             $inputRange.rangeslider('update');
         });
         // Example functionality to demonstrate programmatic value changes
-        $document.on('click', '#js-example-change-value button', function(e) {
+        $document.on('click', '#adjustVolume1', function(e) {
+            //alert((e.target.parentNode)[0].value);
+            
             var $inputRange = $(selector, e.target.parentNode);
             var value = $('input[type="number"]', e.target.parentNode)[0].value;
             $inputRange.val(value).change();
+            element = e.target;
+            var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
+            output[textContent] = value;
         });
         // Example functionality to demonstrate programmatic attribute changes
         $document.on('click', '#js-example-change-attributes button', function(e) {
