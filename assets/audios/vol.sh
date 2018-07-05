@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MIX=amixer
+MIX=/usr/bin/amixer
 declare -i LO=0     # Minimum volume; try 10 to avoid complete silence
 declare -i HI=100   # Maximum volume; try 95 to avoid distortion
 declare -i ADJ=3    # Volume adjustment step size

@@ -398,10 +398,11 @@ class Maint extends CI_Controller {
   
   public function getsoundlevel(){
       try{
+        $retval = '';
         if ($this->config->item('vol_ctrl') != ''){  
-            echo exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')); 
+            $retval = exec("/usr/bin/sudo ".$this->config->item('vol_ctrl')); 
         }
-        return '';
+        return $retval;
       }
       catch (Exception $ex){
         return '';
