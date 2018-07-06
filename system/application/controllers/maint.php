@@ -187,10 +187,10 @@ class Maint extends CI_Controller {
         fclose($file);
         $fsize = (int) $fret;
         if ($fsize > 10){
-                $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
+                $data["export_result"] = "File, ".$thefile.", successfully exported to <br>".$theusbpath." folder.";
         }
         else{
-                $data["export_result"] = "Export Failed";
+                $data["export_result"] = "Export failed. ";
         }
 
         //!write_file($outfile, $csvdata);

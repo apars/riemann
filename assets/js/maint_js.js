@@ -298,7 +298,6 @@ function setvolume(vol) {
     return false; 
 }
 
-
     $(function() {
         var $document = $(document);
         var selector = '[data-rangeslider]';
@@ -310,11 +309,7 @@ function setvolume(vol) {
             var value = element.value;
             var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
             output[textContent] = value;
-
-            
-            
             setvolume(value);
-            
         }
         $document.on('input', 'input[type="range"], ' + selector, function(e) {
             valueOutput(e.target);
