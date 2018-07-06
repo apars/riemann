@@ -85,6 +85,8 @@
                         <div class="fas fa-volume-up"></div>
                         <div class="settingstext">Volume Adjust</div></button>
                     </div>
+                    <!-- This is for auto-downloading-->
+                    <a id="target" style="display: none"></a>
 <!--                    <div class="col-md-2"><br>
                     <button type="button" class="btn btn-lg btn-default" data-toggle="modal" onclick="refreshcodefolderlist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                         <div class="fas fa-sun"></div>

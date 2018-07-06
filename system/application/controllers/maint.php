@@ -171,23 +171,31 @@ class Maint extends CI_Controller {
     $result = $this->survey_model->getSurveyDataForExport($surveyPrefix);
     $this->load->dbutil();
     $this->load->helper('file');
-    $theusbpath = $this->whereusb();
+    $theusbpath = $this->whereusb(true);
     if ($theusbpath!=''){
+        $thebackusbpath=$this->config->item('back_usb_path').'backup/';
         if (!file_exists($theusbpath)) {
-            $theusbpath = $this->config->item('back_usb_path');
-        } 
+            $theusbpath = $thebackusbpath;
+        }
+        
         $thefile = $this->config->item("exp_prefix").date('m-d-Y_hisa').$this->config->item("exp_ext");
-        $outfile = $theusbpath.$thefile;
+        $outfile = $thebackusbpath.$thefile;
         $csvdata = $this->dbutil->csv_from_result($result);
-        if ( ! write_file($outfile, $csvdata)){
-            $data["export_result"] = "Export failed.";
-        }
-        else{
-            $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
-        }
+        !write_file($outfile, $csvdata);
+        $file = $outfile;
+        echo $file.'*'.$theusbpath;
+        //if ( !write_file($outfile, $csvdata)){
+        //    $data["export_result"] = ""; //Export failed.";
+        //}
+        //else{
+            //Let say If I put the file name Bang.png
+            $data["exportfile"] = $file.'*'.$theusbpath;
+            //echo "<a href='download1.php?nama=".$file."'>download</a> ";
+            //$data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
+        //}
     }
     else{
-        $data["export_result"] = "Export failed . USB stick not detected.";
+        $data["export_result"] = ""; //"Export failed . USB stick not detected.";
     }
     //sleep(3);
     echo $data["export_result"];
