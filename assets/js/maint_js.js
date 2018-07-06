@@ -107,20 +107,6 @@ function redirect2importDB(url) {
             }
             });
             
-//            $.post(url, thepair, function(data){
-//                // show the response
-//                $('#response').html(data);
-//                document.getElementById("theloaddbbuttons").style.display = "";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloadertext").style.display = "none";
-//                location.reload(url);
-//                
-//            }).fail(function() {
-//                // just in case posting your form failed
-//                document.getElementById("theloaddbbuttons").style.display = "";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloadertext").style.display = "none";
-//            });
             $('#loadDBFile').modal('hide');
             return false; 
         }
@@ -154,22 +140,6 @@ function redirect2stagecode(url) {
             }
             });
             
-//            $.post(url, thepair, function(data){
-//                // show the response
-//                $('#response').html(data);
-//                document.getElementById("theloaddbbuttons").style.display = "";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloadertext").style.display = "none";
-//                location.reload(url);
-//                alert(data);
-//            }).fail(function() {
-//                // just in case posting your form failed
-//                document.getElementById("theloaddbbuttons").style.display = "";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloadertext").style.display = "none";
-//            });
             $('#loadCodeFile').modal('hide');
             return false; 
         }
@@ -203,22 +173,6 @@ function redirect2loadcode(url) {
             }
             });
             
-//            $.post(url, thepair, function(data){
-//                // show the response
-//                $('#response').html(data);
-//                document.getElementById("theloaddbbuttons").style.display = "";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloadertext").style.display = "none";
-//                location.reload(url);
-//                alert(data);
-//            }).fail(function() {
-//                // just in case posting your form failed
-//                document.getElementById("theloaddbbuttons").style.display = "";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloader").style.display = "none";
-//                document.getElementById("theloadertext").style.display = "none";
-//            });
             $('#loadCodeList').modal('hide');
             return false; 
         }
@@ -243,20 +197,6 @@ function redirect2exportData(url) {
             }
             });
             
-//    $.post(url, "", function(data){
-//        // show the response
-//        $('#response').html(data);
-//        datafromajax = data; 
-//            
-//        //document.getElementById("beginintro").style.display = "";
-//        //document.getElementById("beginloader").style.display = "none";
-//        redirectOnClick(url2+'?exportresult='+encodeURI(datafromajax));
-//            
-//    }).fail(function() {
-//        // just in case posting your form failed
-//        document.getElementById("theloaddbbuttons").style.display = "";
-//        document.getElementById("theloader").style.display = "none";
-//    });
     return true; 
 }
 
@@ -300,6 +240,10 @@ function setvolume(vol) {
     data: thepair,
     success:function(response){
         //alert(response);
+        var aud = document.getElementById('popsoundonvol');
+        //if(!aud.paused){
+            aud.play();
+        //}
     }
     });
     return false; 
@@ -318,10 +262,7 @@ function setvolume(vol) {
             var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
             output[textContent] = value;
 
-            var aud = document.getElementById('popsoundonvol');
-            if(!aud.paused){
-                aud.play();
-            }
+            
             
             setvolume(value);
             

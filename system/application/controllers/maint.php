@@ -232,39 +232,8 @@ class Maint extends CI_Controller {
   
   public function whereusb($withfallback = false){
     try{
-//        $usb_path = $this->config->item('usb_path');
-//        $good_usb_path = "";
-//        $sdavolcmd = "/usr/bin/sudo /sbin/fdisk -l | /bin/grep /dev/sd | /bin/grep exFAT | /bin/grep NTFS | /bin/grep HPFS | /usr/bin/awk -F ' ' '{print $1}'";
-//        $sdavol = exec($sdavolcmd);
-//        if (strlen($sdavol) > 0){
-//            $chkvolcmd = "/bin/cat /proc/mounts | /bin/grep '.$usb_path.' | /bin/grep '.$sdavol.' | /usr/bin/awk -F ' ' '{print $2}'";
-//            $volname = exec($chkvolcmd);
-//            $mntvol='';
-//            if (strlen($volname) < 2){
-//                $mntcmd = "/usr/bin/sudo /bin/mount -o uid-www-data,gid-www-data ".$sdavol." /media/pidrive";
-//                $mntvol = exec($mntcmd);
-//            }
-//            return $usb_path."%%%".$sdavol."%%%".$volname."%%%".$mntvol;
-//        }
         $usb_path = $this->config->item('usb_path');
         $good_usb_path = "";
-//        $sdavol = "";
-//        $sdavolcmd = "/usr/bin/sudo /sbin/fdisk -l | /bin/grep /dev/sd | /bin/grep exFAT | /bin/grep NTFS | /bin/grep HPFS | /usr/bin/awk -F ' ' '{print $1}'";
-//        $sdavol = exec($sdavolcmd);
-//        if (strlen($sdavol) > 0){
-//            $chkmntnamecmd = "/usr/bin/sudo /usr/bin/pmount | grep ".$sdavol." | /usr/bin/awk -F ' ' '{print $3}' | awk -F '/' '{print $3}'";
-//            $chkmntname = exec($chkmntnamecmd);
-//            if (strlen($chkmntname) > 0){
-//                $chkvolcmd = "/usr/bin/sudo /usr/bin/pumount ".$chkmntname;
-//                exec($chkvolcmd);
-//            }
-//            //$mntcmd = "/usr/bin/sudo /usr/bin/pmount ".$sdavol." SCFS";
-//            $mntcmd = "/home/pi/mntit.sh";
-//            exec($mntcmd);
-//            return $sdavol."_".$usb_path."_".$chkmntnamecmd."--->".$chkmntname."<---".strlen($chkmntname)."_".$mntcmd;
-//        }
-
-
         if (file_exists($usb_path)){
             $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
             foreach($directories as $directory){
