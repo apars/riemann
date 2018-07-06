@@ -371,7 +371,37 @@ class Maint extends CI_Controller {
             if(file_exists($this->config->item('start_path'))){
                 unlink($this->config->item('start_path'));
             }
-            $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/'.$_POST["codefolder"];
+            
+            $firststr='#!/bin/sh
+            # Set this to your URL - it must return a 200 OK when called, not a redirect.
+            export URL=http://localhost/'.$_POST["codefolder"];
+            
+            $secondstr='
+            #http://localhost/riemann
+
+            # Dont want screensavers or screen blanking
+            xset s off &
+            xset -dpms &
+            xset s noblank &
+
+            # Hide the mouse cursor
+            unclutter -idle 2 -noevents &
+
+            # Sit and wait until you can hit the URL you\'ll be showing in the kiosk
+            while ! curl -s -o /dev/null -w "%{http_code}" ${URL} | grep -q "301"; do
+              sleep 1
+            done
+
+            # get screen resolution
+            WIDTH=`sudo fbset -s | grep "geometry" | cut -d " " -f6`
+            HEIGHT=`sudo fbset -s | grep "geometry" | cut -d " " -f7`
+
+            # Open chrome in incognito mode + kiosk mode
+            /usr/bin/chromium-browser --start-maximized --incognito --kiosk ${URL}';
+
+            
+            //$data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/'.$_POST["codefolder"];
+            $data_to_write=$firststr.$secondstr;
             $file_handle = fopen($this->config->item('start_path'), 'w'); 
             fwrite($file_handle, $data_to_write);
             fclose($file_handle);
