@@ -120,7 +120,7 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body" style="height: 33vh;">
-                                <p>Please select Database File and click [Load Database] button.</p>
+<!--                                <p>Please select Database File and click [Load Database] button.</p>
                                 <?php    
                                     if (!file_exists($this->config->item('usb_path'))) {
                                         echo '<p><strong>Loading from backup path '.$this->config->item('back_usb_path').'</strong>.</p>';
@@ -136,9 +136,9 @@
                                                       /> <?php echo basename($fileitem) ?>
                                         </label><br>
                                     <?php endforeach; ?>
-                                    <!--<label><input type="radio" style="display: inline" name="dbfile" value="female"> Female</label><br>
-                                    <label><input type="radio" style="display: inline" name="dbfile" value="other"> Other</label>-->
-                                </div>
+                                    <label><input type="radio" style="display: inline" name="dbfile" value="female"> Female</label><br>
+                                    <label><input type="radio" style="display: inline" name="dbfile" value="other"> Other</label>
+                                </div>-->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" onclick="redirect2importDB('<?php echo base_url().'importdb'; ?>')">Load Database</button>

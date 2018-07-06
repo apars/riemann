@@ -247,10 +247,9 @@ class Maint extends CI_Controller {
     if (file_exists($usb_path)){
         $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
         foreach($directories as $directory){
-            $files = glob($directory.'*'); 
-            if((is_writable($directory) == true) && !is_dir_empty($directory)){
-                if(touch($directory.'/test.txt') == true){
-                    if(unlink($directory.'/test.txt') == true){
+            if((is_writable($directory) == TRUE) && (is_dir_empty($directory) == FALSE)){
+                if(touch($directory.'/test.txt') == TRUE){
+                    if(unlink($directory.'/test.txt') == TRUE){
                         $good_usb_path = $directory;
                         return $good_usb_path;
                     }
