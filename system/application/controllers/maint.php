@@ -219,15 +219,30 @@ class Maint extends CI_Controller {
     $this->load->view('templates/survey/footer');
   }
   
+  function is_dir_empty($dir) {
+    if (!is_readable($dir)) return NULL;
+    $handle = opendir($dir);
+    while (false !== ($entry = readdir($handle))) {
+        if ($entry != "." && $entry != "..") {
+            return FALSE;
+        }
+    }
+    return TRUE;
+  }
+  
   public function whereusb($withfallback = false){
     $usb_path = $this->config->item('usb_path');
     $good_usb_path = "";
+    $sdavolcmd = "sudo fdisk -l | grep /dev/sd | grep exFAT | grep NTFS | grep HPFS | awk -F ' ' '{print $1}'";
+    $sdavol = exec($sdavolcmd);
+    $mntcmd = 'sudo mount -o uid-www-data,gid-www-data '.$sdavol.' /media/pidrive';
+    $mntvol = exec($mntcmd);
     
     if (file_exists($usb_path)){
         $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
         foreach($directories as $directory){
-            exec('/usr/bin/sudo /bin/chmod 777 '.$directory);
-            if(is_writable($directory) == true){
+            $files = glob($directory.'*'); 
+            if((is_writable($directory) == true) && !is_dir_empty($directory)){
                 if(touch($directory.'/test.txt') == true){
                     if(unlink($directory.'/test.txt') == true){
                         $good_usb_path = $directory;
