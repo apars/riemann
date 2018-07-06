@@ -235,8 +235,12 @@ class Maint extends CI_Controller {
     $good_usb_path = "";
     $sdavolcmd = "sudo fdisk -l | grep /dev/sd | grep exFAT | grep NTFS | grep HPFS | awk -F ' ' '{print $1}'";
     $sdavol = exec($sdavolcmd);
-    $mntcmd = 'sudo mount -o uid-www-data,gid-www-data '.$sdavol.' /media/pidrive';
-    $mntvol = exec($mntcmd);
+    $chkvolcmd = "cat /proc/mounts | grep '.$usb_path.'| grep '.$sdavol.' | awk -F ' ' '{print $2}'";
+    $volname = exec($chkvolcmd);
+    if (strlen($chkvolcmd) === 0){
+        $mntcmd = 'sudo mount -o uid-www-data,gid-www-data '.$sdavol.' /media/pidrive';
+        $mntvol = exec($mntcmd);
+    }
     
     if (file_exists($usb_path)){
         $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
