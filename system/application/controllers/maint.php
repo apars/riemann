@@ -179,14 +179,20 @@ class Maint extends CI_Controller {
         }
         
         $thefile = $this->config->item("exp_prefix").date('m-d-Y_hisa').$this->config->item("exp_ext");
-        $outfile = $theusbpath.$thefile;
+        $outfile = $theusbpath.'/'.$thefile;
         $csvdata = $this->dbutil->csv_from_result($result);
-        
-        $file = fopen($theusbpath,"w");
-        echo fwrite($file,"Hello World. Testing!");
+
+        $file = fopen($outfile,"w");
+        $fret = fwrite($file, $csvdata);
         fclose($file);
-        $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
-        
+        $fsize = (int) $fret;
+        if ($fsize > 10){
+                $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
+        }
+        else{
+                $data["export_result"] = "Export Failed";
+        }
+
         //!write_file($outfile, $csvdata);
         //$file = $outfile;
         //echo $file.'*'.$theusbpath;
@@ -201,7 +207,7 @@ class Maint extends CI_Controller {
         //}
     }
     else{
-        $data["export_result"] = ""; //"Export failed . USB stick not detected.";
+        $data["export_result"] = "Export failed. USB drive not detected."; //"Export failed . USB stick not detected.";
     }
     //sleep(3);
     echo $data["export_result"];

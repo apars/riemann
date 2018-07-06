@@ -193,8 +193,6 @@ function redirect2exportData(url) {
             url: url,
             data: {},
             success:function(response){
-                $resplen = response.length;
-                if($resplen > 2){
                     //respdata = response.split("*");
                     //url = base_url+'assets/downloads/download.php?srcfile='+respdata[0]+'&dstpath='+respdata[1]+respdata[0].substring(respdata[0].lastIndexOf('/')+1);
                     //downloadFile(respdata[0], respdata[0].substring(respdata[0].lastIndexOf('/')+1));
@@ -202,8 +200,8 @@ function redirect2exportData(url) {
                     
                     //document.getElementById("target").href = url;
                     //document.getElementById("target").click();
-                    $successmsg = response; //respdata[0]+' exported successfully to '+respdata[1]+'!';
-                    redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI($successmsg));
+                    //$successmsg = response; //respdata[0]+' exported successfully to '+respdata[1]+'!';
+                    redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI(response));
                     //alert(url);
 //                    $.ajax({
 //                            type: "GET",
@@ -214,10 +212,6 @@ function redirect2exportData(url) {
 //                                redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI($successmsg));
 //                            }
 //                    });
-                }
-                else{
-                    redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI('Export failed.'));
-                }
             }
             });
             
