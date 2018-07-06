@@ -231,36 +231,40 @@ class Maint extends CI_Controller {
   }
   
   public function whereusb($withfallback = false){
-    $usb_path = $this->config->item('usb_path');
-    $good_usb_path = "";
-    $sdavolcmd = "sudo fdisk -l | grep /dev/sd | grep exFAT | grep NTFS | grep HPFS | awk -F ' ' '{print $1}'";
-    $sdavol = exec($sdavolcmd);
-    if (strlen($sdavol) > 0){
-        $chkvolcmd = "cat /proc/mounts | grep '.$usb_path.'| grep '.$sdavol.' | awk -F ' ' '{print $2}'";
-        $volname = exec($chkvolcmd);
-        if (strlen($chkvolcmd) === 0){
-            $mntcmd = 'sudo mount -o uid-www-data,gid-www-data '.$sdavol.' /media/pidrive';
-            $mntvol = exec($mntcmd);
+    try{
+        $usb_path = $this->config->item('usb_path');
+        $good_usb_path = "";
+        $sdavolcmd = "/usr/bin/sudo /sbin/fdisk -l | /bin/grep /dev/sd | /bin/grep exFAT | /bin/grep NTFS | /bin/grep HPFS | /usr/bin/awk -F ' ' '{/usr/bin/print $1}'";
+        $sdavol = exec($sdavolcmd);
+        if (strlen($sdavol) > 0){
+            $chkvolcmd = "/bin/cat /proc/mounts | /bin/grep '.$usb_path.'| /bin/grep '.$sdavol.' | /usr/bin/awk -F ' ' '{/usr/bin/print $2}'";
+            $volname = exec($chkvolcmd);
+            if (strlen($chkvolcmd) === 0){
+                $mntcmd = '/usr/bin/sudo /bin/mount -o uid-www-data,gid-www-data '.$sdavol.' /media/pidrive';
+                $mntvol = exec($mntcmd);
+            }
         }
-    }
-    
-    if (file_exists($usb_path)){
-        $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
-        foreach($directories as $directory){
-            if((is_writable($directory) == TRUE) && (is_dir_empty($directory) == FALSE)){
-                if(touch($directory.'/test.txt') == TRUE){
-                    if(unlink($directory.'/test.txt') == TRUE){
-                        $good_usb_path = $directory;
-                        return $good_usb_path;
+
+        if (file_exists($usb_path)){
+            $directories = glob($usb_path . '*' , GLOB_ONLYDIR);
+            foreach($directories as $directory){
+                if((is_writable($directory) == TRUE) && (is_dir_empty($directory) == FALSE)){
+                    if(touch($directory.'/test.txt') == TRUE){
+                        if(unlink($directory.'/test.txt') == TRUE){
+                            $good_usb_path = $directory;
+                            return $good_usb_path;
+                        }
                     }
                 }
             }
         }
+        if (($good_usb_path === "") && $withfallback){
+            return $this->config->item('back_usb_path');
+        }
+        return '';
+    } catch (Exception $ex) {
+        return '';
     }
-    if (($good_usb_path === "") && $withfallback){
-        return $this->config->item('back_usb_path');
-    }
-    return '';
   }
 
   public function reloadZiplist(){
