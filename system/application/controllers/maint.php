@@ -179,17 +179,23 @@ class Maint extends CI_Controller {
         }
         
         $thefile = $this->config->item("exp_prefix").date('m-d-Y_hisa').$this->config->item("exp_ext");
-        $outfile = $thebackusbpath.$thefile;
+        $outfile = $theusbpath.$thefile;
         $csvdata = $this->dbutil->csv_from_result($result);
-        !write_file($outfile, $csvdata);
-        $file = $outfile;
-        echo $file.'*'.$theusbpath;
+        
+        $file = fopen($theusbpath,"w");
+        echo fwrite($file,"Hello World. Testing!");
+        fclose($file);
+        $data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
+        
+        //!write_file($outfile, $csvdata);
+        //$file = $outfile;
+        //echo $file.'*'.$theusbpath;
         //if ( !write_file($outfile, $csvdata)){
         //    $data["export_result"] = ""; //Export failed.";
         //}
         //else{
             //Let say If I put the file name Bang.png
-            $data["exportfile"] = $file.'*'.$theusbpath;
+            //$data["exportfile"] = $file.'*'.$theusbpath;
             //echo "<a href='download1.php?nama=".$file."'>download</a> ";
             //$data["export_result"] = "File, ".$thefile.", successfully exported in <br>".$theusbpath." folder.";
         //}

@@ -195,14 +195,16 @@ function redirect2exportData(url) {
             success:function(response){
                 $resplen = response.length;
                 if($resplen > 2){
-                    respdata = response.split("*");
-                    url = base_url+'assets/downloads/download.php?srcfile='+respdata[0]+'&dstpath='+respdata[1]+respdata[0].substring(respdata[0].lastIndexOf('/')+1);
-                    downloadFile(base_url+respdata[0], respdata[0].substring(respdata[0].lastIndexOf('/')+1));
+                    //respdata = response.split("*");
+                    //url = base_url+'assets/downloads/download.php?srcfile='+respdata[0]+'&dstpath='+respdata[1]+respdata[0].substring(respdata[0].lastIndexOf('/')+1);
+                    //downloadFile(respdata[0], respdata[0].substring(respdata[0].lastIndexOf('/')+1));
                     
-                    $successmsg = respdata[0]+' exported successfully to '+respdata[1]+'!';
+                    
+                    //document.getElementById("target").href = url;
+                    //document.getElementById("target").click();
+                    $successmsg = response; //respdata[0]+' exported successfully to '+respdata[1]+'!';
                     redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI($successmsg));
-
-//                    alert(url);
+                    //alert(url);
 //                    $.ajax({
 //                            type: "GET",
 //                            url: url,
@@ -237,7 +239,7 @@ function downloadFile(srcFile, destFileName){
         var contentDisposition = req.getResponseHeader("content-disposition");
         fileName = contentDisposition.substring(contentDisposition.indexOf("=")+1);
       } else {
-        fileName = destFileName+"." + contentType.substring(contentType.indexOf("/")+1);
+        fileName = destFileName; //+"." + contentType.substring(contentType.indexOf("/")+1);
       }
 
       if (window.navigator.msSaveOrOpenBlob) {
