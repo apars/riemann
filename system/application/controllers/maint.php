@@ -425,6 +425,11 @@ class Maint extends CI_Controller {
             $file_handle = fopen($this->config->item('start_path'), 'w'); 
             fwrite($file_handle, $data_to_write);
             fclose($file_handle);
+            
+            $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/'.$_POST["codefolder"];
+            $file_handle = fopen($this->config->item('lxde_start_path'), 'w'); 
+            fwrite($file_handle, $data_to_write);
+            fclose($file_handle);
             echo 'Code successfully selected.';
         }
     } catch (Exception $ex) {

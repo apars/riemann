@@ -17,6 +17,7 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
     $config['code_path']                    = 'D:\keys\\';
     $config['start_path']                   = 'D:\keys\\.Xsession';
+    $config['lxde_start_path']              = 'D:\keys\\start.sh';
     //Shell Scripts
     $config['vol_ctrl']                     = '';   
 }
@@ -27,6 +28,7 @@ else
     $config['mysqladmin_path']              = '/usr/bin/mysqladmin';
     $config['code_path']                    = '/var/www/html/';
     $config['start_path']                   = '/home/pi/.Xsession';
+    $config['lxde_start_path']              = '/home/pi/start.sh';
     //Shell Scripts
     $config['vol_ctrl']                     = '/home/pi/vol.sh';
 }
