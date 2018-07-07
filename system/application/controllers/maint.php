@@ -171,7 +171,7 @@ class Maint extends CI_Controller {
     $result = $this->survey_model->getSurveyDataForExport($surveyPrefix);
     $this->load->dbutil();
     $this->load->helper('file');
-    $theusbpath = $this->whereusb(true);
+    $theusbpath = $this->whereusb();
     if ($theusbpath!=''){
         $thebackusbpath=$this->config->item('back_usb_path').'backup/';
         if (!file_exists($theusbpath)) {
