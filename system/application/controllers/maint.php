@@ -388,9 +388,9 @@ class Maint extends CI_Controller {
         $this->loadConfiguration();
 
         if(isset($_POST['codefolder'])){
-            if(file_exists($this->config->item('start_path'))){
-                unlink($this->config->item('start_path'));
-            }
+//            if(file_exists($this->config->item('start_path'))){
+//                unlink($this->config->item('start_path'));
+//            }
             
             $firststr='#!/bin/sh
             # Set this to your URL - it must return a 200 OK when called, not a redirect.
