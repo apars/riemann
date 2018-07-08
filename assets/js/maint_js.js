@@ -41,6 +41,7 @@ function refreshcodefolderlist(){
 function refreshvolume(){ 
     var mymodal = $('#adjustVolume');
     var url = base_url+'reloadvolume';
+    document.getElementById("adjustVolume").style.display = "";
     
     $.ajax({
         type: "GET",
@@ -284,21 +285,19 @@ function setvolume(vol) {
     thepair = {};
     thepair[thekey] = thevalue;
 
-    if (document.getElementById("adjustVolume").style.display != "none"){
-        $.ajax({
-        type: "POST",
-        url: base_url+'adjustsound',
-        data: thepair,
-        success:function(response){
-            //alert(response);
-            var aud = document.getElementById('popsoundonvol');
-            //if(!aud.paused){
-                aud.play();
-            //}
-        }
-        });
-        return false; 
+    $.ajax({
+    type: "POST",
+    url: base_url+'adjustsound',
+    data: thepair,
+    success:function(response){
+        //alert(response);
+        var aud = document.getElementById('popsoundonvol');
+        //if(!aud.paused){
+            aud.play();
+        //}
     }
+    });
+    return false; 
 }
 
 $(intropage).onload = function(){
@@ -374,7 +373,21 @@ $(function() {
         polyfill: false,
         // Callback function
         onInit: function() {
-            valueOutput(this.$element[0]);
+            var url = base_url+'reloadvolume';
+            if (document.getElementById("adjustVolume").style.display == "none"){
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {},
+                    success:function(response){
+                        this.$element[0].value = response;
+                        valueOutput(this.$element[0]);
+                    }
+                }); 
+            }
+            else{
+                valueOutput(this.$element[0]);
+            }
         },
         // Callback function
         onSlide: function(position, value) {
