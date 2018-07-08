@@ -49,9 +49,9 @@ function refreshvolume(){
         success:function(response){
             document.getElementById("volid").value = response;
             document.getElementById("voltxtid").innerHTML = response;
+            document.getElementById("adjustVolume").style.display = "";
             //mymodal.find('.modal-body').load(url);
             mymodal.modal('show');
-            document.getElementById("adjustVolume").style.display="";
         }
     });
     
@@ -279,26 +279,27 @@ function setvolume(vol) {
     var thekey = '';
     var thevalue = '';
     var thepair = {};
-
-            
+    
     thekey = "vol";
     thevalue = vol;
     thepair = {};
     thepair[thekey] = thevalue;
 
-    $.ajax({
-    type: "POST",
-    url: base_url+'adjustsound',
-    data: thepair,
-    success:function(response){
-        //alert(response);
-        var aud = document.getElementById('popsoundonvol');
-        //if(!aud.paused){
-            aud.play();
-        //}
+    if (document.getElementById("theloaddbbuttons").style.display != "none"){
+        $.ajax({
+        type: "POST",
+        url: base_url+'adjustsound',
+        data: thepair,
+        success:function(response){
+            //alert(response);
+            var aud = document.getElementById('popsoundonvol');
+            //if(!aud.paused){
+                aud.play();
+            //}
+        }
+        });
+        return false; 
     }
-    });
-    return false; 
 }
 
 $(function() {
