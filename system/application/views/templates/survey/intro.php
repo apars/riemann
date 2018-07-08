@@ -268,6 +268,14 @@
                                     <input type="range" id="volid" min="0" max="100" data-rangeslider>
                                     <output></output>
                                 </div>-->
+                                <audio control id="popsoundonvol">
+                                    <source src="<?php echo base_url().$this->config->item('pop_path'); ?>" type="audio/mpeg">
+                                </audio>
+                                <div><br></div>
+                                <div id="voldiv">
+                                    <input type="range" id="volid" style="width:100%;" min="0" max="100" value="" data-rangeslider>
+                                    <output id="voltxtid"></output>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <!--<button type="button" id="usbinsert" class="btn btn-default" data-toggle="modal" onclick="refreshzipfilelist()" data-dismiss="modal">OK</button>-->

@@ -502,15 +502,16 @@ class Maint extends CI_Controller {
     if ($thesoundlevel === "") {
         $thesoundlevel = "50";
     }
-    echo '<audio control id="popsoundonvol">';
-    echo '    <source src="'.base_url().$this->config->item('pop_path').'" type="audio/mpeg">';
-    echo '</audio>';
-    echo '<div><br></div>';
-    echo '<div id="voldiv">';
-    echo '    <input type="range" id="volid" style="width:100%;" min="0" max="100" value="'.$thesoundlevel.'" data-rangeslider>';
-    echo '    <output>'.$thesoundlevel.'</output>';
-    echo '<input type="number" style="display: none;" value="'.$thesoundlevel.'">';
-    echo '</div>';
+    echo $thesoundlevel;
+//    echo '<audio control id="popsoundonvol">';
+//    echo '    <source src="'.base_url().$this->config->item('pop_path').'" type="audio/mpeg">';
+//    echo '</audio>';
+//    echo '<div><br></div>';
+//    echo '<div id="voldiv">';
+//    echo '    <input type="range" id="volid" style="width:100%;" min="0" max="100" value="'.$thesoundlevel.'" data-rangeslider>';
+//    echo '    <output>'.$thesoundlevel.'</output>';
+//    echo '<input type="number" style="display: none;" value="'.$thesoundlevel.'">';
+//    echo '</div>';
   }
   
 }
