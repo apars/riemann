@@ -251,7 +251,7 @@
                 </div>
                 
                 <!-- Adjust Volume -->
-                <div id="adjustVolume" class="modal fade" role="dialog">
+                <div id="adjustVolume" class="modal fade" role="dialog" style="display: none">
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">

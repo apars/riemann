@@ -51,6 +51,7 @@ function refreshvolume(){
             document.getElementById("voltxtid").innerHTML = response;
             //mymodal.find('.modal-body').load(url);
             mymodal.modal('show');
+            document.getElementById("adjustVolume").style.display="";
         }
     });
     
