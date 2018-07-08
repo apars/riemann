@@ -1,4 +1,4 @@
-<div class="container imageloc">
+<div class="container imageloc" id="intropage">
     <div class="row">
         <div class="col-md-12">
             <!--<img class="d-block img-responsive imagecenter w-100" src="<?php echo base_url().$this->config->item('main_back'); ?>" alt="Main_Back">-->

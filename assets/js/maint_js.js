@@ -49,7 +49,6 @@ function refreshvolume(){
         success:function(response){
             document.getElementById("volid").value = response;
             document.getElementById("voltxtid").innerHTML = response;
-            document.getElementById("adjustVolume").style.display = "";
             //mymodal.find('.modal-body').load(url);
             mymodal.modal('show');
         }
@@ -285,7 +284,7 @@ function setvolume(vol) {
     thepair = {};
     thepair[thekey] = thevalue;
 
-    if (document.getElementById("theloaddbbuttons").style.display != "none"){
+    if (document.getElementById("adjustVolume").style.display != "none"){
         $.ajax({
         type: "POST",
         url: base_url+'adjustsound',
@@ -301,6 +300,10 @@ function setvolume(vol) {
         return false; 
     }
 }
+
+$(intropage).onload = function(){
+    document.getElementById("adjustVolume").style.display = "none";
+};
 
 $(function() {
     var $document = $(document);
@@ -386,3 +389,4 @@ $(function() {
         }
     });
 });
+
