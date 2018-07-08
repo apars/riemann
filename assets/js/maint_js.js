@@ -285,23 +285,37 @@ function setvolume(vol) {
     thepair = {};
     thepair[thekey] = thevalue;
 
-    $.ajax({
-    type: "POST",
-    url: base_url+'adjustsound',
-    data: thepair,
-    success:function(response){
-        //alert(response);
-        var aud = document.getElementById('popsoundonvol');
-        //if(!aud.paused){
-            aud.play();
-        //}
+    if(document.getElementById("adjustVolume").style.display != "none"){
+        $.ajax({
+        type: "POST",
+        url: base_url+'adjustsound',
+        data: thepair,
+        success:function(response){
+            //alert(response);
+            var aud = document.getElementById('popsoundonvol');
+            //if(!aud.paused){
+                aud.play();
+            //}
+        }
+        });
     }
-    });
     return false; 
 }
 
-$(intropage).onload = function(){
-    document.getElementById("adjustVolume").style.display = "none";
+window.onload = function(){
+    if(document.getElementById("adjustVolume") != null){
+        document.getElementById("adjustVolume").style.display = "none";
+//    var url = base_url+'reloadvolume';
+//    $.ajax({
+//        type: "GET",
+//        url: url,
+//        data: {},
+//        success:function(response){
+//            document.getElementById("volid").value = response;
+//            document.getElementById("voltxtid").value = response;
+//        }
+//    }); 
+    }
 };
 
 $(function() {
@@ -373,21 +387,7 @@ $(function() {
         polyfill: false,
         // Callback function
         onInit: function() {
-            var url = base_url+'reloadvolume';
-            if (document.getElementById("adjustVolume").style.display == "none"){
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data: {},
-                    success:function(response){
-                        this.$element[0].value = response;
-                        valueOutput(this.$element[0]);
-                    }
-                }); 
-            }
-            else{
-                valueOutput(this.$element[0]);
-            }
+            valueOutput(this.$element[0]);
         },
         // Callback function
         onSlide: function(position, value) {
