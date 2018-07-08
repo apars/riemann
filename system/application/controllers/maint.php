@@ -55,6 +55,7 @@ class Maint extends CI_Controller {
     else{
         $data["main_back"] = file_get_contents($this->config->item('main_back'));
     }     
+    $data["soundlevel"] = $this->getsoundlevel();
     $this->session->set_userdata(array('footerhidden' => false));
     $this->load->view('templates/survey/header', $data);
     $this->load->view('templates/survey/nav');

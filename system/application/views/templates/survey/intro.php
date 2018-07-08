@@ -273,7 +273,7 @@
                                 </audio>
                                 <div><br></div>
                                 <div id="voldiv">
-                                    <input type="range" id="volid" style="width:100%;" min="0" max="100" value="" data-rangeslider>
+                                    <input type="range" id="volid" style="width:100%;" min="0" max="100" value="<?php echo $soundlevel; ?>" data-rangeslider>
                                     <output id="voltxtid"></output>
                                 </div>
                             </div>
