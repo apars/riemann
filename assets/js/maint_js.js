@@ -302,22 +302,6 @@ function setvolume(vol) {
     return false; 
 }
 
-window.onload = function(){
-    if(document.getElementById("adjustVolume") != null){
-        document.getElementById("adjustVolume").style.display = "none";
-//    var url = base_url+'reloadvolume';
-//    $.ajax({
-//        type: "GET",
-//        url: url,
-//        data: {},
-//        success:function(response){
-//            document.getElementById("volid").value = response;
-//            document.getElementById("voltxtid").value = response;
-//        }
-//    }); 
-    }
-};
-
 $(function() {
     var $document = $(document);
     var selector = '[data-rangeslider]';
