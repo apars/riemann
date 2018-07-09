@@ -74,7 +74,7 @@ window.onload = function() {
     $(document).ready(function () {
         $.ajax({
                 type: "GET",
-                url: base_url+"survey/getfooterhidden",
+                url: base_url+"getfooterhidden",
                 data: {},
                 success:function(response){
                     //your code goes here

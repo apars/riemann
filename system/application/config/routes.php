@@ -46,6 +46,7 @@ $route['aquestion/(:any)'] = "survey/aquestion/$1";
 $route['thanks']           = "survey/thanks/";
 $route['reward']           = "survey/reward/";
 $route['registercell']     = "survey/registercell/";
+$route['getfooterhidden']  = "survey/getfooterhidden/";
 $route['reloadlist']       = "maint/reloadlist/";
 $route['reloadziplist']    = "maint/reloadziplist/";
 $route['reloadcodelist']   = "maint/reloadcodelist/";
@@ -55,6 +56,7 @@ $route['selectthecode']    = "maint/selectthecode/";
 $route['reloadvolume']     = "maint/reloadvolume/";
 $route['adjustsound']      = "maint/adjustsound/";
 $route['getsoundlevel']    = "maint/getsoundlevel/";
+
 
 
 
