@@ -220,14 +220,33 @@ class Survey extends CI_Controller {
     $this->load->view('templates/survey/footer');
   }
   
+  function is_session_started()
+  {
+    if ( php_sapi_name() !== 'cli' ) {
+        if ( version_compare(phpversion(), '5.4.0', '>=') ) {
+            return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+        } else {
+            return session_id() === '' ? FALSE : TRUE;
+        }
+    }
+    return FALSE;
+  }
+  
   public function setfooterhidden(){
+    if ( is_session_started() === FALSE ) {
+        session_start();
+    }
     if(isset($_POST["footerhidden"])){
         $this->session->set_userdata(array('footerhidden' => $_POST["footerhidden"]));
     }
   }
   
   public function getfooterhidden(){
+    if ( is_session_started() === FALSE ) {
+        session_start();
+        $this->session->set_userdata(array('footerhidden' => true));
+    }
     $footerhiddenval = $this->session->userdata('footerhidden');
-    echo ($footerhiddenval) ? 'true' : 'false';
+    echo ($footerhiddenval === true) ? 'true' : 'false';
   }
 }

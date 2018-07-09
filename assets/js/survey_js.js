@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-
-
 function redirectOnClick(url) {
     $(location).attr('href',url);
 }
