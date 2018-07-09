@@ -233,7 +233,7 @@ class Survey extends CI_Controller {
   }
   
   public function setfooterhidden(){
-    if ( is_session_started() === FALSE ) {
+    if ( $this->is_session_started() === FALSE ) {
         session_start();
     }
     if(isset($_POST["footerhidden"])){
@@ -242,7 +242,7 @@ class Survey extends CI_Controller {
   }
   
   public function getfooterhidden(){
-    if ( is_session_started() === FALSE ) {
+    if ( $this->is_session_started() === FALSE ) {
         session_start();
         $this->session->set_userdata(array('footerhidden' => true));
     }
