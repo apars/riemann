@@ -220,7 +220,7 @@ class Survey extends CI_Controller {
     $this->load->view('templates/survey/footer');
   }
   
-  function is_session_started()
+  public function is_session_started()
   {
     if ( php_sapi_name() !== 'cli' ) {
         if ( version_compare(phpversion(), '5.4.0', '>=') ) {

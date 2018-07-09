@@ -71,23 +71,24 @@ idleWait = 30000;
 
 window.onload = function() {
     date_time('date_time');
-    
-    $.ajax({
-            type: "GET",
-            url: base_url+"survey/getfooterhidden",
-            data: {},
-            success:function(response){
-                //your code goes here
-                if (response == "false"){
-                   displayval = document.getElementById("thefooter").style.display = "";
-                   footerhidden = false;
+    $(document).ready(function () {
+        $.ajax({
+                type: "GET",
+                url: base_url+"survey/getfooterhidden",
+                data: {},
+                success:function(response){
+                    //your code goes here
+                    if (response == "false"){
+                       displayval = document.getElementById("thefooter").style.display = "";
+                       footerhidden = false;
+                    }
+                    else{
+                        displayval = document.getElementById("thefooter").style.display = "none";
+                        footerhidden = true;
+                    }
                 }
-                else{
-                    displayval = document.getElementById("thefooter").style.display = "none";
-                    footerhidden = true;
-                }
-            }
-        })
+            })
+    });
 };
 
 (function ($) {
