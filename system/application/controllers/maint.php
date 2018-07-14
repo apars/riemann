@@ -56,6 +56,7 @@ class Maint extends CI_Controller {
         $data["main_back"] = file_get_contents($this->config->item('main_back'));
     }     
     $data["soundlevel"] = $this->getsoundlevel();
+    $data["ipaddress"] = $this->getwlan0ip();
     $this->session->set_userdata(array('footerhidden' => false));
     $this->load->view('templates/survey/header', $data);
     $this->load->view('templates/survey/nav');
@@ -513,6 +514,18 @@ class Maint extends CI_Controller {
 //    echo '    <output>'.$thesoundlevel.'</output>';
 //    echo '<input type="number" style="display: none;" value="'.$thesoundlevel.'">';
 //    echo '</div>';
+  }
+  
+  public function getwlan0ip(){
+      if (DIRECTORY_SEPARATOR == '/') {
+        $wifissid = exec("sudo iwgetid -r");
+        $ipaddress = exec("sudo ifconfig wlan0 | grep netmask | awk {'print $2'}");
+        $dispstr = "WiFi: ".$wifissid."<br>"."IP Address: ".$ipaddress;
+      }
+      else{
+        $dispstr = "";
+      }
+      return $dispstr;
   }
   
 }

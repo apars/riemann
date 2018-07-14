@@ -38,7 +38,8 @@
                 <strong>
                     ACHTUNG! <br>MAINTENANCE MODE<br>
                 </strong>
-                Proceed with extreme caution.
+                Proceed with extreme caution.<br>
+                <?php echo $ipaddress; ?>
             </div>
             <div id="theloaddbbuttons">
                 <!--800x480 = 3vw 1280x800 = 5vw -->
