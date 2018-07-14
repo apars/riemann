@@ -99,7 +99,7 @@ function startScreenSaver(options) {
                 imagenum = imagenum + 1;
             }
             var randnumber = 0; // Math.floor((Math.random() * 10) + 1);
-            saverBadge.style.backgroundImage = "url("+base_url+"assets/images/screensave/page"+imagenum+".gif?id="+randnumber+")";
+            saverBadge.style.backgroundImage = "url("+base_url+"assets/images/screensave/page"+imagenum+".jpg?id="+randnumber+")";
             saverBadge.style.backgroundRepeat = "no-repeat";
             saverBadge.style.backgroundAttachment = "fixed";
             saverBadge.style.backgroundPosition = "center center";

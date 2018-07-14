@@ -6,7 +6,7 @@ body.screensaver #saver-badge {
         filter: url(#drop-shadow);
         -webkit-filter: drop-shadow(12px 12px 20px rgba(0,0,0,0.5));
         filter: drop-shadow(12px 12px 20px rgba(0,0,0,0.5));
-        background-image: url('../images/screensave/page6.gif');
+        background-image: url('../images/screensave/page6.jpg');
         background-attachment: fixed;
         background-position: center center;
         background-repeat: no-repeat;
