@@ -7,6 +7,7 @@
  */
 /*Set station name of this device.*/
 $config['station_name']                     = 'station1';
+$config['code_ver']                         = '0.8';
 /*Set fix path of attached usb.*/
 $config['usb_path']                         = 'assets/downloads/';
 $config['back_usb_path']                    = 'assets/downloads/';

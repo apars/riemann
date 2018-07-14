@@ -78,7 +78,7 @@ window.onload = function() {
                 data: {},
                 success:function(response){
                     //your code goes here
-                    if (response == "false"){
+                    if (response === "false"){
                        displayval = document.getElementById("thefooter").style.display = "";
                        footerhidden = false;
                     }

@@ -20,7 +20,7 @@
                     <a href="#" class="fab fa-twitter"></a>
                     <a href="#" class="fab fa-google"></a>
                     <a href="#" class="fab fa-instagram"></a> 
-                    <span style="font-size: 2vh">[DBV <?php echo $this->config->item('dbver'); ?>]</span>
+                    <span style="font-size: 2vh">[CDV <?php echo $this->config->item('code_ver').'_'.$this->config->item('dbver'); ?>]</span>
                     <?php if(($active_surveys != "") && ($active_surveys != null)): ?>
                     <!--<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">E</button>-->
                     <!--<button type="button" class="btn btn-info btn-sm btn-danger" data-toggle="modal" data-target="#inputpin" data-dismiss="modal">M</button>-->

@@ -219,7 +219,7 @@ class Survey extends CI_Controller {
     $this->load->view('templates/survey/survey', $data);
     $this->load->view('templates/survey/footer');
   }
-  
+    
   public function is_session_started()
   {
     if ( php_sapi_name() !== 'cli' ) {
@@ -242,10 +242,11 @@ class Survey extends CI_Controller {
   }
   
   public function getfooterhidden(){
-    if ( $this->is_session_started() === FALSE ) {
+    if ( $this->is_session_started() === FALSE) {
         session_start();
         $this->session->set_userdata(array('footerhidden' => true));
     }
+    
     $footerhiddenval = $this->session->userdata('footerhidden');
     echo ($footerhiddenval === true) ? 'true' : 'false';
   }
