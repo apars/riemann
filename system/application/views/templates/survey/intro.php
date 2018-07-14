@@ -36,7 +36,7 @@
             <?php else: ?>
             <div class="alert alert-danger text-center" role="alert">
                 <strong>
-                    ACHTUNG! <br>MAINTENANCE MODE<br>
+                    MAINTENANCE PAGE<br>
                 </strong>
                 Proceed with extreme caution.<br>
                 <?php echo $ipaddress; ?>

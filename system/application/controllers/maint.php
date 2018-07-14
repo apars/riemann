@@ -520,7 +520,7 @@ class Maint extends CI_Controller {
       if (DIRECTORY_SEPARATOR == '/') {
         $wifissid = exec("sudo iwgetid -r");
         $ipaddress = exec("sudo ifconfig wlan0 | grep netmask | awk {'print $2'}");
-        $dispstr = "WiFi: ".$wifissid."<br>"."IP Address wlan0: ".$ipaddress." eth0: ".$this->geteth0ip();
+        $dispstr = "WiFi: ".$wifissid."; IP Address wlan0: ".$ipaddress." eth0: ".$this->geteth0ip();
       }
       else{
         $dispstr = "";
