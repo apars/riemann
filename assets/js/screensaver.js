@@ -4,8 +4,8 @@ var imagenum = 0;
 $(document).ready(function () {
     startScreenSaver({
         timeout:60000,
-        width: 85,
-        height: 70,
+        width: window.screen.width / parseFloat(window.getComputedStyle(document.getElementsByTagName("body")[0], null).getPropertyValue('font-size')),
+        height: window.screen.height / parseFloat(window.getComputedStyle(document.getElementsByTagName("body")[0], null).getPropertyValue('font-size')),
         //exitTimeout: 1000,
     }); 
 });
