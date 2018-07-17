@@ -384,6 +384,27 @@ class Maint extends CI_Controller {
     }
   }
   
+  public function reloadwifilist(){
+    $this->loadConfiguration();
+    $thecodepath = $this->config->item('code_path');
+    if($thecodepath != ''){
+        echo '<p>Please select a WiFi SSID and click [Connect] button.<br>';
+        echo 'Current code is '.base_url().'</p>';
+        $dirlist = glob($thecodepath.'*', GLOB_ONLYDIR);
+
+        echo '<div class="radio" style="display: block">';
+        foreach($dirlist as $diritem){
+            $codefile = glob($diritem.'/A4590CF3209F22E92B');
+            $htaccessfile = glob($diritem.'/.htaccess');
+            
+            if ((count($codefile) > 0) && (count($htaccessfile) > 0)){
+                echo '<label><input type="radio" style="display: inline" name="codefolder" value="'.basename($diritem).'"/>'.basename($diritem).'</label><br>';
+            }
+        }
+        echo '</div>';
+    }
+  }
+  
   public function selectthecode()
   {
     try{
@@ -516,25 +537,33 @@ class Maint extends CI_Controller {
 //    echo '</div>';
   }
   
-  public function getwlan0ip(){
+  public function islinux(){
       if (DIRECTORY_SEPARATOR == '/') {
+          return true;
+      }else{
+          return false;
+      }
+  }
+  
+  public function getwlan0ip(){
+      if ($this->islinux()) {
         $wifissid = exec("sudo iwgetid -r");
         $ipaddress = exec("sudo ifconfig wlan0 | grep netmask | awk {'print $2'}");
-        $dispstr = "WiFi: ".$wifissid."; IP Address wlan0: ".$ipaddress." eth0: ".$this->geteth0ip();
+        $dispstr = "WiFi: ".$wifissid."; Hostname: ".gethostname()."; IP Address wlan0: ".$ipaddress." eth0: ".$this->geteth0ip();
       }
       else{
-        $dispstr = "";
+        $dispstr = "Hostname: ".gethostname()."; IP Address: ".$this->geteth0ip();;
       }
       return $dispstr;
   }
 
   public function geteth0ip(){
-      if (DIRECTORY_SEPARATOR == '/') {
+      if ($this->islinux()) {
         $ipaddress = exec("sudo ifconfig eth0 | grep netmask | awk {'print $2'}");
         $dispstr = $ipaddress;
       }
       else{
-        $dispstr = "";
+        $dispstr = gethostbyname(gethostname()) ;
       }
       return $dispstr;
   }

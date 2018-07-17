@@ -49,6 +49,7 @@ $route['registercell']     = "survey/registercell/";
 $route['reloadlist']       = "maint/reloadlist/";
 $route['reloadziplist']    = "maint/reloadziplist/";
 $route['reloadcodelist']   = "maint/reloadcodelist/";
+$route['reloadwifilist']    = "maint/reloadwifilist/";
 $route['importdb']         = "maint/importdb/";
 $route['loadcode']         = "maint/loadcode/";
 $route['selectthecode']    = "maint/selectthecode/";

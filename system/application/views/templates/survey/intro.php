@@ -86,6 +86,16 @@
                         <div class="fas fa-volume-up"></div>
                         <div class="settingstext">Volume Adjust</div></button>
                     </div>
+                    <div class="col-md-2" id ="wificonn"><br>
+                    <button type="button" class="btn btn-lg btn-default" onclick="refreshwifilist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-wifi"></div>
+                        <div class="settingstext">Connect WiFi</div></button>
+                    </div>
+                    <div class="col-md-2" id ="refreshpage"><br>
+                    <button type="button" class="btn btn-lg btn-default" onclick="refreshpage()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                        <div class="fas fa-sync-alt"></div>
+                        <div class="settingstext">Refresh Page</div></button>
+                    </div>
                     <!-- This is for auto-downloading-->
                     <a id="target" style="display: none"></a>
 <!--                    <div class="col-md-2"><br>
@@ -201,6 +211,32 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" onclick="redirect2stagecode('<?php echo base_url().'loadcode'; ?>')">Stage Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Load WiFi List -->
+                <div id="loadwifilist" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Connect WiFi</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body" style="height: 33vh;">
+                                <p>Please select a WiFi SSID and click [Connect] button.</p>
+                                <div class="radio" style="display: block">
+                                    <?php foreach($flist as $fileitem): ?>
+                                        <label><input type="radio" style="display: inline" name="codefile" value="<?php echo $fileitem ?>"          
+                                                      /> <?php echo basename($fileitem) ?>
+                                        </label><br>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onclick="redirect2stagecode('<?php echo base_url().'loadcode'; ?>')">Connect</button>
                             </div>
                         </div>
                     </div>

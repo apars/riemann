@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+function refreshpage(){
+    location.reload();
+}
 
 function refreshfilelist(){
     var mymodal = $('#loadDBFile');
@@ -19,6 +22,17 @@ function refreshfilelist(){
 function refreshzipfilelist(){ 
     var mymodal = $('#loadCodeFile');
     var url = base_url+'reloadziplist';
+    mymodal.find('.modal-body').load(url);
+    mymodal.modal('show');
+    
+//    $('.modal-body').load(base_url+'reloadlist',function(){
+//        $('#loadDBFile').modal({show:true});
+//    });
+}
+
+function refreshwifilist(){ 
+    var mymodal = $('#loadwifilist');
+    var url = base_url+'reloadwifilist';
     mymodal.find('.modal-body').load(url);
     mymodal.modal('show');
     
