@@ -92,6 +92,8 @@
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('survey_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('maint_js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url().$this->config->item('numpad_js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().$this->config->item('jskeyboard_js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().$this->config->item('main_js'); ?>"></script>
         
     </body>
 </html>

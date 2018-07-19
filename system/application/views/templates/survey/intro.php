@@ -236,7 +236,36 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" onclick="redirect2stagecode('<?php echo base_url().'loadcode'; ?>')">Connect</button>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#loadwifipass">Connect</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Load WiFi Password -->
+                <div id="loadwifipass" class="modal modal-wide fade" role="dialog">
+                    <div class="modal-dialog" style="width: 1000px;">
+                        <!-- Modal content-->
+                        <div class="modal-content" style="width: 1000px; margin-left: -250px;">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Connect WiFi</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <!--Please input WiFi password and click [OK] button.-->
+                                <br>
+                                <div class="col-md-12 hmarginauto cellentrytext" style="margin-left: auto; margin-right: auto;">
+                                    
+                                    <input class="cellentrytext" name="wifipasswd" type="text" placeholder="WiFi Password">
+                                <br>
+                                </div>
+                                <div id="virtualKeyboard"></div>
+                                <div class="col-md-12 hmarginauto cellentrytext" style="margin-left: auto; margin-right: auto;">
+                                <br>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="enterwifipass" class="btn btn-default" style="display: none;" onclick="redirect2tryconnwifi('<?php echo base_url().'tryconnectwifi'; ?>')">OK</button>
                             </div>
                         </div>
                     </div>

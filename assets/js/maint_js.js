@@ -41,6 +41,17 @@ function refreshwifilist(){
 //    });
 }
 
+function loadwifipassword(){ 
+    var mymodal = $('#loadwifipass');
+    //var url = base_url+'loadwifipass';
+    //mymodal.find('.modal-body').load(url);
+    mymodal.modal('show');
+    
+//    $('.modal-body').load(base_url+'reloadlist',function(){
+//        $('#loadDBFile').modal({show:true});
+//    });
+}
+
 function refreshcodefolderlist(){ 
     var mymodal = $('#loadCodeList');
     var url = base_url+'reloadcodelist';
@@ -191,6 +202,41 @@ function redirect2loadcode(url) {
             });
             
             $('#loadCodeList').modal('hide');
+            return false; 
+        }
+    }
+    alert('You must select a file.');  
+}
+
+function redirect2tryconnwifi(url) {
+    var thewifis = document.getElementsByName("wifis");
+    var thekey = '';
+    var thevalue = '';
+    var thepair = {};
+    for( i = 0; i < thewifis.length; i++ ) {
+        if( thewifis[i].checked ) {
+            document.getElementById("theloadertext").style.display = "";
+            document.getElementById("theloadertext").innerHTML = "Loading Code. Please wait...<br><br>";
+            document.getElementById("theloaddbbuttons").style.display = "none";
+            document.getElementById("theloader").style.display = "";
+            
+            thekey = thewifis[i].name;
+            thevalue = thewifis[i].value;
+            thepair = {};
+            thepair[thekey] = thevalue;
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: thepair,
+            success:function(response){
+                //$('#loadwifipass').modal('show');
+                //loadwifipassword();
+                redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI(response));
+            }
+            });
+            
+            $('#loadwifilist').modal('hide');
             return false; 
         }
     }
@@ -398,6 +444,11 @@ $(function() {
             console.log('onSlideEnd');
             console.log('position: ' + position, 'value: ' + value);
         }
+    });
+    
+    $(".modal-wide").on("show.bs.modal", function() {
+    var height = $(window).height() - 200;
+    $(this).find(".modal-body").css("max-height", height);
     });
 });
 

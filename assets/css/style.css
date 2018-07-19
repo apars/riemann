@@ -150,8 +150,6 @@ body, html {
     overflow-y: auto;
 }
 
-
-
 .nmpd-grid {border: none; padding: 20px;}
 .nmpd-grid>tbody>tr>td {border: none;}
 
@@ -216,3 +214,14 @@ body, html {
     margin-top: auto;
     margin-bottom: auto;
 }
+
+
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}
+.modal-wide .modal-body {
+  overflow-y: auto;
+} 
+
+#loadwifipass .modal-body p { margin-bottom: 900px }

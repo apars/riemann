@@ -26,7 +26,7 @@ $('li').on('click', function(){
 
 $('input').on('click', function(){
     //Accept only radio input types.
-    if (this.type != 'checkbox' && (this.name != 'dbfile') && (this.id != 'password') && (this.id != 'text-basic') && (this.type != 'range'))
+    if (this.type != 'checkbox' && (this.name != 'dbfile') && (this.id != 'password') && (this.id != 'text-basic') && (this.type != 'range') && (this.name != 'wifipasswd'))
     {
         var loc = window.location;
         var pathName = loc.pathname.substring(loc.pathname.lastIndexOf('/')+1);

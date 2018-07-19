@@ -385,21 +385,36 @@ class Maint extends CI_Controller {
   }
   
   public function reloadwifilist(){
+    $matchedLines = array();
+      
     $this->loadConfiguration();
     $thecodepath = $this->config->item('code_path');
     if($thecodepath != ''){
         echo '<p>Please select a WiFi SSID and click [Connect] button.<br>';
-        echo 'Current code is '.base_url().'</p>';
+        if ($this->islinux()){
+            
+        }
+        else{
+            $wifis=exec("netsh wlan show networks > wifiraw.txt");
+            $file = fopen('wifiraw.txt', 'rb');
+            
+            //$out = fopen('filtered.txt', 'wb+')
+            while(! feof($file)) {
+                $rdtxt = fgets($file);
+                //echo $rdtxt.'<br>';
+                if (strpos($rdtxt, 'SSID') !== false) {
+                    $words = explode(' ', $rdtxt);
+                    $matchedLines[] = $words[3];
+                    //$matchedLines[] = $rdtxt;
+                }
+            }
+            fclose($file);
+        }
         $dirlist = glob($thecodepath.'*', GLOB_ONLYDIR);
 
         echo '<div class="radio" style="display: block">';
-        foreach($dirlist as $diritem){
-            $codefile = glob($diritem.'/A4590CF3209F22E92B');
-            $htaccessfile = glob($diritem.'/.htaccess');
-            
-            if ((count($codefile) > 0) && (count($htaccessfile) > 0)){
-                echo '<label><input type="radio" style="display: inline" name="codefolder" value="'.basename($diritem).'"/>'.basename($diritem).'</label><br>';
-            }
+        foreach($matchedLines as $matchedLine){
+            echo '<label><input type="radio" style="display: inline" name="wifis" value="'.$matchedLine.'"/>  '.$matchedLine.'</label><br>';
         }
         echo '</div>';
     }
@@ -460,6 +475,14 @@ class Maint extends CI_Controller {
     }
   }
 
+  public function tryconnectwifi(){
+      echo "Input Box";
+  }
+  
+   public function loadwifipass(){
+      echo "Input Box";
+  }
+  
   public function rebootsystem()
   {
       try{
