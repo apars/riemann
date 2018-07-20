@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-2" id ="wificonn"><br>
                     <button type="button" class="btn btn-lg btn-default" onclick="refreshwifilist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
-                        <div class="fas fa-wifi"></div>
+                        <div class="fas fa-wifi" style="color: <?php if (strlen($ssid) > 0) {echo "greenyellow";} else {echo "black";} ?>;"></div>
                         <div class="settingstext">Configure WiFi</div></button>
                     </div>
                     <div class="col-md-2" id ="refreshpage"><br>

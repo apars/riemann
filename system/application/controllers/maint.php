@@ -57,6 +57,7 @@ class Maint extends CI_Controller {
     }     
     $data["soundlevel"] = $this->getsoundlevel();
     $data["ipaddress"] = $this->getwlan0ip();
+    $data["ssid"] = $this->getwlan0ssid();
     $this->session->set_userdata(array('footerhidden' => false));
     $this->load->view('templates/survey/header', $data);
     $this->load->view('templates/survey/nav');
@@ -586,15 +587,39 @@ class Maint extends CI_Controller {
           return false;
       }
   }
-  
-  public function getwlan0ip(){
+  public function getwlan0ssid(){
       if ($this->islinux()) {
         $wifissid = exec("sudo iwgetid -r");
+        return $wifissid;
+      } else {
+          $wifissid = exec("netsh wlan show interfaces > wifiraw.txt");
+          $file = fopen('wifiraw.txt', 'rb');
+          $matchedLines[] = ""; 
+            //$out = fopen('filtered.txt', 'wb+')
+            while(! feof($file)) {
+                $rdtxt = fgets($file);
+                //echo $rdtxt.'<br>';
+                if (strpos($rdtxt, 'SSID') !== false) {
+                    $words = explode(': ', $rdtxt);
+                    $matchedLines[] = $words[1];
+                    //$matchedLines[] = $rdtxt;
+                    break;
+                }
+            }
+            fclose($file);
+          
+          return trim(implode($matchedLines));
+      }
+  }
+  public function getwlan0ip(){
+      $wifissid = $this->getwlan0ssid();
+      if ($this->islinux()) {
+         //exec("sudo iwgetid -r");
         $ipaddress = exec("sudo ifconfig wlan0 | grep netmask | awk {'print $2'}");
         $dispstr = "WiFi: ".$wifissid."; Hostname: ".gethostname()."; IP Address wlan0: ".$ipaddress." eth0: ".$this->geteth0ip();
       }
       else{
-        $dispstr = "Hostname: ".gethostname()."; IP Address: ".$this->geteth0ip();;
+        $dispstr = "WiFi: ".$wifissid."; Hostname: ".gethostname()."; IP Address: ".$this->geteth0ip();;
       }
       return $dispstr;
   }
