@@ -21,6 +21,7 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['lxde_start_path']              = 'D:\keys\\start.sh';
     //Shell Scripts
     $config['vol_ctrl']                     = '';   
+    $config['wpa_path']                     = 'D:\keys\\wpa_supplicant.conf';
 }
 else
 {
@@ -32,6 +33,7 @@ else
     $config['lxde_start_path']              = '/home/pi/start.sh';
     //Shell Scripts
     $config['vol_ctrl']                     = '/home/pi/vol.sh';
+    $config['wpa_path']                     = '/etc/wpa_supplicant/wpa_supplicant.conf';
 }
 
 $config['bw_mysql_path']                    = 'assets/database/winmysql/mysql.exe';

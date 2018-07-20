@@ -89,7 +89,7 @@
                     <div class="col-md-2" id ="wificonn"><br>
                     <button type="button" class="btn btn-lg btn-default" onclick="refreshwifilist()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                         <div class="fas fa-wifi"></div>
-                        <div class="settingstext">Connect WiFi</div></button>
+                        <div class="settingstext">Configure WiFi</div></button>
                     </div>
                     <div class="col-md-2" id ="refreshpage"><br>
                     <button type="button" class="btn btn-lg btn-default" onclick="refreshpage()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
@@ -256,7 +256,7 @@
                                 <br>
                                 <div class="col-md-12 hmarginauto cellentrytext" style="margin-left: auto; margin-right: auto;">
                                     
-                                    <input class="cellentrytext" name="wifipasswd" type="text" placeholder="WiFi Password">
+                                    <input class="cellentrytext" id="wifipassword" name="wifipasswd" type="text" placeholder="Click me first...">
                                 <br>
                                 </div>
                                 <div id="virtualKeyboard"></div>

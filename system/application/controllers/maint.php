@@ -478,7 +478,19 @@ class Maint extends CI_Controller {
 
   public function tryconnectwifi(){
       if(isset($_POST['wifissid'])){
-        echo "".$_POST['wifissid']." successfully registered.";
+        $thessid = (isset($_POST['wifissid'])) ? $_POST['wifissid'] : "";
+        $thepasswd = (isset($_POST['wifipasswd'])) ? $_POST['wifipasswd'] : "";
+        $netwifi='network={'."\n"
+                    .'    ssid="'.trim($thessid).'"'."\n"
+                    .'    scan_ssid=1'."\n"
+                    .'    psk="'.trim($thepasswd).'"'."\n"
+                    .'}'."\n";
+
+        $file = fopen($this->config->item('wpa_path'),"w");
+        $fret = fwrite($file, $netwifi);
+        fclose($file);
+        
+        echo "SSID ".$thessid." with password ".$thepasswd." successfully registered.";
       }
   }
   
