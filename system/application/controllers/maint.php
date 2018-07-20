@@ -392,7 +392,8 @@ class Maint extends CI_Controller {
     if($thecodepath != ''){
         echo '<p>Please select a WiFi SSID and click [Connect] button.<br>';
         if ($this->islinux()){
-            
+            //https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+            $wifis=exec("sudo iwlist wlan0 scan");
         }
         else{
             $wifis=exec("netsh wlan show networks > wifiraw.txt");
@@ -414,7 +415,7 @@ class Maint extends CI_Controller {
 
         echo '<div class="radio" style="display: block">';
         foreach($matchedLines as $matchedLine){
-            echo '<label><input type="radio" style="display: inline" name="wifis" value="'.$matchedLine.'"/>  '.$matchedLine.'</label><br>';
+            echo '<label><input type="radio" style="display: inline" name="wifissid" value="'.$matchedLine.'"/>  '.$matchedLine.'</label><br>';
         }
         echo '</div>';
     }
@@ -476,11 +477,13 @@ class Maint extends CI_Controller {
   }
 
   public function tryconnectwifi(){
-      echo "Input Box";
+      if(isset($_POST['wifissid'])){
+        echo "".$_POST['wifissid']." successfully registered.";
+      }
   }
   
    public function loadwifipass(){
-      echo "Input Box";
+       echo "loadwifipass";
   }
   
   public function rebootsystem()

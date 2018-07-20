@@ -209,14 +209,14 @@ function redirect2loadcode(url) {
 }
 
 function redirect2tryconnwifi(url) {
-    var thewifis = document.getElementsByName("wifis");
+    var thewifis = document.getElementsByName("wifissid");
     var thekey = '';
     var thevalue = '';
     var thepair = {};
     for( i = 0; i < thewifis.length; i++ ) {
         if( thewifis[i].checked ) {
             document.getElementById("theloadertext").style.display = "";
-            document.getElementById("theloadertext").innerHTML = "Loading Code. Please wait...<br><br>";
+            document.getElementById("theloadertext").innerHTML = "Configuring WiFi. Please wait...<br><br>";
             document.getElementById("theloaddbbuttons").style.display = "none";
             document.getElementById("theloader").style.display = "";
             

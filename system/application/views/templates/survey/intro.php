@@ -222,14 +222,14 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Connect WiFi</h4>
+                                <h4 class="modal-title">Select WiFi SSID</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body" style="height: 33vh;">
                                 <p>Please select a WiFi SSID and click [Connect] button.</p>
                                 <div class="radio" style="display: block">
                                     <?php foreach($flist as $fileitem): ?>
-                                        <label><input type="radio" style="display: inline" name="codefile" value="<?php echo $fileitem ?>"          
+                                        <label><input type="radio" style="display: inline" name="wifissid" value="<?php echo $fileitem ?>"          
                                                       /> <?php echo basename($fileitem) ?>
                                         </label><br>
                                     <?php endforeach; ?>
@@ -248,7 +248,7 @@
                         <!-- Modal content-->
                         <div class="modal-content" style="width: 1000px; margin-left: -250px;">
                             <div class="modal-header">
-                                <h4 class="modal-title">Connect WiFi</h4>
+                                <h4 class="modal-title">Enter WiFi Password</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
