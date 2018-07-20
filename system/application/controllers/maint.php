@@ -394,11 +394,8 @@ class Maint extends CI_Controller {
         echo '<p>Please select a WiFi SSID and click [Connect] button.<br>';
         if ($this->islinux()){
             //https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
-            $wifis=exec("sudo iwlist wlan0 scan | grep ESSID | awk -F'[:]' '{print $2}' | tr -d "."'".'"'."'");
-            foreach(preg_split("/((\r?\n)|(\r\n?))/", $wifis) as $line){
-                // do stuff with $line
-                $matchedLines[] = $line;
-            } 
+            $wifis=array();
+            exec("sudo iwlist wlan0 scan | grep ESSID | awk -F'[:]' '{print $2}' | tr -d "."'".'"'."'",$matchedLines);
         }
         else{
             $wifis=exec("netsh wlan show networks > wifiraw.txt");
