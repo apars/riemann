@@ -394,7 +394,7 @@ class Maint extends CI_Controller {
         echo '<p>Please select a WiFi SSID and click [Connect] button.<br>';
         if ($this->islinux()){
             //https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
-            $wifis=exec("sudo iwlist wlan0 scan | grep ESSID | awk -F'[\"]' '{print $2}'");
+            $wifis=exec("sudo iwlist wlan0 scan | grep ESSID | awk -F'[:]' '{print $2}' | tr -d ".'"');
             foreach(preg_split("/((\r?\n)|(\r\n?))/", $wifis) as $line){
                 // do stuff with $line
                 $matchedLines[] = $line;
@@ -485,7 +485,9 @@ class Maint extends CI_Controller {
       if(isset($_POST['wifissid'])){
         $thessid = (isset($_POST['wifissid'])) ? $_POST['wifissid'] : "";
         $thepasswd = (isset($_POST['wifipasswd'])) ? $_POST['wifipasswd'] : "";
-        $netwifi='network={'."\n"
+        $netwifi='ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'."\n"
+                 .'update_config=1'."\n"
+                 .'network={'."\n"
                     .'    ssid="'.trim($thessid).'"'."\n"
                     .'    scan_ssid=1'."\n"
                     .'    psk="'.trim($thepasswd).'"'."\n"
