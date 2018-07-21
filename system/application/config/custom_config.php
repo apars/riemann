@@ -17,7 +17,7 @@ if (DIRECTORY_SEPARATOR == '\\') {
     $config['mysqldump_path']               = 'D:\xampp\mysql\bin\mysqldump.exe';
     $config['mysqladmin_path']              = 'D:\xampp\mysql\bin\mysqladmin.exe';
     $config['code_path']                    = 'D:\keys\\';
-    $config['start_path']                   = 'D:\keys\\.Xsession';
+    $config['start_path']                   = 'D:\keys\\.xsession';
     $config['lxde_start_path']              = 'D:\keys\\start.sh';
     //Shell Scripts
     $config['vol_ctrl']                     = '';   
@@ -29,7 +29,7 @@ else
     $config['mysqldump_path']               = '/usr/bin/mysqldump';
     $config['mysqladmin_path']              = '/usr/bin/mysqladmin';
     $config['code_path']                    = '/var/www/html/';
-    $config['start_path']                   = '/home/pi/.Xsession';
+    $config['start_path']                   = '/home/pi/.xsession';
     $config['lxde_start_path']              = '/home/pi/start.sh';
     //Shell Scripts
     $config['vol_ctrl']                     = '/home/pi/vol.sh';
