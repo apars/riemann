@@ -1,13 +1,13 @@
-        <footer style="background:transparent !important;">
-            <div class="container" id="thefooter" style="display: none;">
+        <footer style="background:transparent !important; padding: 10px;">
+            <div class="container footer-text" id="thefooter" style="display: none; vertical-align: middle;">
                 <p class="text-muted">
-                <div class="div-left" style="display: inline-block;"><p class="footer-text">&copy; 2018 <?php echo $this->config->item('company_name'); ?> All rights reserved. 
+                <div class="div-left" style="display: inline-block;">&copy; 2018 <?php echo $this->config->item('company_name'); ?> All rights reserved. 
                 <!--<?php if($active_surveys != ""): ?>
                   <?php foreach($active_surveys as $survey): ?>
                     <?php echo getFooterContent($survey->slug); ?>
                   <?php endforeach; ?>
                 <?php endif; ?>-->
-                </p></div>
+                </div>
                 <!-- Trigger the modal with a button -->
                 
                 <div class="form-group" style="display: none;">
@@ -15,12 +15,12 @@
                     <input type="password" class="form-control" id="password" placeholder="Pin code">
                 </div>
                 
-                <div class="div-right" style="display: inline-block;"><p class="footer-text">Follow Us
+                <div class="div-right footer-text" style="display: inline-block;">Follow Us
                     <a href="#" class="fab fa-facebook"></a>
                     <a href="#" class="fab fa-twitter"></a>
                     <a href="#" class="fab fa-google"></a>
-                    <a href="#" class="fab fa-instagram"></a> 
-                    <span style="font-size: 2vh">[CDV <?php echo $this->config->item('code_ver').'_'.$this->config->item('dbver'); ?>]</span>
+                    <a href="#" class="fab fa-instagram"></a>
+                    [CDV <?php echo $this->config->item('code_ver').'_'.$this->config->item('dbver'); ?>]
                     <?php if(($active_surveys != "") && ($active_surveys != null)): ?>
                     <!--<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">E</button>-->
                     <!--<button type="button" class="btn btn-info btn-sm btn-danger" data-toggle="modal" data-target="#inputpin" data-dismiss="modal">M</button>-->
@@ -29,7 +29,7 @@
                     <!--<button type="button" class="btn btn-info btn-sm btn-danger" onclick="redirectOnClick('<?php echo base_url().$this->config->item('loaddb_url').'/'; ?>')" >M</button>-->
                     <?php endif; ?>
                     
-                    </p>
+                    
                     
                     
             <!--<strong>Posted by: <?php echo $this->config->item('posted_by'); ?> Contact information: <a href="mailto:<?php echo $this->config->item('posted_email'); ?>"><?php echo $this->config->item('posted_email'); ?></a>.</strong>-->

@@ -101,10 +101,12 @@ label small {
 .div-left{
     float:left;
     padding-left:10px;
+    vertical-align: middle;
 }
 .div-right{
     float:right;
     padding-right:10px;
+    vertical-align: middle;
 }
 
 .introtext{
