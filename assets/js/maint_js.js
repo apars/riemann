@@ -253,7 +253,7 @@ function redirect2tryconnwifi(url) {
     alert('You must select a file.');  
 }
 
-function redirect2exportData(url) {
+function redirect2exportData(url, downloadit) {
     document.getElementById("theloadertext").style.display = "";
     document.getElementById("theloadertext").innerHTML = "Exporting Data. Please wait...<br><br>";
     document.getElementById("theloaddbbuttons").style.display = "none";
@@ -263,18 +263,20 @@ function redirect2exportData(url) {
     var datafromajax="";
     $.ajax({
             type: "POST",
-            url: url,
+            url: url+'/'+downloadit,
             data: {},
             success:function(response){
                     //respdata = response.split("*");
-                    //url = base_url+'assets/downloads/download.php?srcfile='+respdata[0]+'&dstpath='+respdata[1]+respdata[0].substring(respdata[0].lastIndexOf('/')+1);
-                    //downloadFile(respdata[0], respdata[0].substring(respdata[0].lastIndexOf('/')+1));
-                    
-                    
+                    myArr = JSON.parse(response);
+                    url = base_url+'assets/downloads/download.php?srcfile='+myArr[1]+'&dstpath='+'';
+                    if(downloadit === 'YES'){
+                        downloadFile(base_url+myArr[1], myArr[1].substring(myArr[1].lastIndexOf('/')+1));
+                    }
                     //document.getElementById("target").href = url;
                     //document.getElementById("target").click();
                     //$successmsg = response; //respdata[0]+' exported successfully to '+respdata[1]+'!';
-                    redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI(response));
+                    
+                    redirectOnClick(base_url+'maint/displayexport'+'?exportresult='+encodeURI(myArr[0]));
                     //alert(url);
 //                    $.ajax({
 //                            type: "GET",

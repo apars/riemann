@@ -63,7 +63,7 @@
                     <?php if(($active_surveys_ex != "") && ($active_surveys_ex != null)): ?>
                         <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#exportData" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                             <div class="fas fa-file-excel"></div>
-                            <div class="settingstext">Export</div></button>
+                            <div class="settingstext">Export to USB</div></button>
                     <?php endif; ?>
                     </div>
 
@@ -95,6 +95,13 @@
                     <button type="button" class="btn btn-lg btn-default" onclick="refreshpage()" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
                         <div class="fas fa-sync-alt"></div>
                         <div class="settingstext">Refresh Page</div></button>
+                    </div>
+                    <div class="col-md-2" id ="refreshpage"><br>
+                    <?php foreach($active_surveys_ex as $survey): ?>
+                        <button type="button" class="btn btn-lg btn-default" onclick="redirect2exportData('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>','YES')" style="height:100%;width:100%;font-size:<?php echo $this->config->item('begin_button_fit'); ?>;border-radius: 3vh;">
+                            <div class="fas fa-download"></div>
+                            <div class="settingstext">Download CSV</div></button>
+                    <?php endforeach; ?>
                     </div>
                     <!-- This is for auto-downloading-->
                     <a id="target" style="display: none"></a>
@@ -310,7 +317,7 @@
                             </div>
                             <div class="modal-footer">
                                 <?php foreach($active_surveys_ex as $survey): ?>
-                                    <button type="button" class="btn btn-default" onclick="redirect2exportData('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>')" data-dismiss="modal">OK</button>
+                                    <button type="button" class="btn btn-default" onclick="redirect2exportData('<?php echo base_url().$this->config->item('export_url').'/'.$survey->slug; ?>','NO')" data-dismiss="modal">OK</button>
                                 <?php endforeach; ?>
                             </div>
                         </div>

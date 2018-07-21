@@ -144,8 +144,8 @@ class Maint extends CI_Controller {
 
     }
   }
-  
-  public function export($survey = "")
+   
+  public function export($survey = "", $downloadit = "NO")
   {
     $this->loadConfiguration();
     $surveyPrefix = "";
@@ -174,7 +174,8 @@ class Maint extends CI_Controller {
     $result = $this->survey_model->getSurveyDataForExport($surveyPrefix);
     $this->load->dbutil();
     $this->load->helper('file');
-    $theusbpath = $this->whereusb();
+    $theusbpath = $this->whereusb(($downloadit === "YES") ? true : false);
+    $outfile = '';
     if ($theusbpath!=''){
         $thebackusbpath=$this->config->item('back_usb_path').'backup/';
         if (!file_exists($theusbpath)) {
@@ -190,12 +191,12 @@ class Maint extends CI_Controller {
         fclose($file);
         $fsize = (int) $fret;
         if ($fsize > 10){
-                $data["export_result"] = "File, ".$thefile.", successfully exported to <br>".$theusbpath." folder.";
+                $data["export_result"] = " File, ".$thefile.", successfully exported to <br>".$theusbpath." folder.";
         }
         else{
                 $data["export_result"] = "Export failed. ";
         }
-
+        
         //!write_file($outfile, $csvdata);
         //$file = $outfile;
         //echo $file.'*'.$theusbpath;
@@ -213,7 +214,8 @@ class Maint extends CI_Controller {
         $data["export_result"] = "Export failed. USB drive not detected."; //"Export failed . USB stick not detected.";
     }
     //sleep(3);
-    echo $data["export_result"];
+    $retval = array($data["export_result"], $outfile);
+    echo json_encode($retval);
     
 //    $data["active_surveys"] = "";
 //    $this->load->view('templates/survey/header', $data);
