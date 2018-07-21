@@ -269,8 +269,10 @@ function redirect2exportData(url, downloadit) {
                     //respdata = response.split("*");
                     myArr = JSON.parse(response);
                     //url = base_url+'assets/downloads/download.php?srcfile='+myArr[1]+'&dstpath='+'';
-                    if(downloadit === 'YES'){
-                        downloadFile(base_url+myArr[1], myArr[1].substring(myArr[1].lastIndexOf('/')+1));
+                    if (location.hostname != "localhost" && location.hostname != "127.0.0.1"){
+                        if(downloadit === 'YES'){
+                            downloadFile(base_url+myArr[1], myArr[1].substring(myArr[1].lastIndexOf('/')+1));
+                        }
                     }
                     //document.getElementById("target").href = url;
                     //document.getElementById("target").click();
