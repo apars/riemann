@@ -181,6 +181,9 @@ class Maint extends CI_Controller {
         if (!file_exists($theusbpath)) {
             $theusbpath = $thebackusbpath;
         }
+        if ($downloadit === "YES"){
+            $theusbpath = $this->config->item('back_usb_path');
+        }
         
         $thefile = $this->config->item("exp_prefix").date('m-d-Y_hisa').$this->config->item("exp_ext");
         $outfile = $theusbpath.'/'.$thefile;

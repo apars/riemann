@@ -268,7 +268,7 @@ function redirect2exportData(url, downloadit) {
             success:function(response){
                     //respdata = response.split("*");
                     myArr = JSON.parse(response);
-                    url = base_url+'assets/downloads/download.php?srcfile='+myArr[1]+'&dstpath='+'';
+                    //url = base_url+'assets/downloads/download.php?srcfile='+myArr[1]+'&dstpath='+'';
                     if(downloadit === 'YES'){
                         downloadFile(base_url+myArr[1], myArr[1].substring(myArr[1].lastIndexOf('/')+1));
                     }
