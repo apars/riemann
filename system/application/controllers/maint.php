@@ -108,7 +108,7 @@ class Maint extends CI_Controller {
             $mysqladminbin = $this->config->item("mysqladmin_path");
                 
             if (!file_exists($mysqlbin)){
-                if (DIRECTORY_SEPARATOR == '\\') {
+                if (!$this->islinux()) {
                     $mysqlbin = realpath($this->config->item("bw_mysql_path"));
                     $mysqldumpbin = realpath($this->config->item("bw_mysqldump_path"));
                     $mysqladminbin = realpath($this->config->item("bw_mysqladmin_path"));
@@ -326,7 +326,7 @@ class Maint extends CI_Controller {
             $path_parts = pathinfo($_POST["codefile"]);
             $destfolder = $this->config->item('code_path').$path_parts['filename'].$dateappend;
             mkdir($destfolder, 0777);
-            if (DIRECTORY_SEPARATOR == '/') {
+            if ($this->islinux()) {
                 exec('tar -C '.$destfolder.' -xvf '.$_POST["codefile"]);
                 //$phar = new PharData($_POST["codefile"]);
                 //if($phar->extractTo($destfolder)){
