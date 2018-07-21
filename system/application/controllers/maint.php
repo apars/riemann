@@ -392,6 +392,7 @@ class Maint extends CI_Controller {
     $thecodepath = $this->config->item('code_path');
     if($thecodepath != ''){
         echo '<p>Please select a WiFi SSID and click [Connect] button.<br>';
+        echo '<label><input type="checkbox" id="appendit" name="appendit" value="append">  Append Settings?</label>';
         if ($this->islinux()){
             //https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
             $wifis=array();
@@ -482,15 +483,18 @@ class Maint extends CI_Controller {
       if(isset($_POST['wifissid'])){
         $thessid = (isset($_POST['wifissid'])) ? $_POST['wifissid'] : "";
         $thepasswd = (isset($_POST['wifipasswd'])) ? $_POST['wifipasswd'] : "";
-        $netwifi='ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'."\n"
-                 .'update_config=1'."\n"
+        $appendit  = (isset($_POST['appendit'])) ? ($_POST['appendit'] === 'TRUE') ? TRUE : FALSE : FALSE;
+        $header1 = ($appendit) ? '' : 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'."\n";
+        $header2 = ($appendit) ? '' : 'update_config=1'."\n";
+        $netwifi= $header1
+                 .$header2
                  .'network={'."\n"
                     .'    ssid="'.trim($thessid).'"'."\n"
                     .'    scan_ssid=1'."\n"
                     .'    psk="'.trim($thepasswd).'"'."\n"
                     .'}'."\n";
 
-        $file = fopen($this->config->item('wpa_path'),"w");
+        $file = fopen($this->config->item('wpa_path'),($appendit) ? "a" : "w");
         $fret = fwrite($file, $netwifi);
         fclose($file);
         

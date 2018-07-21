@@ -211,6 +211,7 @@ function redirect2loadcode(url) {
 function redirect2tryconnwifi(url) {
     var thewifis = document.getElementsByName("wifissid");
     var thewifipasswd = document.getElementById("wifipassword").value;
+    var appendit = document.getElementById("appendit").checked;
     var thekey = '';
     var thevalue = '';
     var thepair = {};
@@ -228,6 +229,10 @@ function redirect2tryconnwifi(url) {
             
             thekey = "wifipasswd";
             thevalue = thewifipasswd;
+            thepair[thekey] = thevalue;
+            
+            thekey = "appendit";
+            thevalue = (appendit) ? 'TRUE' : 'FALSE';
             thepair[thekey] = thevalue;
 
             $.ajax({

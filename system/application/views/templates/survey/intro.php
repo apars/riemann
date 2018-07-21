@@ -227,6 +227,7 @@
                             </div>
                             <div class="modal-body" style="height: 33vh;">
                                 <p>Please select a WiFi SSID and click [Connect] button.</p>
+                                <label><input type="checkbox" id="appendit" name="appendit" value="append">  Append Settings?</label>
                                 <div class="radio" style="display: block">
                                     <?php foreach($flist as $fileitem): ?>
                                         <label><input type="radio" style="display: inline" name="wifissid" value="<?php echo $fileitem ?>"          
