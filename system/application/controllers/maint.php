@@ -473,6 +473,14 @@ class Maint extends CI_Controller {
             fwrite($file_handle, $data_to_write);
             fclose($file_handle);
             
+            $thecodepath = $this->config->item('code_path');
+            $thedownloadfolder = $thecodepath.'assets/downloads';
+            if($this->islinux()){
+                exec('sudo chown www-data '.$thedownloadfolder);
+                exec('sudo chgrp www-data '.$thedownloadfolder);
+                exec('sudo chmod 777 '.$thedownloadfolder);
+            }
+            
             $data_to_write='/usr/bin/chromium-browser --incognito --start-maximized --kiosk http://localhost/'.$_POST["codefolder"];
             $file_handle = fopen($this->config->item('lxde_start_path'), 'w'); 
             fwrite($file_handle, $data_to_write);
