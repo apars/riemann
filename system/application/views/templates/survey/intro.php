@@ -260,7 +260,7 @@
                                     <input class="cellentrytext" id="wifipassword" name="wifipasswd" type="text" placeholder="Click me first...">
                                 <br>
                                 </div>
-                                <div id="virtualKeyboard"></div>
+                                <div id="virtualKeyboard" style="font-size:14px; "></div>
                                 <div class="col-md-12 hmarginauto cellentrytext" style="margin-left: auto; margin-right: auto;">
                                 <br>
                                 </div>
