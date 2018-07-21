@@ -81,7 +81,7 @@ class Maint extends CI_Controller {
 
         echo '<div class="radio" style="display: block">';
         foreach($flist as $fileitem){
-            echo '<label><input type="radio" style="display: inline" name="dbfile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
+            echo '<label><input type="radio" class="bigradio" style="display: inline" name="dbfile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
         }
         echo '</div>';
     }
@@ -300,7 +300,7 @@ class Maint extends CI_Controller {
 
         echo '<div class="radio" style="display: block">';
         foreach($flist as $fileitem){
-            echo '<label><input type="radio" style="display: inline" name="codefile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
+            echo '<label><input type="radio" class="bigradio" style="display: inline" name="codefile" value="'.$fileitem.'"/>'.basename($fileitem).'</label><br>';
         }
         echo '</div>';
     }
@@ -383,7 +383,7 @@ class Maint extends CI_Controller {
             $htaccessfile = glob($diritem.'/.htaccess');
             
             if ((count($codefile) > 0) && (count($htaccessfile) > 0)){
-                echo '<label><input type="radio" style="display: inline" name="codefolder" value="'.basename($diritem).'"/>'.basename($diritem).'</label><br>';
+                echo '<label><input type="radio" class="bigradio" style="display: inline" name="codefolder" value="'.basename($diritem).'"/>'.basename($diritem).'</label><br>';
             }
         }
         echo '</div>';
@@ -396,8 +396,8 @@ class Maint extends CI_Controller {
     $this->loadConfiguration();
     $thecodepath = $this->config->item('code_path');
     if($thecodepath != ''){
-        echo '<p>Please select a WiFi SSID and click [Connect] button.<br>';
-        echo '<label><input type="checkbox" id="appendit" name="appendit" value="append">  Append Settings?</label>';
+        echo '<div>Please select a WiFi SSID and click [Connect] button.';
+        echo '<label><input type="checkbox" class="bigradio" id="appendit" name="appendit" value="append">Append Settings?</label></div>';
         if ($this->islinux()){
             //https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
             $wifis=array();
@@ -423,7 +423,7 @@ class Maint extends CI_Controller {
 
         echo '<div class="radio" style="display: block">';
         foreach($matchedLines as $matchedLine){
-            echo '<label><input type="radio" style="display: inline" name="wifissid" value="'.$matchedLine.'"/>  '.$matchedLine.'</label><br>';
+            echo '<label><input type="radio" class="bigradio" style="display: inline" name="wifissid" value="'.$matchedLine.'"/>'.$matchedLine.'</label><br>';
         }
         echo '</div>';
     }

@@ -124,7 +124,7 @@ function redirect2importDB(url) {
             thekey = thedbfile[i].name;
             thevalue = thedbfile[i].value;
             thepair = {};
-            thepair[thekey] = thevalue;
+            thepair[thekey] = thevalue.trim();
             
             $.ajax({
             type: "POST",
@@ -157,7 +157,7 @@ function redirect2stagecode(url) {
             thekey = thecodefile[i].name;
             thevalue = thecodefile[i].value;
             thepair = {};
-            thepair[thekey] = thevalue;
+            thepair[thekey] = thevalue.trim();
             
             $.ajax({
             type: "POST",
@@ -190,7 +190,7 @@ function redirect2loadcode(url) {
             thekey = thecodefile[i].name;
             thevalue = thecodefile[i].value;
             thepair = {};
-            thepair[thekey] = thevalue;
+            thepair[thekey] = thevalue.trim();
 
             $.ajax({
             type: "POST",
@@ -225,7 +225,7 @@ function redirect2tryconnwifi(url) {
             thepair = {};
             thekey = thewifis[i].name;
             thevalue = thewifis[i].value;
-            thepair[thekey] = thevalue;
+            thepair[thekey] = thevalue.trim();
             
             thekey = "wifipasswd";
             thevalue = thewifipasswd;
@@ -233,7 +233,7 @@ function redirect2tryconnwifi(url) {
             
             thekey = "appendit";
             thevalue = (appendit) ? 'TRUE' : 'FALSE';
-            thepair[thekey] = thevalue;
+            thepair[thekey] = thevalue.trim();
 
             $.ajax({
             type: "POST",

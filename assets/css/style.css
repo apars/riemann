@@ -225,3 +225,5 @@ body, html {
 } 
 
 #loadwifipass .modal-body p { margin-bottom: 900px }
+
+.bigradio{ width: 1.5em; height: 1.5em; vertical-align: middle; margin: 1.25em;}
